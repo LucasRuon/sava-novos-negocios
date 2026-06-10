@@ -947,6 +947,14 @@
             color: #553c9a;
         }
 
+        .abertura-pasta-opcao {
+            margin-bottom: 20px;
+        }
+
+        #aberturaPastaDados.is-disabled {
+            display: none;
+        }
+
         .prazos-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -3332,7 +3340,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="section abertura-pasta-section">
+                            <div class="section abertura-pasta-section avulso-only">
                                 <div class="section-header">
                                     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="2">
@@ -3342,108 +3350,139 @@
                                         </svg></div>
                                     <h2 class="section-title">Abertura de Pasta (ADVWin)</h2>
                                 </div>
-                                <div class="form-row-3">
-                                    <div class="form-group"><label class="required" for="advogadoResponsavel">Advogado
-                                            Responsável</label><select id="advogadoResponsavel"
-                                            name="advogadoResponsavel" required>
-                                            <option value="">Selecione...</option>
-                                        </select></div>
-                                    <div class="form-group"><label class="required"
-                                            for="coordenador">Coordenador</label><select id="coordenador"
-                                            name="coordenador" required>
-                                            <option value="">Selecione...</option>
-                                        </select></div>
-                                    <div class="form-group"><label class="required" for="advogadoSocio">Sócio
-                                            Responsável</label><select id="advogadoSocio" name="advogadoSocio" required>
-                                            <option value="">Selecione...</option>
-                                        </select></div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="conditional-field" id="advogadoResponsavelOutrosField" style="flex:1;">
-                                        <label class="required" for="advogadoResponsavelOutros">Especifique o
-                                            Advogado</label>
-                                        <div class="input-with-btn"><input type="text" id="advogadoResponsavelOutros"
-                                                name="advogadoResponsavelOutros" placeholder="Nome do advogado"
-                                                required><button type="button" class="btn-add-nome"
-                                                onclick="adicionarNomeComFeedback('advogados', 'advogadoResponsavelOutros', 'advogadoResponsavel', this)">Adicionar</button>
-                                        </div>
-                                    </div>
-                                    <div class="conditional-field" id="coordenadorOutrosField" style="flex:1;"><label
-                                            class="required" for="coordenadorOutros">Especifique o Coordenador</label>
-                                        <div class="input-with-btn"><input type="text" id="coordenadorOutros"
-                                                name="coordenadorOutros" placeholder="Nome do coordenador"
-                                                required><button type="button" class="btn-add-nome"
-                                                onclick="adicionarNomeComFeedback('coordenadores', 'coordenadorOutros', 'coordenador', this)">Adicionar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group"><label class="required">Documentos Pendentes?</label>
+                                <div class="form-row abertura-pasta-opcao">
+                                    <div class="form-group avulso-only"><label>Abrir Pasta ADVWin?</label>
                                         <div class="radio-group">
-                                            <div class="radio-item"><input type="radio" id="docPendentesSim"
-                                                    name="documentosPendentes" value="Sim" required><label
-                                                    for="docPendentesSim">Sim</label></div>
-                                            <div class="radio-item"><input type="radio" id="docPendentesNao"
-                                                    name="documentosPendentes" value="Não" checked required><label
-                                                    for="docPendentesNao">Não</label></div>
-                                        </div>
-                                        <div class="conditional-field" id="docPendentesField"><label class="required"
-                                                for="quaisDocumentos">Quais?</label>
-                                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
-                                                Nesse campo colocar os documentos que estão faltando para que o cliente
-                                                providencie. Será encaminhado por email solicitando os documentos.</p>
-                                            <textarea id="quaisDocumentos" name="quaisDocumentos" rows="2"
-                                                required></textarea>
+                                            <div class="radio-item"><input type="radio" id="abrirPastaAdvwinSim"
+                                                    name="abrirPastaAdvwin" value="Abrir pasta" checked><label
+                                                    for="abrirPastaAdvwinSim">Abrir pasta</label></div>
+                                            <div class="radio-item"><input type="radio" id="abrirPastaAdvwinNao"
+                                                    name="abrirPastaAdvwin" value="Não abrir pasta"><label
+                                                    for="abrirPastaAdvwinNao">Não abrir pasta</label></div>
                                         </div>
                                     </div>
-                                    <div class="form-group"><label class="required">Processo Estratégico?</label>
+                                </div>
+                                <div id="aberturaPastaDados">
+                                    <div class="form-row-3">
+                                        <div class="form-group"><label class="required" for="advogadoResponsavel">Advogado
+                                                Responsável</label><select id="advogadoResponsavel"
+                                                name="advogadoResponsavel" required>
+                                                <option value="">Selecione...</option>
+                                            </select></div>
+                                        <div class="form-group"><label class="required"
+                                                for="coordenador">Coordenador</label><select id="coordenador"
+                                                name="coordenador" required>
+                                                <option value="">Selecione...</option>
+                                            </select></div>
+                                        <div class="form-group"><label class="required" for="advogadoSocio">Sócio
+                                                Responsável</label><select id="advogadoSocio" name="advogadoSocio" required>
+                                                <option value="">Selecione...</option>
+                                            </select></div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="conditional-field" id="advogadoResponsavelOutrosField" style="flex:1;">
+                                            <label class="required" for="advogadoResponsavelOutros">Especifique o
+                                                Advogado</label>
+                                            <div class="input-with-btn"><input type="text" id="advogadoResponsavelOutros"
+                                                    name="advogadoResponsavelOutros" placeholder="Nome do advogado"
+                                                    required><button type="button" class="btn-add-nome"
+                                                    onclick="adicionarNomeComFeedback('advogados', 'advogadoResponsavelOutros', 'advogadoResponsavel', this)">Adicionar</button>
+                                            </div>
+                                        </div>
+                                        <div class="conditional-field" id="coordenadorOutrosField" style="flex:1;"><label
+                                                class="required" for="coordenadorOutros">Especifique o Coordenador</label>
+                                            <div class="input-with-btn"><input type="text" id="coordenadorOutros"
+                                                    name="coordenadorOutros" placeholder="Nome do coordenador"
+                                                    required><button type="button" class="btn-add-nome"
+                                                    onclick="adicionarNomeComFeedback('coordenadores', 'coordenadorOutros', 'coordenador', this)">Adicionar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group"><label class="required">Documentos Pendentes?</label>
+                                            <div class="radio-group">
+                                                <div class="radio-item"><input type="radio" id="docPendentesSim"
+                                                        name="documentosPendentes" value="Sim" required><label
+                                                        for="docPendentesSim">Sim</label></div>
+                                                <div class="radio-item"><input type="radio" id="docPendentesNao"
+                                                        name="documentosPendentes" value="Não" checked required><label
+                                                        for="docPendentesNao">Não</label></div>
+                                            </div>
+                                            <div class="conditional-field" id="docPendentesField"><label class="required"
+                                                    for="quaisDocumentos">Quais?</label>
+                                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+                                                    Nesse campo colocar os documentos que estão faltando para que o cliente
+                                                    providencie. Será encaminhado por email solicitando os documentos.</p>
+                                                <textarea id="quaisDocumentos" name="quaisDocumentos" rows="2"
+                                                    required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"><label class="required">Processo Estratégico?</label>
+                                            <div class="radio-group">
+                                                <div class="radio-item"><input type="radio" id="estrategicoSim"
+                                                        name="processoEstrategico" value="Sim" required><label
+                                                        for="estrategicoSim">Sim</label></div>
+                                                <div class="radio-item"><input type="radio" id="estrategicoNao"
+                                                        name="processoEstrategico" value="Não" checked required><label
+                                                        for="estrategicoNao">Não</label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group"><label class="required" for="dataEntrada">Data de
+                                                Entrada</label><input type="date" id="dataEntrada" name="dataEntrada"
+                                                required></div>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <h4 style="font-size:1rem;font-weight:600;color:#553c9a;margin-bottom:16px;">Prazos</h4>
+                                    <div class="form-group"><label class="required">Tipo de Prazo</label>
                                         <div class="radio-group">
-                                            <div class="radio-item"><input type="radio" id="estrategicoSim"
-                                                    name="processoEstrategico" value="Sim" required><label
-                                                    for="estrategicoSim">Sim</label></div>
-                                            <div class="radio-item"><input type="radio" id="estrategicoNao"
-                                                    name="processoEstrategico" value="Não" checked required><label
-                                                    for="estrategicoNao">Não</label></div>
+                                            <div class="radio-item"><input type="radio" id="tipoPrazoPeticaoInicial"
+                                                    name="tipoPrazoSelecao" value="peticao_inicial" checked required><label
+                                                    for="tipoPrazoPeticaoInicial">Prazo da Petição Inicial</label></div>
+                                            <div class="radio-item"><input type="radio" id="tipoPrazoOutros"
+                                                    name="tipoPrazoSelecao" value="outros_prazos" required><label
+                                                    for="tipoPrazoOutros">Outros Prazos</label></div>
+                                        </div>
+                                    </div>
+                                    <div class="prazos-grid">
+                                        <div class="prazo-card prazo-active" id="cardPrazoInicial">
+                                            <h4 class="required">Prazo da Inicial</h4>
+                                            <div class="radio-group">
+                                                <div class="radio-item"><input type="radio" id="prazoNormal"
+                                                        name="prazoInicial" value="Normal – 15 dias" checked required><label
+                                                        for="prazoNormal">Normal – 15 dias</label></div>
+                                                <div class="radio-item"><input type="radio" id="prazoUrgente"
+                                                        name="prazoInicial" value="Urgente – 2 dias" required><label
+                                                        for="prazoUrgente">Urgente – 2 dias</label></div>
+                                            </div>
+                                        </div>
+                                        <div class="prazo-card prazo-disabled" id="cardOutrosPrazos">
+                                            <h4>Outros Prazos</h4>
+                                            <div class="form-group" style="margin-bottom:12px;"><input type="text"
+                                                    id="tipoPrazo" name="tipoPrazo" placeholder="Tipo (ex: Contestação)"
+                                                    disabled required></div>
+                                            <div class="form-group" style="margin-bottom:0;"><input type="date"
+                                                    id="dataPrazo" name="dataPrazo" disabled required></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group"><label class="required" for="dataEntrada">Data de
-                                            Entrada</label><input type="date" id="dataEntrada" name="dataEntrada"
-                                            required></div>
+                            </div>
+                            <div class="section partido-only">
+                                <div class="section-header">
+                                    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path d="M9 11l3 3L22 4"></path>
+                                            <path
+                                                d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
+                                            </path>
+                                        </svg></div>
+                                    <h2 class="section-title">Orientação para a Controladoria</h2>
                                 </div>
-                                <div class="divider"></div>
-                                <h4 style="font-size:1rem;font-weight:600;color:#553c9a;margin-bottom:16px;">Prazos</h4>
-                                <div class="form-group"><label class="required">Tipo de Prazo</label>
-                                    <div class="radio-group">
-                                        <div class="radio-item"><input type="radio" id="tipoPrazoPeticaoInicial"
-                                                name="tipoPrazoSelecao" value="peticao_inicial" checked required><label
-                                                for="tipoPrazoPeticaoInicial">Prazo da Petição Inicial</label></div>
-                                        <div class="radio-item"><input type="radio" id="tipoPrazoOutros"
-                                                name="tipoPrazoSelecao" value="outros_prazos" required><label
-                                                for="tipoPrazoOutros">Outros Prazos</label></div>
-                                    </div>
-                                </div>
-                                <div class="prazos-grid">
-                                    <div class="prazo-card prazo-active" id="cardPrazoInicial">
-                                        <h4 class="required">Prazo da Inicial</h4>
-                                        <div class="radio-group">
-                                            <div class="radio-item"><input type="radio" id="prazoNormal"
-                                                    name="prazoInicial" value="Normal – 15 dias" checked required><label
-                                                    for="prazoNormal">Normal – 15 dias</label></div>
-                                            <div class="radio-item"><input type="radio" id="prazoUrgente"
-                                                    name="prazoInicial" value="Urgente – 2 dias" required><label
-                                                    for="prazoUrgente">Urgente – 2 dias</label></div>
-                                        </div>
-                                    </div>
-                                    <div class="prazo-card prazo-disabled" id="cardOutrosPrazos">
-                                        <h4>Outros Prazos</h4>
-                                        <div class="form-group" style="margin-bottom:12px;"><input type="text"
-                                                id="tipoPrazo" name="tipoPrazo" placeholder="Tipo (ex: Contestação)"
-                                                disabled required></div>
-                                        <div class="form-group" style="margin-bottom:0;"><input type="date"
-                                                id="dataPrazo" name="dataPrazo" disabled required></div>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="orientacaoControladoria">Orientações</label>
+                                    <textarea id="orientacaoControladoria" name="orientacaoControladoria" rows="5"
+                                        placeholder="Registre as orientações específicas do caso para a Controladoria."></textarea>
                                 </div>
                             </div>
                             <div class="info-box"
@@ -4157,6 +4196,7 @@
             document.getElementById('anoExpectativa').value = new Date().getFullYear();
             document.getElementById('dataEntrada').value = new Date().toISOString().split('T')[0];
             document.getElementById('anoExpectativa').value = new Date().getFullYear();
+            atualizarAberturaPastaAdvwin();
         });
 
         // ==========================================
@@ -4172,6 +4212,7 @@
                 } else {
                     document.getElementById('textoContrato').setAttribute('required', 'required');
                 }
+                atualizarAberturaPastaAdvwin();
             });
         });
 
@@ -4204,13 +4245,78 @@
         document.getElementById('coordenador').addEventListener('change', function () { document.getElementById('coordenadorOutrosField').classList.toggle('active', this.value === 'Outros'); });
         document.querySelectorAll('input[name="documentosPendentes"]').forEach(function (r) { r.addEventListener('change', function () { document.getElementById('docPendentesField').classList.toggle('active', this.value === 'Sim'); }); });
 
+        function isFormularioAvulso() {
+            return document.body.classList.contains('tipo-avulso') || document.body.classList.contains('tipo-avulso-sem-contrato');
+        }
+
+        function deveAbrirPastaAdvwin() {
+            if (!isFormularioAvulso()) return false;
+            var naoAbrir = document.getElementById('abrirPastaAdvwinNao');
+            return !(naoAbrir && naoAbrir.checked);
+        }
+
+        function setAberturaPastaInputsDisabled(disabled) {
+            var dados = document.getElementById('aberturaPastaDados');
+            if (!dados) return;
+            dados.querySelectorAll('input, select, textarea, button').forEach(function (el) {
+                el.disabled = disabled;
+            });
+        }
+
+        function atualizarCamposPrazo() {
+            var cI = document.getElementById('cardPrazoInicial'), cO = document.getElementById('cardOutrosPrazos');
+            var abrirPasta = deveAbrirPastaAdvwin();
+            var tipoSelecionado = document.querySelector('input[name="tipoPrazoSelecao"]:checked');
+            if (!cI || !cO) return;
+
+            if (!abrirPasta) {
+                cI.classList.add('prazo-disabled');
+                cI.classList.remove('prazo-active');
+                cO.classList.add('prazo-disabled');
+                cO.classList.remove('prazo-active');
+                document.getElementById('prazoNormal').disabled = true;
+                document.getElementById('prazoUrgente').disabled = true;
+                document.getElementById('tipoPrazo').disabled = true;
+                document.getElementById('dataPrazo').disabled = true;
+                return;
+            }
+
+            if (!tipoSelecionado || tipoSelecionado.value === 'peticao_inicial') {
+                cI.classList.remove('prazo-disabled');
+                cI.classList.add('prazo-active');
+                document.getElementById('prazoNormal').disabled = false;
+                document.getElementById('prazoUrgente').disabled = false;
+                cO.classList.add('prazo-disabled');
+                cO.classList.remove('prazo-active');
+                document.getElementById('tipoPrazo').disabled = true;
+                document.getElementById('dataPrazo').disabled = true;
+            } else {
+                cI.classList.add('prazo-disabled');
+                cI.classList.remove('prazo-active');
+                document.getElementById('prazoNormal').disabled = true;
+                document.getElementById('prazoUrgente').disabled = true;
+                cO.classList.remove('prazo-disabled');
+                cO.classList.add('prazo-active');
+                document.getElementById('tipoPrazo').disabled = false;
+                document.getElementById('dataPrazo').disabled = false;
+            }
+        }
+
+        function atualizarAberturaPastaAdvwin() {
+            var abrirPasta = deveAbrirPastaAdvwin();
+            var dados = document.getElementById('aberturaPastaDados');
+            if (dados) dados.classList.toggle('is-disabled', !abrirPasta);
+            setAberturaPastaInputsDisabled(!abrirPasta);
+            atualizarCamposPrazo();
+        }
+
+        document.querySelectorAll('input[name="abrirPastaAdvwin"]').forEach(function (r) {
+            r.addEventListener('change', atualizarAberturaPastaAdvwin);
+        });
+
         // Prazos
         document.querySelectorAll('input[name="tipoPrazoSelecao"]').forEach(function (r) {
-            r.addEventListener('change', function () {
-                var cI = document.getElementById('cardPrazoInicial'), cO = document.getElementById('cardOutrosPrazos');
-                if (this.value === 'peticao_inicial') { cI.classList.remove('prazo-disabled'); cI.classList.add('prazo-active'); document.getElementById('prazoNormal').disabled = false; document.getElementById('prazoUrgente').disabled = false; cO.classList.add('prazo-disabled'); cO.classList.remove('prazo-active'); document.getElementById('tipoPrazo').disabled = true; document.getElementById('dataPrazo').disabled = true; }
-                else { cI.classList.add('prazo-disabled'); cI.classList.remove('prazo-active'); document.getElementById('prazoNormal').disabled = true; document.getElementById('prazoUrgente').disabled = true; cO.classList.remove('prazo-disabled'); cO.classList.add('prazo-active'); document.getElementById('tipoPrazo').disabled = false; document.getElementById('dataPrazo').disabled = false; }
-            });
+            r.addEventListener('change', atualizarCamposPrazo);
         });
 
         // Honorários
@@ -4486,7 +4592,7 @@
 
             var socBoleto = document.getElementById('sociedadeBoleto') ? document.getElementById('sociedadeBoleto').value : '';
             if (socBoleto === 'SAVA_GESTAO') {
-                novoTexto += '\n\n2.3 A forma de pagamento dos honorários é a seguinte: Chave Pix: CNPJ zzzzzzzzzzzzzzzzz - Sava Gestão Empresarial Ltda. I Banco Bradesco S/A I Agência xxxxxxxxxxxx I Conta xxxxxxxxx.';
+                novoTexto += '\n\n2.3 A forma de pagamento dos honorários é a seguinte: Chave Pix: CNPJ 52877687000141 - Sava Gestão Empresarial Ltda - BANCO CORA - AG: 0001 - C/C: 4629850-2.';
                 novoTexto += '\n\n2.3.1 O CONTRATADO autoriza, por questões internas de cessão de crédito e direitos, que o pagamento dos honorários ocorra mediante a forma acima indicada, tendo como favorecido o SAVA GESTÃO EMPRESARIAL, de modo que, estando disponíveis os valores em favor da sociedade beneficiada indicada, dar-se plena quitação e atesto de recebimento.';
             }
 
@@ -4559,6 +4665,26 @@
             document.querySelectorAll('input[name="naturezaNegocio"]:checked').forEach(function (c) { naturezas.push(c.value); });
             document.querySelectorAll('input[name="tipoHonorarios"]:checked').forEach(function (c) { tiposH.push(c.value); });
             var mE = fd.get('mesExpectativa'), aE = fd.get('anoExpectativa');
+            var abrirPastaAdvwinSelecao = tipo === 'Partido' ? '' : (fd.get('abrirPastaAdvwin') || 'Abrir pasta');
+            var deveAbrirPasta = tipo !== 'Partido' && abrirPastaAdvwinSelecao !== 'Não abrir pasta';
+            var tituloPrefixo = tipo === 'Partido' ? 'Orientação para a Controladoria' : (deveAbrirPasta ? 'Abertura de Pasta' : 'Sem Abertura de Pasta');
+            var tituloSolicitacao = tituloPrefixo + ' - ' + fd.get('organizacaoInterna') + ' - ' + areas.join(', ') + ' - ' + fd.get('nomeCliente');
+            var aberturaPastaDados = {
+                advogadoResponsavel: deveAbrirPasta ? (fd.get('advogadoResponsavel') || '') : '',
+                advogadoResponsavelOutros: deveAbrirPasta ? (fd.get('advogadoResponsavelOutros') || '') : '',
+                coordenador: deveAbrirPasta ? (fd.get('coordenador') || '') : '',
+                coordenadorOutros: deveAbrirPasta ? (fd.get('coordenadorOutros') || '') : '',
+                advogadoSocio: deveAbrirPasta ? (fd.get('advogadoSocio') || '') : '',
+                abrirPastaAdvwin: abrirPastaAdvwinSelecao,
+                orientacaoControladoria: tipo === 'Partido' ? (fd.get('orientacaoControladoria') || '') : '',
+                documentosPendentes: deveAbrirPasta ? (fd.get('documentosPendentes') || '') : '',
+                quaisDocumentos: deveAbrirPasta ? (fd.get('quaisDocumentos') || '') : '',
+                processoEstrategico: deveAbrirPasta ? (fd.get('processoEstrategico') || '') : '',
+                dataEntrada: deveAbrirPasta ? (fd.get('dataEntrada') || '') : '',
+                tipoPrazoSelecao: deveAbrirPasta ? (fd.get('tipoPrazoSelecao') || '') : '',
+                prazoInicial: deveAbrirPasta && fd.get('tipoPrazoSelecao') === 'peticao_inicial' ? (fd.get('prazoInicial') || '') : '',
+                outrosPrazos: deveAbrirPasta && fd.get('tipoPrazoSelecao') === 'outros_prazos' ? { tipo: fd.get('tipoPrazo') || '', data: fd.get('dataPrazo') || '' } : { tipo: '', data: '' }
+            };
             var data = {
                 timestamp: new Date().toISOString(), tipoFormulario: tipo,
                 cadastradoPor: { nome: currentUser ? currentUser.nome : 'Anonimo', email: currentUser ? currentUser.email : '', cargo: currentUser ? currentUser.cargo : '' },
@@ -4619,8 +4745,8 @@
                         responsaveisSetores: idx === 0 ? (fd.get('responsaveisSetores') || '') : ''
                     };
                 }),
-                aberturaPasta: { advogadoResponsavel: fd.get('advogadoResponsavel'), advogadoResponsavelOutros: fd.get('advogadoResponsavelOutros') || '', coordenador: fd.get('coordenador') || '', coordenadorOutros: fd.get('coordenadorOutros') || '', advogadoSocio: fd.get('advogadoSocio') || '', documentosPendentes: fd.get('documentosPendentes'), quaisDocumentos: fd.get('quaisDocumentos') || '', processoEstrategico: fd.get('processoEstrategico'), dataEntrada: fd.get('dataEntrada'), tipoPrazoSelecao: fd.get('tipoPrazoSelecao'), prazoInicial: fd.get('tipoPrazoSelecao') === 'peticao_inicial' ? fd.get('prazoInicial') : '', outrosPrazos: fd.get('tipoPrazoSelecao') === 'outros_prazos' ? { tipo: fd.get('tipoPrazo') || '', data: fd.get('dataPrazo') || '' } : { tipo: '', data: '' } },
-                tituloPasta: 'Abertura de Pasta - ' + fd.get('organizacaoInterna') + ' - ' + areas.join(', ') + ' - ' + fd.get('nomeCliente'),
+                aberturaPasta: aberturaPastaDados,
+                tituloPasta: tituloSolicitacao,
                 contratoJaAssinado: fd.get('contratoJaAssinado') === 'sim'
             };
             fetch(API_URLS.novosNegocios, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
@@ -4638,6 +4764,7 @@
                         document.getElementById('previewComboIndicator').textContent = 'Selecione os filtros acima para gerar o texto';
                         document.getElementById('dataEntrada').value = new Date().toISOString().split('T')[0];
                         document.getElementById('anoExpectativa').value = new Date().getFullYear();
+                        atualizarAberturaPastaAdvwin();
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     } else { throw new Error(); }
                 })
