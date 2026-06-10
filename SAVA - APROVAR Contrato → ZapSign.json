@@ -1,0 +1,2148 @@
+{
+  "name": "SAVA - APROVAR Contrato → ZapSign",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "aprovar-contrato",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "850b6c08-8af3-4e73-ad5c-a613bf50c522",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -816,
+        1056
+      ],
+      "webhookId": "sava-aprovar-contrato"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\nreturn [{\n  json: {\n    contrato_id: body.contrato_id || '',\n    cliente_nome: body.cliente_nome || '',\n    cliente_email: body.cliente_email || '',\n    link_drive: body.link_drive || '',\n    aprovado_por: body.aprovado_por || '',\n    aprovado_por_email: body.aprovado_por_email || '',\n    data_aprovacao: body.data_aprovacao || new Date().toISOString()\n  }\n}];"
+      },
+      "id": "f68ad5f3-620b-4d05-8537-e099c9bbf950",
+      "name": "Extrair Dados do Body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -368,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "contratos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.contrato_id }}",
+            "status": "em_assinatura",
+            "aprovado_por": "={{ $json.aprovado_por }}",
+            "aprovado_por_email": "={{ $json.aprovado_por_email }}",
+            "data_aprovacao": "={{ $json.data_aprovacao }}",
+            "row_number": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "doc_id",
+              "displayName": "doc_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_assinatura",
+              "displayName": "data_assinatura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signed_file",
+              "displayName": "signed_file",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_nome",
+              "displayName": "signatario_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_email",
+              "displayName": "signatario_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f8951292-a024-4ecf-b5e7-cddd22ef7d63",
+      "name": "Atualizar Status → em_assinatura",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -144,
+        864
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.zapsign.com.br/api/v1/docs/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ 'Contrato - ' + $('Extrair Dados do Body').item.json.cliente_nome }}"
+            },
+            {
+              "name": "url_pdf",
+              "value": "={{ $('Extrair Dados do Body').item.json.link_drive }}"
+            },
+            {
+              "name": "sandbox",
+              "value": "false"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "20ad472e-95ec-437a-b93a-c156de9403c8",
+      "name": "Criar Documento ZapSign",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        0,
+        448
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "Z9fh5qyveJbcOfSZ",
+          "name": "Sava | Zapsign"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://api.zapsign.com.br/api/v1/docs/' + $json.token + '/signers/' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ $('Extrair Dados do Body').item.json.cliente_nome }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $('Extrair Dados do Body').item.json.cliente_email }}"
+            },
+            {
+              "name": "send_automatic_email",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ced8274f-64d6-4bb1-963b-5f727e85177d",
+      "name": "Adicionar Signatário ZapSign",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        224,
+        448
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "Z9fh5qyveJbcOfSZ",
+          "name": "Sava | Zapsign"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "contratos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Extrair Dados do Body').item.json.contrato_id }}",
+            "zapsign_token": "={{ $json.token }}",
+            "zapsign_link": "={{ $json.signers && $json.signers[0] ? $json.signers[0].sign_url : '' }}",
+            "row_number": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "doc_id",
+              "displayName": "doc_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_assinatura",
+              "displayName": "data_assinatura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signed_file",
+              "displayName": "signed_file",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_nome",
+              "displayName": "signatario_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_email",
+              "displayName": "signatario_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f74284f9-e9f6-478f-991c-7ece83860d8b",
+      "name": "Salvar Token ZapSign na Planilha",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1328,
+        864
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Contrato aprovado e enviado via ZapSign', zapsign_token: $('5. Criar Documento no ZapSign7').item.json.token }) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "0dbc23a0-f827-4729-bcdc-992f5658edce",
+      "name": "Responder ao Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.zapsign.com.br/api/v1/docs/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "=teste"
+            },
+            {
+              "name": "url_pdf",
+              "value": "=https://docs.google.com/document/d/1A3YA771s666cZc0UWv_RpApjyOzNXJswTkMDfooycUc/edit"
+            },
+            {
+              "name": "sandbox",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b00b069a-89e6-4132-b871-03269d314fed",
+      "name": "Criar Documento ZapSign1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        0,
+        224
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "Z9fh5qyveJbcOfSZ",
+          "name": "Sava | Zapsign"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Code in JavaScript').item.json.id }}/export?mimeType=application/pdf",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "3c30456b-52a9-4190-a59f-b287bed8d030",
+      "name": "3. Exportar como PDF7",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        656,
+        864
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Baixa o documento como PDF binário"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.zapsign.com.br/api/v1/docs/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"Contrato | {{ $('Extrair Dados do Body').item.json.cliente_nome }}\",\n  \"base64_pdf\": \"{{ $json.data }}\",\n  \"lang\": \"pt-br\",\n  \"sandbox\": false,\n  \"signers\": [\n    {\n      \"name\": \"{{ $('Webhook').item.json.body.cliente_nome }}\",\n      \"email\": \"{{ $('Webhook').item.json.body.cliente_email }}\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    },\n    {\n      \"name\": \"Ferdinando Vasconcelos\",\n      \"email\": \"ferdinando@sava.adv.br\",\n      \"phone_country\": \"55\",\n      \"phone_number\": \"8393024442\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "dcd36e56-b582-4c61-848b-57eea5646aa5",
+      "name": "5. Criar Documento no ZapSign7",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1104,
+        864
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "Z9fh5qyveJbcOfSZ",
+          "name": "Sava | Zapsign"
+        }
+      },
+      "notes": "Cria o documento e o signatário no ZapSign"
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        864
+      ],
+      "id": "e72cc563-f3d2-4a19-9ecb-43f86d71a32a",
+      "name": "Extract from File7"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "contratos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "=1772049088695",
+            "status": "em_assinatura",
+            "aprovado_por": "={{ $json.aprovado_por }}",
+            "aprovado_por_email": "={{ $json.aprovado_por_email }}",
+            "data_aprovacao": "={{ $json.data_aprovacao }}",
+            "row_number": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "cafa1932-fb1f-4742-8ed3-0dab3f782e6f",
+      "name": "Atualizar Status → em_assinatura1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        0,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pega o link do item atual\nconst link = $('Extrair Dados do Body').first().json.link_drive;\n\n// Regex para capturar o ID entre /d/ e /edit\nconst match = link.match(/\\/d\\/([^/]+)/);\n\n// Se encontrar, retorna apenas o ID\nreturn [\n  {\n    json: {\n      id: match ? match[1] : null\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        80,
+        864
+      ],
+      "id": "dcaf52d9-dc91-4353-94fc-303d8db03a26",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.responsavel_assinatura_sava }}",
+                    "rightValue": "Ferdinando",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "8219b713-7019-4165-8446-00c26f2bf789"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Ferdinando"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "76174eb3-64da-49fd-9588-d2a5720f4d16",
+                    "leftValue": "={{ $json.body.responsavel_assinatura_sava }}",
+                    "rightValue": "Daniel",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Daniel"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -592,
+        960
+      ],
+      "id": "ed19d157-77fa-4a4e-8b0b-de6034b4b7b4",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\nreturn [{\n  json: {\n    contrato_id: body.contrato_id || '',\n    cliente_nome: body.cliente_nome || '',\n    cliente_email: body.cliente_email || '',\n    link_drive: body.link_drive || '',\n    aprovado_por: body.aprovado_por || '',\n    aprovado_por_email: body.aprovado_por_email || '',\n    data_aprovacao: body.data_aprovacao || new Date().toISOString()\n  }\n}];"
+      },
+      "id": "1159fb95-ae7e-4802-90ac-b04247b5ec92",
+      "name": "Extrair Dados do Body1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -368,
+        1056
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "contratos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.contrato_id }}",
+            "status": "em_assinatura",
+            "aprovado_por": "={{ $json.aprovado_por }}",
+            "aprovado_por_email": "={{ $json.aprovado_por_email }}",
+            "data_aprovacao": "={{ $json.data_aprovacao }}",
+            "row_number": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "doc_id",
+              "displayName": "doc_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_assinatura",
+              "displayName": "data_assinatura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signed_file",
+              "displayName": "signed_file",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_nome",
+              "displayName": "signatario_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_email",
+              "displayName": "signatario_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "80548051-80e5-460a-9d24-a468e0c7c589",
+      "name": "Atualizar Status → em_assinatura2",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -144,
+        1056
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "contratos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Extrair Dados do Body1').item.json.contrato_id }}",
+            "zapsign_token": "={{ $json.token }}",
+            "zapsign_link": "={{ $json.signers && $json.signers[0] ? $json.signers[0].sign_url : '' }}",
+            "row_number": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "doc_id",
+              "displayName": "doc_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_assinatura",
+              "displayName": "data_assinatura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signed_file",
+              "displayName": "signed_file",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_nome",
+              "displayName": "signatario_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_email",
+              "displayName": "signatario_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "4dfd28da-95bc-42bc-9691-521e6cd8b078",
+      "name": "Salvar Token ZapSign na Planilha1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1328,
+        1056
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Contrato aprovado e enviado via ZapSign', zapsign_token: $('5. Criar Documento no ZapSign').item.json.token }) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "594db208-609e-43e9-84b9-809a6ca73d68",
+      "name": "Responder ao Webhook1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        1056
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Code in JavaScript1').item.json.id }}/export?mimeType=application/pdf",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "b9b49264-5a51-4b09-ab68-e36fd80cffcb",
+      "name": "3. Exportar como PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        656,
+        1056
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Baixa o documento como PDF binário"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.zapsign.com.br/api/v1/docs/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"Contrato | {{ $('Extrair Dados do Body1').item.json.cliente_nome }}\",\n  \"base64_pdf\": \"{{ $json.data }}\",\n  \"lang\": \"pt-br\",\n  \"sandbox\": false,\n  \"signers\": [\n    {\n      \"name\": \"{{ $('Webhook').item.json.body.cliente_nome }}\",\n      \"email\": \"{{ $('Webhook').item.json.body.cliente_email }}\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    },\n    {\n      \"name\": \"Daniel Sebadelhe Aranha\",\n      \"email\": \"daniel@sava.adv.br\",\n      \"phone_country\": \"55\",\n      \"phone_number\": \"8393823367\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "6fc2a6ea-a8d0-4c77-9974-6b1030f300f2",
+      "name": "5. Criar Documento no ZapSign",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1104,
+        1056
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "Z9fh5qyveJbcOfSZ",
+          "name": "Sava | Zapsign"
+        }
+      },
+      "notes": "Cria o documento e o signatário no ZapSign"
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        1056
+      ],
+      "id": "491cf279-c1f6-4460-94fa-84d59a43f1d4",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pega o link do item atual\nconst link = $('Extrair Dados do Body1').first().json.link_drive;\n\n// Regex para capturar o ID entre /d/ e /edit\nconst match = link.match(/\\/d\\/([^/]+)/);\n\n// Se encontrar, retorna apenas o ID\nreturn [\n  {\n    json: {\n      id: match ? match[1] : null\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        80,
+        1056
+      ],
+      "id": "2e45f46c-2a68-4f59-961f-3fa23414d2a1",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.body.aprovado_por_email }}",
+        "subject": "=Contrato Aguardando Assinatura | {{ $json.body.cliente_nome }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Contrato Aguardando Assinatura</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:700px;margin:auto;background:#ffffff;border-radius:8px;padding:24px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">✍️ Contrato Aguardando Assinatura</h2>\n\n<p style=\"color:#555;font-size:15px;\">\nOlá <strong>{{ $json.body.cliente_nome }}</strong>,\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nSeu contrato já foi preparado e está disponível para assinatura.\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nPara dar continuidade ao processo, pedimos que acesse o documento através do botão abaixo e realize a assinatura.\n</p>\n\n<p style=\"text-align:center;margin:30px 0;\">\n\n<a href=\"{{ $json.body.link_drive }}\"\n   style=\"background:#2563eb;\n          color:#ffffff;\n          padding:14px 24px;\n          text-decoration:none;\n          border-radius:6px;\n          font-weight:bold;\n          display:inline-block;\n          font-size:15px;\">\nAbrir Contrato para Assinatura\n</a>\n\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:25px 0;\">\n\n<table width=\"100%\" style=\"border-collapse:collapse;font-size:14px;color:#444;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Cliente:</strong></td>\n<td>{{ $json.body.cliente_nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{ $json.body.cliente_email }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Responsável pela assinatura:</strong></td>\n<td>{{ $json.body.responsavel_assinatura_sava }}</td>\n</tr>\n\n</table>\n\n<p style=\"font-size:12px;color:#888;margin-top:25px;text-align:center;\">\nCaso o botão não funcione, copie e cole o link abaixo no navegador:<br>\n{{ $json.body.link_drive }}\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -592,
+        1152
+      ],
+      "id": "b2d9173a-157a-4284-a0e0-693efcfd52ec",
+      "name": "Send a message",
+      "webhookId": "5c598d7f-53b5-46ec-bcb5-8a7b8ef5dd90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uWhyXLRG3r2ewzr6",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=daniel@sava.adv.br",
+        "subject": "=Contrato Aguardando Assinatura | {{ $json.body.cliente_nome }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Contrato Aguardando Assinatura</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:700px;margin:auto;background:#ffffff;border-radius:8px;padding:24px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">✍️ Contrato Aguardando Assinatura</h2>\n\n<p style=\"color:#555;font-size:15px;\">\nOlá <strong>{{ $json.body.cliente_nome }}</strong>,\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nSeu contrato já foi preparado e está disponível para assinatura.\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nPara dar continuidade ao processo, pedimos que acesse o documento através do botão abaixo e realize a assinatura.\n</p>\n\n<p style=\"text-align:center;margin:30px 0;\">\n\n<a href=\"{{ $json.body.link_drive }}\"\n   style=\"background:#2563eb;\n          color:#ffffff;\n          padding:14px 24px;\n          text-decoration:none;\n          border-radius:6px;\n          font-weight:bold;\n          display:inline-block;\n          font-size:15px;\">\nAbrir Contrato para Assinatura\n</a>\n\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:25px 0;\">\n\n<table width=\"100%\" style=\"border-collapse:collapse;font-size:14px;color:#444;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Cliente:</strong></td>\n<td>{{ $json.body.cliente_nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{ $json.body.cliente_email }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Responsável pela assinatura:</strong></td>\n<td>{{ $json.body.responsavel_assinatura_sava }}</td>\n</tr>\n\n</table>\n\n<p style=\"font-size:12px;color:#888;margin-top:25px;text-align:center;\">\nCaso o botão não funcione, copie e cole o link abaixo no navegador:<br>\n{{ $json.body.link_drive }}\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -368,
+        1248
+      ],
+      "id": "e803ae19-1513-4bd0-92bf-4277084cc7d0",
+      "name": "Send a message1",
+      "webhookId": "5c598d7f-53b5-46ec-bcb5-8a7b8ef5dd90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uWhyXLRG3r2ewzr6",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=ferdinando@sava.adv.br",
+        "subject": "=Contrato Aguardando Assinatura | {{ $json.body.cliente_nome }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Contrato Aguardando Assinatura</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:700px;margin:auto;background:#ffffff;border-radius:8px;padding:24px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">✍️ Contrato Aguardando Assinatura</h2>\n\n<p style=\"color:#555;font-size:15px;\">\nOlá <strong>{{ $json.body.cliente_nome }}</strong>,\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nSeu contrato já foi preparado e está disponível para assinatura.\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nPara dar continuidade ao processo, pedimos que acesse o documento através do botão abaixo e realize a assinatura.\n</p>\n\n<p style=\"text-align:center;margin:30px 0;\">\n\n<a href=\"{{ $json.body.link_drive }}\"\n   style=\"background:#2563eb;\n          color:#ffffff;\n          padding:14px 24px;\n          text-decoration:none;\n          border-radius:6px;\n          font-weight:bold;\n          display:inline-block;\n          font-size:15px;\">\nAbrir Contrato para Assinatura\n</a>\n\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:25px 0;\">\n\n<table width=\"100%\" style=\"border-collapse:collapse;font-size:14px;color:#444;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Cliente:</strong></td>\n<td>{{ $json.body.cliente_nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{ $json.body.cliente_email }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Responsável pela assinatura:</strong></td>\n<td>{{ $json.body.responsavel_assinatura_sava }}</td>\n</tr>\n\n</table>\n\n<p style=\"font-size:12px;color:#888;margin-top:25px;text-align:center;\">\nCaso o botão não funcione, copie e cole o link abaixo no navegador:<br>\n{{ $json.body.link_drive }}\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -368,
+        672
+      ],
+      "id": "c982a470-a1ab-423a-9ea1-49ba3322f666",
+      "name": "Send a message2",
+      "webhookId": "5c598d7f-53b5-46ec-bcb5-8a7b8ef5dd90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uWhyXLRG3r2ewzr6",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://docs.googleapis.com/v1/documents/{{ $json.id }}:batchUpdate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"requests\": [\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{adv}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"Ferdinando Vasconcelos – OAB/PB 21.146\"\n      }\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "4e8d0152-d633-4303-864a-e66ce74e6d35",
+      "name": "2. Substituir Placeholders (Docs API)1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        368,
+        864
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Substitui todos os placeholders no documento copiado"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://docs.googleapis.com/v1/documents/{{ $json.id }}:batchUpdate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"requests\": [\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{adv}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"Daniel Sebadelhe Aranha – OAB/PB 14.139\"\n      }\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "ee803cc7-3a80-45db-84e0-7cc5182a9751",
+      "name": "2. Substituir Placeholders (Docs API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        368,
+        1056
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Substitui todos os placeholders no documento copiado"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-n8n.zfp6fw.easypanel.host",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+            "content-length": "419",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+            "content-type": "application/json",
+            "origin": "null",
+            "priority": "u=1, i",
+            "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "200.170.154.16",
+            "x-forwarded-host": "n8n-n8n.zfp6fw.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "ca446ee844b0",
+            "x-real-ip": "200.170.154.16"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "contrato_id": 1776865077568,
+            "cliente_nome": "Tadeu da Costa Vasconcelos",
+            "cliente_email": "tadeuvasconcelos@gmail.com",
+            "link_drive": "https://docs.google.com/document/d/1UOhnBxfBwZ7oLTatIEeZ-lHqki38lBJ6JX2-RaBK0Pg/edit",
+            "status_atual": "aguardando_aprovacao",
+            "aprovado_por": "Tadeu",
+            "aprovado_por_email": "tadeu.vasconcelos@sava.adv.br",
+            "responsavel_assinatura_sava": "Ferdinando",
+            "data_aprovacao": "2026-04-22T14:19:40.637Z"
+          },
+          "webhookUrl": "https://n8n-n8n.zfp6fw.easypanel.host/webhook/aprovar-contrato",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair Dados do Body": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Status → em_assinatura",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Atualizar Status → em_assinatura": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Documento ZapSign": {
+      "main": [
+        [
+          {
+            "node": "Adicionar Signatário ZapSign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salvar Token ZapSign na Planilha": {
+      "main": [
+        [
+          {
+            "node": "Responder ao Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Exportar como PDF7": {
+      "main": [
+        [
+          {
+            "node": "Extract from File7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "2. Substituir Placeholders (Docs API)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File7": {
+      "main": [
+        [
+          {
+            "node": "5. Criar Documento no ZapSign7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5. Criar Documento no ZapSign7": {
+      "main": [
+        [
+          {
+            "node": "Salvar Token ZapSign na Planilha",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Extrair Dados do Body",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extrair Dados do Body1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair Dados do Body1": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Status → em_assinatura2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Atualizar Status → em_assinatura2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salvar Token ZapSign na Planilha1": {
+      "main": [
+        [
+          {
+            "node": "Responder ao Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Exportar como PDF": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5. Criar Documento no ZapSign": {
+      "main": [
+        [
+          {
+            "node": "Salvar Token ZapSign na Planilha1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "5. Criar Documento no ZapSign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "2. Substituir Placeholders (Docs API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Substituir Placeholders (Docs API)": {
+      "main": [
+        [
+          {
+            "node": "3. Exportar como PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Substituir Placeholders (Docs API)1": {
+      "main": [
+        [
+          {
+            "node": "3. Exportar como PDF7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "7133099d-2d7a-484c-bac9-de8468678ffe",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a614b5eafeb499abe48a1ab5cea0292f09be70a2f6390f3f19fe25e3cc43001f"
+  },
+  "id": "tcyElur7QyhegkDb",
+  "tags": [
+    {
+      "updatedAt": "2026-02-17T17:58:33.621Z",
+      "createdAt": "2026-02-17T17:58:33.621Z",
+      "id": "a5nYzZXvfRYvjnMw",
+      "name": "Sava"
+    }
+  ]
+}

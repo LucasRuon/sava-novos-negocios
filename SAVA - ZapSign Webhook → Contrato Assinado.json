@@ -1,0 +1,877 @@
+{
+  "name": "SAVA - ZapSign Webhook → Contrato Assinado",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "zapsign-assinatura",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "6ace3db0-92e9-4574-bbf7-4c7a17453efd",
+      "name": "Webhook ZapSign",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        96
+      ],
+      "webhookId": "sava-zapsign-assinatura"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Payload real ZapSign:\n// body.event_type = 'doc_signed' dispara a CADA assinatura individual\n// body.status = 'signed' SOMENTE quando TODOS os signatários assinaram\n// body.status = 'pending' quando ainda há signatários pendentes\n// body.token = token do documento (= zapsign_token na planilha)\n// body.signer_who_signed = quem acabou de assinar neste disparo\n// body.signed_file = URL do PDF assinado (disponível mesmo em 'pending')\n\nconst body = $input.first().json.body;\nconst signer = body.signer_who_signed || {};\n\nreturn [{\n  json: {\n    event_type: body.event_type || '',\n    doc_status: body.status || '',\n    zapsign_token: body.token || '',\n    doc_nome: body.name || '',\n    signed_file: body.signed_file || '',\n    signatario_nome: signer.name || '',\n    signatario_email: signer.email || '',\n    signatario_telefone: (signer.phone_country || '') + (signer.phone_number || ''),\n    data_assinatura: signer.signed_at || new Date().toISOString(),\n    total_signatarios: (body.signers || []).length,\n    assinados: (body.signers || []).filter(s => s.status === 'signed').length\n  }\n}];"
+      },
+      "id": "15f9dab8-7490-42ee-a313-8371615926ac",
+      "name": "Extrair Dados do Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "cond-status",
+              "leftValue": "={{ $json.doc_status }}",
+              "rightValue": "signed",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "954226ae-41e7-4719-88d4-5c13ea058ab6",
+      "name": "Todos assinaram? (status = signed)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "contratos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "zapsign_token": "={{ $json.zapsign_token }}",
+            "status": "assinado",
+            "row_number": 0
+          },
+          "matchingColumns": [
+            "zapsign_token"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "doc_id",
+              "displayName": "doc_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_assinatura",
+              "displayName": "data_assinatura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signed_file",
+              "displayName": "signed_file",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_nome",
+              "displayName": "signatario_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_email",
+              "displayName": "signatario_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "7eb838d6-8ab3-4690-8b67-b9ba142bc99d",
+      "name": "Atualizar Planilha → assinado",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        448,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $('Extrair Dados do Payload').item.json;\nconst dataFormatada = new Date(d.data_assinatura)\n  .toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });\n\nconst mensagem = [\n  '✅ *Contrato Assinado!*',\n  '',\n  `📄 *Documento:* ${d.doc_nome}`,\n  `👤 *Assinado por:* ${d.signatario_nome}`,\n  `📧 *E-mail:* ${d.signatario_email}`,\n  `🕐 *Data/Hora:* ${dataFormatada}`,\n  `✍️ *Signatários:* ${d.assinados}/${d.total_signatarios} assinaram`,\n  '',\n  `📎 *PDF Assinado:* ${d.signed_file}`\n].join('\\n');\n\nreturn [{ json: { mensagem, dados: d } }];"
+      },
+      "id": "e912f326-545c-44d9-977f-d89b9dba67c7",
+      "name": "Montar Mensagem WhatsApp",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "COLE_URL_DA_SUA_API_WHATSAPP_AQUI",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "apikey",
+              "value": "COLE_SUA_API_KEY_WHATSAPP_AQUI"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "5154a9c5-6d2a-48df-a1e9-d3e9efd95e48",
+      "name": "Notificar Tadeu via WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        448,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Contrato marcado como assinado', token: $('Extrair Dados do Payload').item.json.zapsign_token }) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "7e783b10-d8dd-4c7b-b93c-fd168500f37c",
+      "name": "Responder 200 OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        672,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Disparo parcial: um signatário assinou mas outros ainda pendentes\nconst d = $input.first().json;\nconsole.log(`[ZapSign] Assinatura parcial: ${d.assinados}/${d.total_signatarios} - token: ${d.zapsign_token}`);\nreturn [{ json: { ignorado: true, motivo: 'status_pending', assinados: d.assinados, total: d.total_signatarios } }];"
+      },
+      "id": "c71011a7-c141-42d7-87f9-54ef5a54c925",
+      "name": "Log Assinatura Parcial",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Assinatura parcial registrada. Aguardando demais signatarios.', assinados: $json.assinados, total: $json.total }) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "dbca9e33-7113-4c29-a056-ccbb8529c079",
+      "name": "Responder 200 OK (parcial)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        672,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "=secretaria@sava.adv.br, ferdinando@sava.adv.br, daniel@sava.adv.br, cybelle@sava.adv.br, tadeu.vasconcelos@sava.adv.br",
+        "subject": "={{ $json.body.name }} | Assinado 🥳",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Contrato Assinado</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:700px;margin:auto;background:#ffffff;border-radius:8px;padding:24px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#16a34a;\">✅ Contrato Assinado</h2>\n\n<p style=\"color:#555;font-size:15px;\">\nInformamos que o contrato abaixo foi <strong>assinado com sucesso</strong>.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<table width=\"100%\" style=\"border-collapse:collapse;font-size:14px;color:#444;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Contrato:</strong></td>\n<td>{{ $json.body.name }}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<p style=\"color:#555;font-size:14px;\">\nO documento já pode ser considerado válido e arquivado conforme os procedimentos internos.\n</p>\n\n<p style=\"font-size:12px;color:#888;margin-top:25px;text-align:center;\">\nEste é um aviso automático do sistema.\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        192
+      ],
+      "id": "75494b78-ea5a-4b58-ad82-d097f033405a",
+      "name": "Send a message2",
+      "webhookId": "5c598d7f-53b5-46ec-bcb5-8a7b8ef5dd90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uWhyXLRG3r2ewzr6",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook ZapSign": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-n8n.zfp6fw.easypanel.host",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "7371",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "traceparent": "00-699f8a3100000000815ef40a07eb1ec0-aa8ab99ca67a2498-00",
+            "tracestate": "dd=p:aa8ab99ca67a2498;s:0;t.dm:-1;t.tid:699f8a3100000000",
+            "x-datadog-parent-id": "12288838615692879000",
+            "x-datadog-sampling-priority": "0",
+            "x-datadog-tags": "_dd.p.dm=-1,_dd.p.tid=699f8a3100000000",
+            "x-datadog-trace-id": "9322156602623205056",
+            "x-forwarded-for": "44.196.128.113",
+            "x-forwarded-host": "n8n-n8n.zfp6fw.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "ca446ee844b0",
+            "x-real-ip": "44.196.128.113"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "sandbox": true,
+            "external_id": "",
+            "open_id": 113,
+            "token": "a86e28ba-d55f-4f7b-ac5f-d74610543831",
+            "name": "Contrato | cliente",
+            "folder_path": "/",
+            "folder_token": null,
+            "status": "pending",
+            "rejected_reason": null,
+            "lang": "pt-br",
+            "original_file": "https://zapsign.s3.amazonaws.com/2026/2/pdf/7b0c40f5-671e-4426-b3e0-8d7aa6797f6b/9f1ba81a-993c-4397-bf55-25c02476694e.pdf",
+            "signed_file": "https://zapsign.s3.amazonaws.com/2026/2/pdf/7760b097-20e0-4b2f-bc0b-33b78c6e905b/f09a86ee-977e-4cf9-8690-0112bbca18ad.pdf",
+            "extra_docs": [],
+            "created_through": "api",
+            "deleted": false,
+            "deleted_at": null,
+            "signed_file_only_finished": false,
+            "disable_signer_emails": false,
+            "brand_logo": "",
+            "brand_primary_color": "",
+            "created_at": "2026-02-25T20:00:18.045723Z",
+            "last_update_at": "2026-02-25T23:48:01.560448Z",
+            "created_by": {
+              "email": "ferdinando@sava.adv.br"
+            },
+            "template": null,
+            "signers": [
+              {
+                "external_id": "",
+                "sign_url": "https://app.zapsign.com.br/verificar/0fea141d-64ab-474a-8e6e-33e6e769201a",
+                "token": "0fea141d-64ab-474a-8e6e-33e6e769201a",
+                "status": "signed",
+                "name": "teste automacao",
+                "lock_name": false,
+                "email": "email@gmail.com",
+                "lock_email": false,
+                "hide_email": false,
+                "blank_email": false,
+                "phone_country": "55",
+                "phone_number": "41999198525",
+                "lock_phone": false,
+                "hide_phone": false,
+                "blank_phone": false,
+                "times_viewed": 1,
+                "last_view_at": "2026-02-25T23:47:28.984329Z",
+                "signed_at": "2026-02-25T23:47:58.822717Z",
+                "auth_mode": "assinaturaTela",
+                "qualification": "",
+                "require_selfie_photo": false,
+                "require_document_photo": false,
+                "geo_latitude": "-25.516833",
+                "geo_longitude": "-49.283369",
+                "redirect_link": "",
+                "signature_image": "https://zapsign.s3.amazonaws.com/2026/2/files/75200e7e-99d0-4e10-913e-c762c6669c3d/0cfb6f23-5349-466f-91a7-52e539acf269.png",
+                "visto_image": "https://zapsign.s3.amazonaws.com/2026/2/files/ba4132db-2960-42ce-b4e6-de622fc4876d/73d7acce-aba0-4d0b-b7eb-84e423aabbb5.png",
+                "document_photo_url": "",
+                "document_verse_photo_url": "",
+                "selfie_photo_url": "",
+                "selfie_photo_url2": "",
+                "send_via": "email",
+                "resend_attempts": null,
+                "cpf": "",
+                "cnpj": "",
+                "send_automatic_whatsapp_signed_file": null,
+                "liveness_photo_url": "",
+                "selfie_validation_type": "none",
+                "ip": "45.166.251.233",
+                "delegator": null,
+                "signature_anchor_text": null,
+                "rubrica_anchor_text": null,
+                "guided_signature": false,
+                "sent_sms_link": null
+              },
+              {
+                "external_id": "",
+                "sign_url": "https://app.zapsign.com.br/verificar/be81b413-f2aa-44a2-afb2-595940ed231b",
+                "token": "be81b413-f2aa-44a2-afb2-595940ed231b",
+                "status": "new",
+                "name": "",
+                "lock_name": false,
+                "email": "",
+                "lock_email": false,
+                "hide_email": false,
+                "blank_email": false,
+                "phone_country": "55",
+                "phone_number": "",
+                "lock_phone": false,
+                "hide_phone": false,
+                "blank_phone": false,
+                "times_viewed": 0,
+                "last_view_at": null,
+                "signed_at": null,
+                "auth_mode": "assinaturaTela",
+                "qualification": "",
+                "require_selfie_photo": false,
+                "require_document_photo": false,
+                "geo_latitude": null,
+                "geo_longitude": null,
+                "redirect_link": "",
+                "signature_image": null,
+                "visto_image": null,
+                "document_photo_url": "",
+                "document_verse_photo_url": "",
+                "selfie_photo_url": "",
+                "selfie_photo_url2": "",
+                "send_via": "email",
+                "resend_attempts": null,
+                "cpf": "",
+                "cnpj": "",
+                "send_automatic_whatsapp_signed_file": null,
+                "liveness_photo_url": "",
+                "selfie_validation_type": "none",
+                "ip": null,
+                "delegator": null,
+                "signature_anchor_text": null,
+                "rubrica_anchor_text": null,
+                "guided_signature": false,
+                "sent_sms_link": null
+              },
+              {
+                "external_id": "",
+                "sign_url": "https://app.zapsign.com.br/verificar/cce20cf5-c461-4152-98a2-b4a7c203d210",
+                "token": "cce20cf5-c461-4152-98a2-b4a7c203d210",
+                "status": "new",
+                "name": "",
+                "lock_name": false,
+                "email": "",
+                "lock_email": false,
+                "hide_email": false,
+                "blank_email": false,
+                "phone_country": "55",
+                "phone_number": "",
+                "lock_phone": false,
+                "hide_phone": false,
+                "blank_phone": false,
+                "times_viewed": 0,
+                "last_view_at": null,
+                "signed_at": null,
+                "auth_mode": "assinaturaTela",
+                "qualification": "",
+                "require_selfie_photo": false,
+                "require_document_photo": false,
+                "geo_latitude": null,
+                "geo_longitude": null,
+                "redirect_link": "",
+                "signature_image": null,
+                "visto_image": null,
+                "document_photo_url": "",
+                "document_verse_photo_url": "",
+                "selfie_photo_url": "",
+                "selfie_photo_url2": "",
+                "send_via": "email",
+                "resend_attempts": null,
+                "cpf": "",
+                "cnpj": "",
+                "send_automatic_whatsapp_signed_file": null,
+                "liveness_photo_url": "",
+                "selfie_validation_type": "none",
+                "ip": null,
+                "delegator": null,
+                "signature_anchor_text": null,
+                "rubrica_anchor_text": null,
+                "guided_signature": false,
+                "sent_sms_link": null
+              },
+              {
+                "external_id": "",
+                "sign_url": "https://app.zapsign.com.br/verificar/3c4ca7eb-6fb5-46d5-b3ce-c853a77d463d",
+                "token": "3c4ca7eb-6fb5-46d5-b3ce-c853a77d463d",
+                "status": "new",
+                "name": "",
+                "lock_name": false,
+                "email": "",
+                "lock_email": false,
+                "hide_email": false,
+                "blank_email": false,
+                "phone_country": "55",
+                "phone_number": "",
+                "lock_phone": false,
+                "hide_phone": false,
+                "blank_phone": false,
+                "times_viewed": 0,
+                "last_view_at": null,
+                "signed_at": null,
+                "auth_mode": "assinaturaTela",
+                "qualification": "",
+                "require_selfie_photo": false,
+                "require_document_photo": false,
+                "geo_latitude": null,
+                "geo_longitude": null,
+                "redirect_link": "",
+                "signature_image": null,
+                "visto_image": null,
+                "document_photo_url": "",
+                "document_verse_photo_url": "",
+                "selfie_photo_url": "",
+                "selfie_photo_url2": "",
+                "send_via": "email",
+                "resend_attempts": null,
+                "cpf": "",
+                "cnpj": "",
+                "send_automatic_whatsapp_signed_file": null,
+                "liveness_photo_url": "",
+                "selfie_validation_type": "none",
+                "ip": null,
+                "delegator": null,
+                "signature_anchor_text": null,
+                "rubrica_anchor_text": null,
+                "guided_signature": false,
+                "sent_sms_link": null
+              }
+            ],
+            "answers": [],
+            "auto_reminder": 0,
+            "signature_report": null,
+            "tsa_country": null,
+            "use_timestamp": true,
+            "metadata": [],
+            "has_simplified_signature": false,
+            "simplified_signature_position": null,
+            "event_type": "doc_signed",
+            "signer_who_signed": {
+              "external_id": "",
+              "sign_url": "https://app.zapsign.com.br/verificar/0fea141d-64ab-474a-8e6e-33e6e769201a",
+              "token": "0fea141d-64ab-474a-8e6e-33e6e769201a",
+              "status": "signed",
+              "name": "teste automacao",
+              "lock_name": false,
+              "email": "email@gmail.com",
+              "lock_email": false,
+              "hide_email": false,
+              "blank_email": false,
+              "phone_country": "55",
+              "phone_number": "41999198525",
+              "lock_phone": false,
+              "hide_phone": false,
+              "blank_phone": false,
+              "times_viewed": 1,
+              "last_view_at": "2026-02-25T23:47:28.984329Z",
+              "signed_at": "2026-02-25T23:47:58.822717Z",
+              "auth_mode": "assinaturaTela",
+              "qualification": "",
+              "require_selfie_photo": false,
+              "require_document_photo": false,
+              "geo_latitude": "-25.516833",
+              "geo_longitude": "-49.283369",
+              "redirect_link": "",
+              "signature_image": "https://zapsign.s3.amazonaws.com/2026/2/files/75200e7e-99d0-4e10-913e-c762c6669c3d/0cfb6f23-5349-466f-91a7-52e539acf269.png",
+              "visto_image": "https://zapsign.s3.amazonaws.com/2026/2/files/ba4132db-2960-42ce-b4e6-de622fc4876d/73d7acce-aba0-4d0b-b7eb-84e423aabbb5.png",
+              "document_photo_url": "",
+              "document_verse_photo_url": "",
+              "selfie_photo_url": "",
+              "selfie_photo_url2": "",
+              "send_via": "email",
+              "resend_attempts": null,
+              "cpf": "",
+              "cnpj": "",
+              "send_automatic_whatsapp_signed_file": null,
+              "liveness_photo_url": "",
+              "selfie_validation_type": "none",
+              "ip": "45.166.251.233",
+              "delegator": null,
+              "signature_anchor_text": null,
+              "rubrica_anchor_text": null,
+              "guided_signature": false,
+              "sent_sms_link": null
+            }
+          },
+          "webhookUrl": "https://n8n-n8n.zfp6fw.easypanel.host/webhook/zapsign-assinatura",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook ZapSign": {
+      "main": [
+        [
+          {
+            "node": "Extrair Dados do Payload",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair Dados do Payload": {
+      "main": [
+        [
+          {
+            "node": "Todos assinaram? (status = signed)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Todos assinaram? (status = signed)": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Planilha → assinado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Assinatura Parcial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Atualizar Planilha → assinado": {
+      "main": [
+        [
+          {
+            "node": "Responder 200 OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar Mensagem WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Notificar Tadeu via WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificar Tadeu via WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Responder 200 OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Assinatura Parcial": {
+      "main": [
+        [
+          {
+            "node": "Responder 200 OK (parcial)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c2da1ff2-cf11-4945-bd4f-e0ad3e7515b2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a614b5eafeb499abe48a1ab5cea0292f09be70a2f6390f3f19fe25e3cc43001f"
+  },
+  "id": "dsEPoh3vUGCKv4KA",
+  "tags": [
+    {
+      "updatedAt": "2026-02-17T17:58:33.621Z",
+      "createdAt": "2026-02-17T17:58:33.621Z",
+      "id": "a5nYzZXvfRYvjnMw",
+      "name": "Sava"
+    }
+  ]
+}

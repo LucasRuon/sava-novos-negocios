@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAVA Advogados — Treinamento Sistema de Novos Negócios</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0b1220;
+    --bg2: #111a30;
+    --card: #16213d;
+    --accent: #c9a86a;
+    --accent2: #e6c98a;
+    --text: #eef2ff;
+    --muted: #9aa5c1;
+    --ok: #4ade80;
+    --warn: #fbbf24;
+    --danger: #f87171;
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: radial-gradient(1200px 800px at 10% 10%, #1a2752 0%, var(--bg) 60%) fixed;
+    color: var(--text);
+    overflow: hidden;
+  }
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    padding: 60px 80px 100px;
+    flex-direction: column;
+    justify-content: center;
+    animation: fade 0.4s ease;
+  }
+  .slide.active { display: flex; }
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(201, 168, 106, 0.15);
+    color: var(--accent2);
+    border: 1px solid rgba(201, 168, 106, 0.4);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    width: fit-content;
+  }
+  h1.title {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    background: linear-gradient(135deg, #fff 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+  }
+  h2.title {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  h2.title .num {
+    color: var(--accent);
+    margin-right: 14px;
+    font-weight: 600;
+  }
+  .subtitle {
+    font-size: 22px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    max-width: 900px;
+  }
+  .lead {
+    font-size: 20px;
+    color: var(--muted);
+    max-width: 1000px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  ul.bullets {
+    list-style: none;
+    max-width: 1100px;
+  }
+  ul.bullets li {
+    font-size: 21px;
+    line-height: 1.6;
+    padding: 10px 0 10px 32px;
+    position: relative;
+    color: #dde3f0;
+  }
+  ul.bullets li::before {
+    content: "▸";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-size: 22px;
+  }
+  ul.bullets li strong { color: #fff; }
+  .grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+  }
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 24px;
+    transition: transform .2s, border-color .2s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: rgba(201,168,106,0.4); }
+  .card .ico {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: var(--accent2);
+  }
+  .card p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+  .tip, .alert {
+    margin-top: 24px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border-left: 4px solid;
+    font-size: 17px;
+    max-width: 1100px;
+    line-height: 1.5;
+  }
+  .tip {
+    background: rgba(74, 222, 128, 0.08);
+    border-color: var(--ok);
+    color: #d4f5dd;
+  }
+  .alert {
+    background: rgba(248, 113, 113, 0.08);
+    border-color: var(--danger);
+    color: #fbd5d5;
+  }
+  .tip strong, .alert strong { color: #fff; }
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .step:last-child { border-bottom: none; }
+  .step .n {
+    flex: 0 0 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #1b1305;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+  }
+  .step .t { font-size: 18px; line-height: 1.5; }
+  .step .t strong { color: var(--accent2); }
+  .footer {
+    position: absolute;
+    bottom: 24px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width .3s;
+  }
+  .nav {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    gap: 8px;
+    z-index: 50;
+  }
+  .nav button {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    font-size: 18px;
+    cursor: pointer;
+    transition: all .2s;
+    backdrop-filter: blur(8px);
+  }
+  .nav button:hover { background: var(--accent); color: #1b1305; border-color: var(--accent); }
+  .counter {
+    position: fixed;
+    bottom: 32px;
+    left: 24px;
+    color: var(--muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    z-index: 50;
+  }
+  .brand {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 50;
+  }
+  .brand b { color: var(--accent); }
+  .cover {
+    text-align: center;
+    align-items: center;
+  }
+  .cover h1.title { font-size: 80px; }
+  .flow {
+    display: flex;
+    gap: 14px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .flow .pill {
+    background: var(--card);
+    padding: 14px 22px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 16px;
+  }
+  .flow .arrow { color: var(--accent); align-self: center; font-size: 22px; }
+  .kbd {
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 13px;
+    color: var(--accent2);
+  }
+  .compact .lead { font-size: 18px; margin-bottom: 16px; }
+  .compact ul.bullets li { font-size: 18px; line-height: 1.42; padding-top: 7px; padding-bottom: 7px; }
+  .compact .step { padding: 10px 0; }
+  .compact .step .n { width: 34px; height: 34px; flex-basis: 34px; font-size: 15px; }
+  .compact .step .t { font-size: 16.5px; line-height: 1.42; }
+  .small { font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .section-label {
+    color: var(--accent2);
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    max-width: 1180px;
+  }
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    max-width: 1200px;
+  }
+  .mini-card {
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 16px;
+    min-height: 110px;
+  }
+  .mini-card h3 {
+    color: var(--accent2);
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .mini-card p {
+    color: var(--muted);
+    font-size: 13.5px;
+    line-height: 1.42;
+  }
+  .status-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+    max-width: 1150px;
+  }
+  .status {
+    border-radius: 8px;
+    border: 1px solid rgba(201,168,106,0.22);
+    padding: 14px;
+    background: rgba(201,168,106,0.07);
+    color: #eef2ff;
+    font-size: 15px;
+    text-align: center;
+  }
+  .link-list a {
+    color: var(--accent2);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .link-list a:hover { text-decoration: underline; }
+  .section-note {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 18px;
+    max-width: 1060px;
+    line-height: 1.5;
+  }
+  .two-flows {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    max-width: 1200px;
+  }
+  @media print {
+    .slide { display: flex !important; page-break-after: always; position: relative; height: 100vh; }
+    .nav, .counter, .progress { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="brand"><b>SAVA</b> ADVOGADOS</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1. CAPA -->
+  <section class="slide cover active">
+    <div class="badge">TREINAMENTO INTERNO</div>
+    <h1 class="title">Sistema de<br>Novos Negócios</h1>
+    <p class="subtitle">Guia operacional para formulários, CRM, contratos, comunicações e fluxos automáticos</p>
+    <p style="color: var(--muted); font-size: 15px; margin-top: 40px;">SAVA Advogados · Maio de 2026</p>
+  </section>
+
+  <!-- 2. AGENDA -->
+  <section class="slide">
+    <div class="badge">AGENDA</div>
+    <h2 class="title">O que este treinamento cobre</h2>
+    <div class="grid3" style="margin-top: 30px;">
+      <div class="card"><div class="ico">🔐</div><h3>1. Acesso</h3><p>Criação de conta com e-mail corporativo e entrada no sistema.</p></div>
+      <div class="card"><div class="ico">📝</div><h3>2. Formulários</h3><p>Negócio Avulso, Negócio de Partido e Captação de Leads.</p></div>
+      <div class="card"><div class="ico">📊</div><h3>3. CRM Leads</h3><p>Funil, detalhes, pendência financeira, relatórios e conversão.</p></div>
+      <div class="card"><div class="ico">📄</div><h3>4. Contratos</h3><p>Conferência, aprovação, revisão, assinatura e histórico.</p></div>
+      <div class="card"><div class="ico">⚙️</div><h3>5. Automações</h3><p>E-mails, Drive, financeiro, documentos e controles internos.</p></div>
+      <div class="card"><div class="ico">✅</div><h3>6. Checklists</h3><p>Regras práticas antes de enviar negócios e aprovar contratos.</p></div>
+    </div>
+  </section>
+
+  <!-- 3. VISÃO GERAL -->
+  <section class="slide">
+    <div class="badge">VISÃO GERAL</div>
+    <h2 class="title"><span class="num">01</span>Para que serve o sistema?</h2>
+    <p class="lead">O sistema organiza o fluxo de novos negócios da SAVA, desde a captação de um lead até o cadastro do negócio, acompanhamento no CRM, geração e conferência de contratos e envio para assinatura.</p>
+    <ul class="bullets">
+      <li><strong>Formulários:</strong> cadastro de novos negócios e captação de leads.</li>
+      <li><strong>CRM Leads:</strong> acompanhamento dos leads e oportunidades comerciais.</li>
+      <li><strong>Contratos:</strong> conferência, aprovação, revisão e acompanhamento dos contratos.</li>
+      <li><strong>Automações:</strong> registros internos, comunicações, Drive, financeiro e assinatura digital.</li>
+    </ul>
+  </section>
+
+  <!-- 4. NAVEGAÇÃO -->
+  <section class="slide">
+    <div class="badge">NAVEGAÇÃO</div>
+    <h2 class="title"><span class="num">02</span>As 3 áreas principais</h2>
+    <p class="lead">Após o login, a barra superior dá acesso aos três módulos do sistema.</p>
+    <div class="grid3">
+      <div class="card"><div class="ico">📝</div><h3>Formulários</h3><p>Cadastro de novos negócios e leads. É aqui que tudo começa.</p></div>
+      <div class="card"><div class="ico">🗂️</div><h3>CRM Leads</h3><p>Funil visual em Kanban com dashboard de indicadores.</p></div>
+      <div class="card"><div class="ico">📑</div><h3>Contratos</h3><p>Aprovar, solicitar revisão e acessar o contrato no Drive.</p></div>
+    </div>
+    <div class="tip">💡 Depois do login, o sistema identifica seu nome e cargo nas telas internas.</div>
+  </section>
+
+  <!-- 5. PRIMEIRO ACESSO -->
+  <section class="slide">
+    <div class="badge">ACESSO</div>
+    <h2 class="title"><span class="num">03</span>Criar conta e entrar</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="color: var(--accent2); margin-bottom: 14px;">🔑 Já tenho conta</h3>
+        <ul class="bullets">
+          <li>Na tela inicial, informe seu e-mail.</li>
+          <li>Clique em <strong>Entrar</strong>.</li>
+          <li>O sistema abre a área de <strong>Formulários</strong>.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: var(--accent2); margin-bottom: 14px;">🆕 Primeiro acesso</h3>
+        <ul class="bullets">
+          <li>Clique em <strong>"Cadastre-se"</strong>.</li>
+          <li>Preencha nome completo, e-mail corporativo e cargo.</li>
+          <li>Clique em <strong>Criar Conta</strong>.</li>
+          <li>Depois, volte para a tela de login.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert">⚠️ <strong>Importante:</strong> a criação de conta só é permitida com e-mail corporativo <span class="kbd">@sava.adv.br</span>. Outros domínios não criam conta nem acessam o sistema.</div>
+  </section>
+
+  <!-- 6. FORMULÁRIO - VISÃO GERAL -->
+  <section class="slide">
+    <div class="badge">MÓDULO FORMULÁRIO</div>
+    <h2 class="title"><span class="num">04</span>Os 3 tipos de cadastro</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="ico">📄</div>
+        <h3>Negócio Avulso</h3>
+        <p>Caso pontual, contratado de forma individual. <br><br><strong style="color:#fff;">Use quando:</strong> cliente novo ou demanda específica fora de partido.</p>
+      </div>
+      <div class="card">
+        <div class="ico">👥</div>
+        <h3>Negócio de Partido</h3>
+        <p>Cliente já vinculado a um partido/contrato recorrente.<br><br><strong style="color:#fff;">Use quando:</strong> a demanda nasce dentro de um partido existente.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🎯</div>
+        <h3>Captação de Lead</h3>
+        <p>Oportunidade ainda em negociação.<br><br><strong style="color:#fff;">Use quando:</strong> ainda não há fechamento — vai para o CRM.</p>
+      </div>
+    </div>
+    <div class="alert">⚠️ <strong>Atenção:</strong> escolha o fluxo antes de preencher. Avulso é pontual; Partido é recorrente ou continuado; Lead ainda não é negócio fechado.</div>
+  </section>
+
+  <!-- 7. NEGOCIO AVULSO - PASSO A PASSO -->
+  <section class="slide compact">
+    <div class="badge">NEGÓCIO AVULSO</div>
+    <h2 class="title"><span class="num">05</span>Cadastrando um Negócio Avulso</h2>
+    <div class="step"><div class="n">1</div><div class="t">Em <strong>Dados do Negócio</strong>, informe natureza, organização interna, tipo de pessoa, área de atuação, processo, parte adversa, escopo e resumo.</div></div>
+    <div class="step"><div class="n">2</div><div class="t">Em <strong>Honorários e Valores</strong>, escolha Pro Labore, Ad Exitum ou Pro Labore + Ad Exitum e preencha valores e condições.</div></div>
+    <div class="step"><div class="n">3</div><div class="t">Revise a <strong>Cláusula de Honorários para o Contrato</strong>.</div></div>
+    <div class="step"><div class="n">4</div><div class="t">Preencha dados de indicação, negociação, parceiro externo e participações financeiras, quando houver.</div></div>
+    <div class="step"><div class="n">5</div><div class="t">Complete dados do cliente, endereço e abertura de pasta no <strong>ADVWin</strong>.</div></div>
+    <div class="step"><div class="n">6</div><div class="t">Informe se o contrato já foi assinado fisicamente e clique em <strong>Enviar Cadastro</strong>.</div></div>
+  </section>
+
+  <!-- 8. NEGOCIO PARTIDO -->
+  <section class="slide">
+    <div class="badge">PASSO A PASSO</div>
+    <h2 class="title"><span class="num">06</span>Cadastrando um Negócio de Partido</h2>
+    <p class="lead">Use este fluxo quando se tratar de contratação recorrente ou com acompanhamento continuado.</p>
+    <ul class="bullets">
+      <li>Selecione o botão <strong>Negócio de Partido</strong> no topo do formulário.</li>
+      <li>Preencha dados principais, honorários, condições comerciais, negociação, cliente e abertura de pasta.</li>
+      <li>Complete campos específicos quando aparecerem: robô de monitoramento, reajuste, vigência e responsáveis por setor.</li>
+      <li>Informe se o contrato já foi assinado fisicamente e clique em <strong>Enviar Cadastro</strong>.</li>
+    </ul>
+    <div class="tip">💡 O sistema registra o negócio, movimenta controles de partido, envia comunicações e encaminha contrato para conferência e assinatura quando aplicável.</div>
+  </section>
+
+  <!-- 9. CAPTAÇÃO LEAD -->
+  <section class="slide">
+    <div class="badge">PASSO A PASSO</div>
+    <h2 class="title"><span class="num">07</span>Cadastrando um Lead</h2>
+    <p class="lead">Use quando ainda não existe negócio fechado, mas há um possível cliente para acompanhar.</p>
+    <ul class="bullets">
+      <li>Selecione <strong>Captação de Leads</strong> no topo do formulário.</li>
+      <li>Preencha nome completo, telefone, e-mail, área de interesse, data sugerida, horário preferido e origem.</li>
+      <li>Registre observações, resumo do caso e providências para a secretaria.</li>
+      <li>Clique em <strong>Cadastrar Lead</strong>.</li>
+    </ul>
+    <div class="tip">💡 O lead entra no CRM como <strong>Novo Lead</strong>, com pendência financeira inicial como <strong>Não</strong>. Secretaria e usuário que cadastrou recebem e-mail.</div>
+  </section>
+
+  <!-- 10. AUTOMAÇÃO AVULSO -->
+  <section class="slide compact">
+    <div class="badge">AUTOMAÇÕES</div>
+    <h2 class="title"><span class="num">08</span>Depois que um Avulso é enviado</h2>
+    <div class="cols">
+      <div>
+        <h3 class="section-label">Sem contrato físico</h3>
+        <ul class="bullets">
+          <li>Registra negócio e movimentações internas.</li>
+          <li>Gera contrato por modelo, quando a área permite.</li>
+          <li>Cria pasta no Drive e salva cópia do contrato.</li>
+          <li>Comunica abertura de pasta, documentos pendentes e financeiro quando aplicável.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="section-label">Já assinado fisicamente</h3>
+        <ul class="bullets">
+          <li>Registra o negócio e o contrato como assinado.</li>
+          <li>Cria pasta no Drive para organização do caso.</li>
+          <li>Solicita cobrança ao financeiro.</li>
+          <li>Não envia o contrato para assinatura digital.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section-note">Criminal e Tributário podem registrar o negócio sem seguir a mesma geração automática de contrato usada nos demais casos.</div>
+  </section>
+
+  <!-- 11. CRM VISÃO GERAL -->
+  <section class="slide">
+    <div class="badge">MÓDULO CRM</div>
+    <h2 class="title"><span class="num">09</span>O CRM de Leads</h2>
+    <p class="lead">A área CRM Leads serve para acompanhar oportunidades comerciais, consultar contatos e atualizar a situação de cada lead.</p>
+    <div class="grid2">
+      <div class="card"><h3>🔎 Buscar lead</h3><p>Use a busca para procurar por nome ou e-mail.</p></div>
+      <div class="card"><h3>🔄 Atualizar dados</h3><p>Clique em Atualizar para recarregar a lista antes de analisar o funil.</p></div>
+    </div>
+  </section>
+
+  <!-- 12. CRM KANBAN -->
+  <section class="slide">
+    <div class="badge">CRM</div>
+    <h2 class="title"><span class="num">10</span>Visão Kanban</h2>
+    <p class="lead">Cada coluna é uma etapa do funil. Para mudar um lead de etapa, arraste o card para a coluna desejada.</p>
+    <ul class="bullets">
+      <li>Novo Lead</li>
+      <li>Contato Realizado</li>
+      <li>Reunião Agendada</li>
+      <li>Proposta Enviada</li>
+      <li>Negócio Fechado</li>
+      <li>Perdido</li>
+    </ul>
+    <div class="tip">💡 Mantenha a etapa atualizada para que os indicadores reflitam a situação real.</div>
+  </section>
+
+  <!-- 13. CRM DETALHES -->
+  <section class="slide compact">
+    <div class="badge">CRM</div>
+    <h2 class="title"><span class="num">11</span>Detalhes e pendência financeira</h2>
+    <p class="lead">Use os detalhes para revisar e atualizar dados operacionais do lead.</p>
+    <ul class="bullets">
+      <li>Clique em <strong>Detalhes</strong> no card.</li>
+      <li>Atualize área de interesse, status, valor da proposta, pendência financeira e notas do CRM.</li>
+      <li>Clique em <strong>Salvar Alterações</strong>.</li>
+      <li>Marque <strong>Pendência Financeira</strong> quando existir ponto financeiro que precise de atenção.</li>
+      <li>Leads com pendência aparecem destacados no CRM.</li>
+    </ul>
+  </section>
+
+  <!-- 14. CONVERSÃO -->
+  <section class="slide">
+    <div class="badge">FLUXO-CHAVE</div>
+    <h2 class="title"><span class="num">12</span>Convertendo Lead em Negócio</h2>
+    <div class="flow">
+      <div class="pill">📋 Lead no CRM</div>
+      <div class="arrow">→</div>
+      <div class="pill">+ Negócio ou Converter</div>
+      <div class="arrow">→</div>
+      <div class="pill">Formulário Avulso</div>
+      <div class="arrow">→</div>
+      <div class="pill">Enviar Cadastro</div>
+    </div>
+    <ul class="bullets" style="margin-top: 30px;">
+      <li>O sistema abre o formulário de <strong>Negócio Avulso</strong>.</li>
+      <li>Nome, telefone, e-mail e área do lead são preenchidos automaticamente.</li>
+      <li>Complete os campos obrigatórios restantes.</li>
+      <li>A conversão apenas preenche o formulário: o negócio só é registrado depois do envio.</li>
+    </ul>
+  </section>
+
+  <!-- 15. DASHBOARD -->
+  <section class="slide">
+    <div class="badge">DASHBOARD</div>
+    <h2 class="title"><span class="num">13</span>Indicadores do CRM</h2>
+    <p class="lead">Na opção Relatórios, o sistema mostra indicadores para leitura do funil comercial:</p>
+    <div class="grid2">
+      <div class="card"><div class="ico">📊</div><h3>Quantidade por Etapa</h3><p>Quantos leads estão em cada fase do funil. Identifica gargalos.</p></div>
+      <div class="card"><div class="ico">📈</div><h3>Leads vs Negócios Fechados</h3><p>Taxa de conversão — quantos leads viram negócio.</p></div>
+      <div class="card"><div class="ico">🎯</div><h3>Origem dos Leads</h3><p>De onde vêm: indicação, site, parceiro, etc. Norteia investimento em marketing.</p></div>
+      <div class="card"><div class="ico">⚖️</div><h3>Área de Interesse</h3><p>Quais áreas do escritório mais atraem leads.</p></div>
+    </div>
+    <div class="tip">💡 Na parte superior do CRM também aparecem total de leads, negócios fechados, taxa de conversão e pendências financeiras.</div>
+  </section>
+
+  <!-- 16. CONTRATOS GERAL -->
+  <section class="slide">
+    <div class="badge">MÓDULO CONTRATOS</div>
+    <h2 class="title"><span class="num">14</span>Acompanhamento de Contratos</h2>
+    <p class="lead">A área Contratos acompanha contratos gerados, conferência de conteúdo, solicitação de revisão, aprovação e envio para assinatura.</p>
+    <ul class="bullets">
+      <li>Use o filtro de mês para consultar contratos de um período específico.</li>
+      <li>Clique em <strong>Atualizar</strong> para recarregar.</li>
+      <li>Os cards mostram cliente, área, tipo, advogado responsável e data de geração.</li>
+      <li>Status principais: Aguardando Aprovação, Revisão Solicitada, Em Assinatura e Assinados.</li>
+    </ul>
+  </section>
+
+  <!-- 17. AÇÕES CONTRATOS -->
+  <section class="slide">
+    <div class="badge">CONTRATOS</div>
+    <h2 class="title"><span class="num">15</span>Ações em cada contrato</h2>
+    <div class="grid2">
+      <div class="card"><div class="ico">🔗</div><h3>Copiar Link</h3><p>Copia o link do contrato para abrir o documento no navegador.</p></div>
+      <div class="card"><div class="ico">👁️</div><h3>Ver Detalhes</h3><p>Abre o modal com todas as informações daquele contrato.</p></div>
+      <div class="card"><div class="ico">✅</div><h3>Aprovar e Enviar</h3><p>Gera PDF, envia para assinatura digital e muda o status para Em Assinatura.</p></div>
+      <div class="card"><div class="ico">✏️</div><h3>Solicitar Revisão</h3><p>Registra observação de ajuste e comunica o responsável selecionado.</p></div>
+    </div>
+  </section>
+
+  <!-- 18. FLUXO APROVAÇÃO -->
+  <section class="slide">
+    <div class="badge">FLUXO</div>
+    <h2 class="title"><span class="num">16</span>Aprovação vs. Revisão</h2>
+    <div class="flow">
+      <div class="pill">📄 Contrato pendente</div>
+      <div class="arrow">→</div>
+      <div class="pill">Conferir dados</div>
+      <div class="arrow">→</div>
+      <div class="pill">Selecionar responsável SAVA</div>
+      <div class="arrow">→</div>
+      <div class="pill" style="border-color: var(--ok);">✅ Aprovar e Enviar</div>
+    </div>
+    <div class="flow" style="margin-top: 14px;">
+      <div class="pill">📄 Contrato pendente</div>
+      <div class="arrow">→</div>
+      <div class="pill">✏️ Solicitar Revisão</div>
+      <div class="arrow">→</div>
+      <div class="pill">Observação objetiva</div>
+      <div class="arrow">→</div>
+      <div class="pill">Responsável recebe e-mail</div>
+    </div>
+    <div class="alert" style="margin-top: 30px;">⚠️ Antes de aprovar, confira o contrato pelo link. A aprovação envia avisos automáticos para os signatários.</div>
+  </section>
+
+  <!-- 19. BOAS PRÁTICAS -->
+  <section class="slide">
+    <div class="badge">BOAS PRÁTICAS</div>
+    <h2 class="title"><span class="num">17</span>Boas práticas de uso</h2>
+    <ul class="bullets">
+      <li>Preencha os campos com o máximo de clareza possível.</li>
+      <li>Use observações para registrar contexto que ajude quem dará continuidade.</li>
+      <li>Em documentos pendentes, detalhe exatamente o que falta.</li>
+      <li>Antes de aprovar contrato, sempre confira o documento.</li>
+      <li>Ao solicitar revisão, escreva orientação objetiva e acionável.</li>
+      <li>Mantenha o CRM atualizado para que os indicadores reflitam a situação real.</li>
+    </ul>
+  </section>
+
+  <!-- 20. ERROS COMUNS -->
+  <section class="slide">
+    <div class="badge">REGRAS PRÁTICAS</div>
+    <h2 class="title"><span class="num">18</span>Pontos que mudam o fluxo</h2>
+    <div class="grid2">
+      <div class="card"><h3>Criminal e Tributário</h3><p>Podem não gerar contrato automaticamente como os demais. O cadastro fica registrado e pode exigir tratativa manual.</p></div>
+      <div class="card"><h3>Previdenciário PF</h3><p>Segue modelo específico de contrato.</p></div>
+      <div class="card"><h3>Contrato já assinado</h3><p>Pula assinatura digital e entra como assinado no acompanhamento.</p></div>
+      <div class="card"><h3>Documentos pendentes</h3><p>Só geram solicitação ao cliente quando o campo é marcado como Sim e os documentos são descritos.</p></div>
+    </div>
+  </section>
+
+  <!-- 21. ESTUDO DE CASO -->
+  <section class="slide">
+    <div class="badge">FLUXO COMPLETO</div>
+    <h2 class="title"><span class="num">19</span>Quando um lead é cadastrado</h2>
+    <div class="step"><div class="n">1</div><div class="t">Usuário cadastra o lead na área <strong>Captação de Leads</strong>.</div></div>
+    <div class="step"><div class="n">2</div><div class="t">Lead aparece no CRM como <strong>Novo Lead</strong>.</div></div>
+    <div class="step"><div class="n">3</div><div class="t">Secretaria e usuário que cadastrou recebem e-mail.</div></div>
+    <div class="step"><div class="n">4</div><div class="t">Equipe consulta os dados, entra em contato e organiza reunião quando houver data sugerida.</div></div>
+    <div class="step"><div class="n">5</div><div class="t">Responsável atualiza o status do lead no CRM.</div></div>
+    <div class="step"><div class="n">6</div><div class="t">Se virar oportunidade real, converte em negócio, completa o formulário e envia.</div></div>
+  </section>
+
+  <!-- 22. CHECKLIST -->
+  <section class="slide">
+    <div class="badge">CHECKLIST</div>
+    <h2 class="title"><span class="num">20</span>Antes de enviar um negócio</h2>
+    <ul class="bullets">
+      <li>Tipo correto selecionado: Avulso ou Partido.</li>
+      <li>Natureza do negócio e área de atuação corretas.</li>
+      <li>CPF/CNPJ, dados do cliente e endereço completos.</li>
+      <li>Escopo, resumo da negociação, honorários e cláusula revisados.</li>
+      <li>Dados de indicação, negociação, advogado, coordenador e sócio definidos.</li>
+      <li>Documentos pendentes descritos, prazo informado e contrato físico marcado corretamente.</li>
+    </ul>
+  </section>
+
+  <!-- 23. FAQ -->
+  <section class="slide">
+    <div class="badge">CHECKLIST</div>
+    <h2 class="title"><span class="num">21</span>Antes de aprovar um contrato</h2>
+    <ul class="bullets">
+      <li>O contrato foi aberto e conferido.</li>
+      <li>Cliente, área, tipo e advogado estão corretos.</li>
+      <li>O conteúdo do contrato está adequado.</li>
+      <li>Histórico de revisões foi consultado.</li>
+      <li>Responsável pela assinatura SAVA foi selecionado.</li>
+      <li>Se houver erro, foi solicitada revisão com observação objetiva.</li>
+      <li>Se estiver correto, foi clicado em <strong>Aprovar e Enviar</strong>.</li>
+    </ul>
+  </section>
+
+  <!-- 24. COMUNICAÇÕES -->
+  <section class="slide compact">
+    <div class="badge">COMUNICAÇÕES AUTOMÁTICAS</div>
+    <h2 class="title"><span class="num">22</span>Quem é avisado pelo sistema</h2>
+    <div class="mini-grid">
+      <div class="mini-card"><h3>Novo lead</h3><p>Secretaria e usuário recebem dados do lead, origem, agenda e providências.</p></div>
+      <div class="mini-card"><h3>Nova pasta</h3><p>Equipe interna recebe dados gerais, cliente, negócio e organização interna.</p></div>
+      <div class="mini-card"><h3>Documentos</h3><p>Cliente recebe solicitação quando pendências são marcadas e descritas.</p></div>
+      <div class="mini-card"><h3>Financeiro</h3><p>Recebe pedido de cobrança quando houver Pro Labore ou contrato já assinado.</p></div>
+      <div class="mini-card"><h3>Aprovação</h3><p>Equipe responsável recebe aviso de contrato gerado para conferência.</p></div>
+      <div class="mini-card"><h3>Revisão</h3><p>Responsável selecionado recebe observação e link do contrato.</p></div>
+      <div class="mini-card"><h3>Assinatura</h3><p>Signatários recebem avisos de assinatura digital.</p></div>
+      <div class="mini-card"><h3>Assinado</h3><p>Equipe recebe e-mail quando todos concluírem a assinatura.</p></div>
+    </div>
+  </section>
+
+  <!-- 25. DOCUMENTOS -->
+  <section class="slide">
+    <div class="badge">DRIVE E DOCUMENTOS</div>
+    <h2 class="title"><span class="num">23</span>Organização automática</h2>
+    <p class="lead">Conforme o tipo de cadastro e a situação do contrato, o sistema pode preparar a documentação do caso.</p>
+    <ul class="bullets">
+      <li>Criar pasta no Drive com o nome do cliente.</li>
+      <li>Gerar contrato a partir de modelo e preencher com dados do formulário.</li>
+      <li>Liberar o contrato para edição e conferência.</li>
+      <li>Exportar PDF, salvar arquivo na pasta e registrar acompanhamento na área <strong>Contratos</strong>.</li>
+      <li>Registrar contrato já assinado fisicamente sem conduzir assinatura digital.</li>
+    </ul>
+  </section>
+
+  <!-- 26. NEGÓCIO SEM CONTRATO ASSINADO -->
+  <section class="slide compact">
+    <div class="badge">FLUXO COMPLETO</div>
+    <h2 class="title"><span class="num">24</span>Novo negócio sem contrato assinado</h2>
+    <div class="step"><div class="n">1</div><div class="t">Usuário marca <strong>Não, seguir com assinatura digital</strong> e envia o cadastro.</div></div>
+    <div class="step"><div class="n">2</div><div class="t">Sistema registra o negócio, comunica abertura de pasta e cria pasta no Drive.</div></div>
+    <div class="step"><div class="n">3</div><div class="t">Contrato é gerado quando a área permite e fica disponível para conferência.</div></div>
+    <div class="step"><div class="n">4</div><div class="t">Responsável acessa o link pelo e-mail ou pela área <strong>Contratos</strong>.</div></div>
+    <div class="step"><div class="n">5</div><div class="t">Se precisar, edita dados, texto ou cláusulas diretamente no documento antes da aprovação.</div></div>
+    <div class="step"><div class="n">6</div><div class="t">Depois, volta ao sistema para <strong>Aprovar e Enviar</strong> ou <strong>Solicitar Revisão</strong>.</div></div>
+  </section>
+
+  <!-- 27. DOCUMENTOS PENDENTES -->
+  <section class="slide compact">
+    <div class="badge">DOCUMENTOS PENDENTES</div>
+    <h2 class="title"><span class="num">25</span>Quando faltam documentos</h2>
+    <ul class="bullets">
+      <li>No formulário, marque <strong>Documentos Pendentes? Sim</strong>.</li>
+      <li>Descreva exatamente quais documentos faltam.</li>
+      <li>Depois do envio, o cliente recebe e-mail solicitando os documentos.</li>
+      <li>A equipe interna também recebe cópia.</li>
+      <li>Ao receber, secretaria ou responsável deve salvar os arquivos na pasta do cliente no Drive.</li>
+      <li>Confira se os documentos correspondem ao solicitado e cobre novamente se ainda faltar algo.</li>
+    </ul>
+  </section>
+
+  <!-- 28. FINANCEIRO -->
+  <section class="slide">
+    <div class="badge">FINANCEIRO</div>
+    <h2 class="title"><span class="num">26</span>Quando há solicitação de cobrança</h2>
+    <p class="lead">O financeiro é acionado especialmente quando o negócio possui Pro Labore, Pro Labore + Ad Exitum ou contrato já assinado fisicamente.</p>
+    <ul class="bullets">
+      <li>O e-mail informa dados do cliente e da pasta.</li>
+      <li>O financeiro confere os dados recebidos.</li>
+      <li>Gera boleto, Pix ou outra forma de pagamento aplicável.</li>
+      <li>Encaminha a cobrança ao cliente e acompanha o pagamento.</li>
+      <li>Se houver inadimplência, segue o fluxo financeiro da SAVA.</li>
+    </ul>
+  </section>
+
+  <!-- 29. ASSINATURA DIGITAL -->
+  <section class="slide compact">
+    <div class="badge">ASSINATURA DIGITAL</div>
+    <h2 class="title"><span class="num">27</span>Contrato aprovado para assinatura</h2>
+    <div class="step"><div class="n">1</div><div class="t">Responsável aprova o contrato no sistema.</div></div>
+    <div class="step"><div class="n">2</div><div class="t">Contrato passa para <strong>Em Assinatura</strong>.</div></div>
+    <div class="step"><div class="n">3</div><div class="t">Cliente e responsável SAVA recebem e-mail com link para assinar.</div></div>
+    <div class="step"><div class="n">4</div><div class="t">Cada signatário acessa o link e assina digitalmente.</div></div>
+    <div class="step"><div class="n">5</div><div class="t">Enquanto faltar assinatura, o contrato continua aguardando conclusão.</div></div>
+    <div class="step"><div class="n">6</div><div class="t">Quando todos assinam, o contrato vira <strong>Assinado</strong> e a equipe recebe aviso.</div></div>
+  </section>
+
+  <!-- 30. REVISÃO SOLICITADA -->
+  <section class="slide compact">
+    <div class="badge">REVISÃO DE CONTRATO</div>
+    <h2 class="title"><span class="num">28</span>Quando uma revisão é solicitada</h2>
+    <div class="step"><div class="n">1</div><div class="t">Usuário abre o contrato, clica em revisão, seleciona responsável e descreve o ajuste.</div></div>
+    <div class="step"><div class="n">2</div><div class="t">Contrato passa para <strong>Revisão Solicitada</strong>.</div></div>
+    <div class="step"><div class="n">3</div><div class="t">Responsável recebe e-mail com cliente, solicitante, observação e link.</div></div>
+    <div class="step"><div class="n">4</div><div class="t">Responsável acessa o contrato e faz os ajustes necessários.</div></div>
+    <div class="step"><div class="n">5</div><div class="t">Contrato deve ser conferido novamente.</div></div>
+    <div class="step"><div class="n">6</div><div class="t">Quando estiver correto, retorna ao sistema e aprova para seguir com assinatura.</div></div>
+  </section>
+
+  <!-- 31. CONTRATO FÍSICO -->
+  <section class="slide compact">
+    <div class="badge">CONTRATO FÍSICO</div>
+    <h2 class="title"><span class="num">29</span>Quando já foi assinado fisicamente</h2>
+    <ul class="bullets">
+      <li>No cadastro do negócio, marque <strong>Sim, já assinou</strong>.</li>
+      <li>O sistema registra o negócio como contrato já assinado.</li>
+      <li>O contrato não segue para assinatura digital.</li>
+      <li>O sistema cria ou prepara a organização da pasta do cliente.</li>
+      <li>O financeiro recebe solicitação de cobrança, quando aplicável.</li>
+      <li>A equipe deve inserir na pasta a cópia do contrato físico assinado e os demais documentos recebidos.</li>
+    </ul>
+  </section>
+
+  <!-- 32. ABERTURA DE PASTA -->
+  <section class="slide compact">
+    <div class="badge">ABERTURA DE PASTA</div>
+    <h2 class="title"><span class="num">30</span>Organização fora do sistema</h2>
+    <ul class="bullets">
+      <li>A comunicação de nova abertura de pasta vai para a equipe interna.</li>
+      <li>A pasta do cliente é criada no Drive quando o fluxo aplicável executa essa etapa.</li>
+      <li>Advogado, secretaria ou responsável deve salvar documentos do cliente, contrato gerado, contrato assinado e arquivos relevantes.</li>
+      <li>Quando depender de ADVWin ou outro controle interno, use os dados do formulário para concluir o cadastro.</li>
+      <li>A pasta deve permanecer organizada para consulta futura por qualquer pessoa da equipe.</li>
+    </ul>
+  </section>
+
+  <!-- 33. LINKS -->
+  <section class="slide compact">
+    <div class="badge">LINKS ÚTEIS</div>
+    <h2 class="title"><span class="num">31</span>Referências operacionais</h2>
+    <ul class="bullets link-list">
+      <li><strong>Pasta geral de novos negócios:</strong> <a href="https://drive.google.com/drive/folders/10gGDxH_byq37gV5_rB29YG_p3QNN973q">Drive</a></li>
+      <li><strong>Controle geral de novos negócios:</strong> <a href="https://docs.google.com/spreadsheets/d/1tN3kXkDPEToNy63V4yD3CrpdJf7JU0vgEQz5Q88qLmE/edit">Planilha</a></li>
+      <li><strong>Controle operacional de leads e contratos:</strong> <a href="https://docs.google.com/spreadsheets/d/1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo/edit">Planilha</a></li>
+      <li><strong>Controle de contratos avulsos e de partido:</strong> <a href="https://docs.google.com/spreadsheets/d/11s_kwnicjG-2C7hH4yj81sipnF-4U9fXQiMqBeWJiBI/edit">Planilha</a></li>
+    </ul>
+    <div class="section-note">O link individual de cada contrato aparece no e-mail recebido e também no card do contrato dentro da área Contratos.</div>
+  </section>
+
+  <!-- 34. EXERCÍCIOS -->
+  <section class="slide">
+    <div class="badge">PRÁTICA</div>
+    <h2 class="title"><span class="num">32</span>Exercícios práticos</h2>
+    <div class="step"><div class="n">1</div><div class="t"><strong>Cadastre um lead fictício</strong> com origem, área de interesse, observações e providências para a secretaria.</div></div>
+    <div class="step"><div class="n">2</div><div class="t"><strong>No CRM</strong>, abra detalhes, altere status, registre nota e marque/desmarque pendência financeira.</div></div>
+    <div class="step"><div class="n">3</div><div class="t"><strong>Converta em negócio</strong>, complete os campos obrigatórios e revise honorários.</div></div>
+    <div class="step"><div class="n">4</div><div class="t"><strong>Em Contratos</strong>, localize o contrato, copie o link e simule aprovação ou revisão conforme orientação do treinamento.</div></div>
+  </section>
+
+  <!-- 35. ENCERRAMENTO -->
+  <section class="slide cover">
+    <div class="badge">FIM</div>
+    <h1 class="title">Bom uso do<br>sistema</h1>
+    <p class="subtitle">Cadastre com clareza, mantenha o CRM atualizado e confira contratos antes de aprovar.</p>
+    <p style="color: var(--muted); font-size: 14px; margin-top: 60px;">SAVA Advogados · Treinamento de Plataforma</p>
+  </section>
+
+</div>
+
+<div class="counter"><span id="curr">1</span> / <span id="total">35</span></div>
+<div class="nav">
+  <button onclick="prev()" title="Anterior (←)">‹</button>
+  <button onclick="next()" title="Próximo (→)">›</button>
+</div>
+<div class="progress" id="progress"></div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let i = 0;
+  document.getElementById('total').textContent = total;
+
+  function show(n) {
+    slides[i].classList.remove('active');
+    i = (n + total) % total;
+    slides[i].classList.add('active');
+    document.getElementById('curr').textContent = i + 1;
+    document.getElementById('progress').style.width = ((i + 1) / total * 100) + '%';
+  }
+  function next() { show(i + 1); }
+  function prev() { show(i - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(total - 1); }
+  });
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('.nav') || e.target.closest('button') || e.target.closest('a')) return;
+    next();
+  });
+
+  show(0);
+</script>
+
+</body>
+</html>

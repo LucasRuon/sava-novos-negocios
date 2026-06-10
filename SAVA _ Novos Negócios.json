@@ -1,0 +1,4090 @@
+{
+  "name": "SAVA | Novos Negócios",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "novos-negocios",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -2864,
+        1136
+      ],
+      "id": "7ce75d89-1f1c-46f3-a131-891a8067b248",
+      "name": "Webhook",
+      "webhookId": "c5a56914-e444-4520-a055-9d3339036358"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1tN3kXkDPEToNy63V4yD3CrpdJf7JU0vgEQz5Q88qLmE",
+          "mode": "list",
+          "cachedResultName": "Dados Sava | Novos Negócios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tN3kXkDPEToNy63V4yD3CrpdJf7JU0vgEQz5Q88qLmE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 708299615,
+          "mode": "list",
+          "cachedResultName": "Base",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tN3kXkDPEToNy63V4yD3CrpdJf7JU0vgEQz5Q88qLmE/edit#gid=708299615"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ $json.body.timestamp.toDateTime().toLocal('America/Sao_Paulo').format('dd/MM/yyyy HH:mm') }}",
+            "tipoFormulario": "={{ $json.body.tipoFormulario }}",
+            "naturezaNegocio": "={{ $json.body.dadosNegocio.naturezaNegocio }}",
+            "organizacaoInterna": "={{ $json.body.dadosNegocio.organizacaoInterna }}",
+            "areas": "={{ $json.body.dadosNegocio.areas.join() }}",
+            "areaOutrosEspecificar": "={{ $json.body.dadosNegocio.areaOutrosEspecificar }}",
+            "numeroProcesso": "={{ $json.body.dadosNegocio.numeroProcesso }}",
+            "parteAdversa": "={{ $json.body.dadosNegocio.parteAdversa }}",
+            "escopoAtuacao": "={{ $json.body.dadosNegocio.escopoAtuacao }}",
+            "resumoNegociacao": "={{ $json.body.dadosNegocio.resumoNegociacao }}",
+            "tipoHonorarios": "={{ $json.body.honorarios.tipoHonorarios.join() }}",
+            "valoresPercentuais": "={{ $json.body.honorarios.valoresPercentuais }}",
+            "expectativaRecebimento": "={{ $json.body.honorarios.expectativaRecebimento }}",
+            "notaFiscal": "={{ $json.body.honorarios.notaFiscal }}",
+            "caixaEscritorio": "={{ $json.body.honorarios.caixaEscritorio }}",
+            "roboMonitoramento": "={{ $json.body.honorarios.roboMonitoramento }}",
+            "criterioReajuste": "={{ $json.body.honorarios.criterioReajuste }}",
+            "periodoVigencia": "={{ $json.body.honorarios.periodoVigencia }}",
+            "tipoIndicacao": "={{ $json.body.dadosNegociacao.tipoIndicacao }}",
+            "qualMidiaSocial": "={{ $json.body.dadosNegociacao.qualMidiaSocial }}",
+            "responsavelIndicacao": "={{ $json.body.dadosNegociacao.responsavelIndicacao }}",
+            "indicacaoTemParticipacao": "={{ $json.body.dadosNegociacao.indicacaoTemParticipacao }}",
+            "indicacaoValor": "={{ $json.body.dadosNegociacao.indicacaoValor }}",
+            "responsavelInterno": "={{ $json.body.dadosNegociacao.responsavelInterno }}",
+            "parceiroExterno": "={{ $json.body.dadosNegociacao.parceiroExterno }}",
+            "parceiroTemParticipacao": "={{ $json.body.dadosNegociacao.parceiroTemParticipacao }}",
+            "parceiroValor": "={{ $json.body.dadosNegociacao.parceiroValor }}",
+            "nomeCliente": "={{ $json.body.dadosCliente.nome }}",
+            "cpfCnpj": "={{ $json.body.dadosCliente.cpfCnpj }}",
+            "telefone": "={{ $json.body.dadosCliente.telefone }}",
+            "email": "={{ $json.body.dadosCliente.email }}",
+            "endereco": "={{ $json.body.dadosCliente.endereco }}",
+            "responsaveisSetores": "={{ $json.body.dadosCliente.responsaveisSetores }}",
+            "advogadoResponsavel": "={{ $json.body.aberturaPasta.advogadoResponsavel }}",
+            "coordenador": "={{ $json.body.aberturaPasta.coordenador }}",
+            "advogadoSocio": "={{ $json.body.aberturaPasta.advogadoSocio }}",
+            "documentosPendentes": "={{ $json.body.aberturaPasta.documentosPendentes }}",
+            "quaisDocumentos": "={{ $json.body.aberturaPasta.quaisDocumentos }}",
+            "processoEstrategico": "={{ $json.body.aberturaPasta.processoEstrategico }}",
+            "dataEntrada": "={{ $json.body.aberturaPasta.dataEntrada }}",
+            "objetoAcao": "={{ $json.body.aberturaPasta.objetoAcao }}",
+            "prazoInicial": "={{ $json.body.aberturaPasta.prazoInicial }}",
+            "outrosPrazos_tipo": "={{ $json.body.aberturaPasta.outrosPrazos.tipo }}",
+            "outrosPrazos_data": "={{ $json.body.aberturaPasta.outrosPrazos.data }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipoFormulario",
+              "displayName": "tipoFormulario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "naturezaNegocio",
+              "displayName": "naturezaNegocio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "organizacaoInterna",
+              "displayName": "organizacaoInterna",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "areas",
+              "displayName": "areas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "areaOutrosEspecificar",
+              "displayName": "areaOutrosEspecificar",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "numeroProcesso",
+              "displayName": "numeroProcesso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "parteAdversa",
+              "displayName": "parteAdversa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "escopoAtuacao",
+              "displayName": "escopoAtuacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "resumoNegociacao",
+              "displayName": "resumoNegociacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipoHonorarios",
+              "displayName": "tipoHonorarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "valoresPercentuais",
+              "displayName": "valoresPercentuais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "expectativaRecebimento",
+              "displayName": "expectativaRecebimento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notaFiscal",
+              "displayName": "notaFiscal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "caixaEscritorio",
+              "displayName": "caixaEscritorio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "roboMonitoramento",
+              "displayName": "roboMonitoramento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "criterioReajuste",
+              "displayName": "criterioReajuste",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "periodoVigencia",
+              "displayName": "periodoVigencia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipoIndicacao",
+              "displayName": "tipoIndicacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "qualMidiaSocial",
+              "displayName": "qualMidiaSocial",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "responsavelIndicacao",
+              "displayName": "responsavelIndicacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "indicacaoTemParticipacao",
+              "displayName": "indicacaoTemParticipacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "indicacaoValor",
+              "displayName": "indicacaoValor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "responsavelInterno",
+              "displayName": "responsavelInterno",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "parceiroExterno",
+              "displayName": "parceiroExterno",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "parceiroTemParticipacao",
+              "displayName": "parceiroTemParticipacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "parceiroValor",
+              "displayName": "parceiroValor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nomeCliente",
+              "displayName": "nomeCliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cpfCnpj",
+              "displayName": "cpfCnpj",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telefone",
+              "displayName": "telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "endereco",
+              "displayName": "endereco",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "responsaveisSetores",
+              "displayName": "responsaveisSetores",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogadoResponsavel",
+              "displayName": "advogadoResponsavel",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "coordenador",
+              "displayName": "coordenador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogadoSocio",
+              "displayName": "advogadoSocio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "documentosPendentes",
+              "displayName": "documentosPendentes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "quaisDocumentos",
+              "displayName": "quaisDocumentos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "processoEstrategico",
+              "displayName": "processoEstrategico",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "dataEntrada",
+              "displayName": "dataEntrada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "objetoAcao",
+              "displayName": "objetoAcao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "prazoInicial",
+              "displayName": "prazoInicial",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "outrosPrazos_tipo",
+              "displayName": "outrosPrazos_tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "outrosPrazos_data",
+              "displayName": "outrosPrazos_data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2192,
+        -144
+      ],
+      "id": "01e44eb5-6cda-4598-ad99-dadcdb97cd3e",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "sem-contrato-criminal",
+                    "leftValue": "={{ $json.body.dadosNegocio.areas[0] }}",
+                    "rightValue": "Criminal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  },
+                  {
+                    "id": "sem-contrato-tributario",
+                    "leftValue": "={{ $json.body.dadosNegocio.areas[0] }}",
+                    "rightValue": "Tributário",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "or"
+              },
+              "renameOutput": true,
+              "outputKey": "Sem Contrato Automático"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "prev-area",
+                    "leftValue": "={{ $json.body.dadosNegocio.areas[0] }}",
+                    "rightValue": "Previdenciário",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  },
+                  {
+                    "id": "prev-pf",
+                    "leftValue": "={{ $json.body.dadosNegocio.organizacaoInterna }}",
+                    "rightValue": "PF",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Avulso PF PREV"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2416,
+        64
+      ],
+      "id": "848cb6ea-d72e-45e3-a46f-d4205770e090",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "template-id",
+              "name": "templateId",
+              "value": "1Imdr50ViWtgihjZkkOoMP4ERrRkX9Bi8jlSH__PTbgo",
+              "type": "string"
+            },
+            {
+              "id": "nome-cliente",
+              "name": "nomeCliente",
+              "value": "={{ $('Webhook').item.json.body.dadosCliente.nome }}",
+              "type": "string"
+            },
+            {
+              "id": "cpf",
+              "name": "cpf",
+              "value": "={{ $('Webhook').item.json.body.dadosCliente.cpfCnpj }}",
+              "type": "string"
+            },
+            {
+              "id": "email",
+              "name": "email",
+              "value": "={{ $('Webhook').item.json.body.dadosCliente.email }}",
+              "type": "string"
+            },
+            {
+              "id": "data-contrato",
+              "name": "dataContrato",
+              "value": "={{ $now.setLocale('pt-BR').toFormat(\"d 'de' LLLL 'de' yyyy\") }}",
+              "type": "string"
+            },
+            {
+              "id": "valor",
+              "name": "valorProLabore",
+              "value": "={{ $json.body.honorarios.valorProLabore }}",
+              "type": "string"
+            },
+            {
+              "id": "nome-documento",
+              "name": "nomeDocumento",
+              "value": "=Contrato Negócios Avulso PF ou PJ | {{ $('Webhook').item.json.body.dadosCliente.nome }}",
+              "type": "string"
+            },
+            {
+              "id": "pasta-destino",
+              "name": "pastaDestino",
+              "value": "1fsQVKIEYzfgIwYrklMSFNXl4Fi1lVvH5",
+              "type": "string"
+            },
+            {
+              "id": "da9e37a8-143d-4553-a4f9-031755c1a333",
+              "name": "numeroProcesso",
+              "value": "={{ $json.body.dadosNegocio.numeroProcesso }}",
+              "type": "string"
+            },
+            {
+              "id": "76cd1942-122e-4dc4-b3a4-a7648533a753",
+              "name": "endereco",
+              "value": "={{ $json.body.dadosCliente.endereco }}",
+              "type": "string"
+            },
+            {
+              "id": "00ee773d-6532-4815-b383-479e814c4a97",
+              "name": "telefone",
+              "value": "={{ $json.body.dadosCliente.telefone }}",
+              "type": "string"
+            },
+            {
+              "id": "e95e3161-041b-4d38-9e9a-0b28a683d2ee",
+              "name": "escopoAtuacao",
+              "value": "={{ $('Webhook').item.json.body.dadosNegocio.escopoAtuacao }}",
+              "type": "string"
+            },
+            {
+              "id": "59acf85b-a2f8-41e0-b55e-7e1d78cc130e",
+              "name": "resumoNegociacao",
+              "value": "={{ $('Webhook').item.json.body.dadosNegocio.resumoNegociacao }}",
+              "type": "string"
+            },
+            {
+              "id": "f6216865-de2b-46d7-880a-ed3d2398a5f6",
+              "name": "percentual AdExitum",
+              "value": "={{ $json.body.honorarios.percentualAdExitum }}",
+              "type": "string"
+            },
+            {
+              "id": "52ff55ca-626a-4db8-a869-20af764338a6",
+              "name": "body.honorarios.tipoHonorarios[0]",
+              "value": "={{ $json.body.honorarios.tipoHonorarios.join() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b6f5163e-dc72-43d3-8ede-42408393249e",
+      "name": "Definir Variáveis7",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2192,
+        832
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.templateId }}/copy",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $json.nomeDocumento }}\",\n  \"parents\": [\"{{ $json.pastaDestino }}\"]\n}",
+        "options": {}
+      },
+      "id": "97e9aee3-bc42-44bd-a616-a4b885d92851",
+      "name": "1. Copiar Template (Drive API)1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1968,
+        832
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Copia o documento template para uma nova pasta"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "novo-doc-id",
+              "name": "novoDocumentoId",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "nome-cliente-2",
+              "name": "nomeCliente",
+              "value": "={{ $('Definir Variáveis7').item.json.nomeCliente }}",
+              "type": "string"
+            },
+            {
+              "id": "cpf-2",
+              "name": "cpf",
+              "value": "={{ $('Definir Variáveis7').item.json.cpf }}",
+              "type": "string"
+            },
+            {
+              "id": "email-2",
+              "name": "email",
+              "value": "={{ $('Definir Variáveis7').item.json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "data-2",
+              "name": "dataContrato",
+              "value": "={{ $('Definir Variáveis7').item.json.dataContrato }}",
+              "type": "string"
+            },
+            {
+              "id": "69477464-8575-4fe3-a686-a95a0f53c941",
+              "name": "endereco",
+              "value": "={{ $('Definir Variáveis7').item.json.endereco }}",
+              "type": "string"
+            },
+            {
+              "id": "becb3326-39bc-49f4-8a13-63a9b1648fab",
+              "name": "numeroProcesso",
+              "value": "={{ $('Definir Variáveis7').item.json.numeroProcesso }}",
+              "type": "string"
+            },
+            {
+              "id": "87700e85-b208-4903-abd3-a713da1dc81c",
+              "name": "dataContrato",
+              "value": "={{ $('Definir Variáveis7').item.json.dataContrato }}",
+              "type": "string"
+            },
+            {
+              "id": "358e025b-e325-49c2-839e-64467696c06a",
+              "name": "telefone",
+              "value": "={{ $('Definir Variáveis7').item.json.telefone }}",
+              "type": "string"
+            },
+            {
+              "id": "0743df90-2add-4058-aafe-586f506f01b9",
+              "name": "clausulaHonorario",
+              "value": "={{ $('Webhook').item.json.body.honorarios.clausulaHonorarios }}",
+              "type": "string"
+            },
+            {
+              "id": "d479ad78-d99b-420a-bf1d-ed3f05d79813",
+              "name": "percentual AdExitum",
+              "value": "={{ $('Definir Variáveis7').item.json['percentual AdExitum'] }}",
+              "type": "string"
+            },
+            {
+              "id": "8e1cd40b-6375-47f2-8d9f-008606fe9f80",
+              "name": "valorProLabore",
+              "value": "={{ $('Definir Variáveis7').item.json.valorProLabore }}",
+              "type": "string"
+            },
+            {
+              "id": "c62c1490-6d58-4cc3-b29b-53282a63063d",
+              "name": "tipoHonorarios",
+              "value": "={{ $('Definir Variáveis7').item.json.body.honorarios.tipoHonorarios.join() }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "id": "e93b3194-feb4-497b-9241-606ebf202c0c",
+      "name": "Preparar Dados p/ Substituição7",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1744,
+        832
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://docs.googleapis.com/v1/documents/{{ $json.novoDocumentoId }}:batchUpdate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"requests\": [\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{contratante}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.nomeCliente ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{cnpj_cpf}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.cpf ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{endereco_completo}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.endereco ?? '').replace(/\\n/g, '\\\\n') }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{numero_processo}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.numeroProcesso ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{valor_contrato}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.valorProLabore ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{adExitum}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ $json['percentual AdExitum'] }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{data_atual}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.dataContrato ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{email}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.email ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{contato_telefone}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.telefone ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{escopo_atuacao}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($('Webhook').item.json.body.dadosNegocio.escopoAtuacao ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{clausulaHonorario}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.clausulaHonorario ?? '').toString().replace(/\\\"/g, '\\\\\\\"').replace(/\\\\n/g, '\\\\\\\\n') }}\"\n      }\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "5d84a195-58ec-4b64-a9f0-81a90de3f3ed",
+      "name": "2. Substituir Placeholders (Docs API)1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1296,
+        832
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Substitui todos os placeholders no documento copiado"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "template-id",
+              "name": "templateId",
+              "value": "1QifBy0fLrGk25Cq6XcW6uzgBv_0_fVXotG10Za4oKfs",
+              "type": "string"
+            },
+            {
+              "id": "nome-cliente",
+              "name": "nomeCliente",
+              "value": "={{ $('Webhook').item.json.body.dadosCliente.nome }}",
+              "type": "string"
+            },
+            {
+              "id": "cpf",
+              "name": "cpf",
+              "value": "={{ $('Webhook').item.json.body.dadosCliente.cpfCnpj }}",
+              "type": "string"
+            },
+            {
+              "id": "email",
+              "name": "email",
+              "value": "={{ $('Webhook').item.json.body.dadosCliente.email }}",
+              "type": "string"
+            },
+            {
+              "id": "data-contrato",
+              "name": "dataContrato",
+              "value": "={{ $now.setLocale('pt-BR').toFormat(\"d 'de' LLLL 'de' yyyy\") }}",
+              "type": "string"
+            },
+            {
+              "id": "valor",
+              "name": "valor",
+              "value": "={{ $json.body.honorarios.valoresPercentuais }}",
+              "type": "string"
+            },
+            {
+              "id": "nome-documento",
+              "name": "nomeDocumento",
+              "value": "=Contrato Negócios Avulso PF PREV | {{ $('Webhook').item.json.body.dadosCliente.nome }}",
+              "type": "string"
+            },
+            {
+              "id": "pasta-destino",
+              "name": "pastaDestino",
+              "value": "1fsQVKIEYzfgIwYrklMSFNXl4Fi1lVvH5",
+              "type": "string"
+            },
+            {
+              "id": "da9e37a8-143d-4553-a4f9-031755c1a333",
+              "name": "numeroProcesso",
+              "value": "={{ $json.body.dadosNegocio.numeroProcesso }}",
+              "type": "string"
+            },
+            {
+              "id": "76cd1942-122e-4dc4-b3a4-a7648533a753",
+              "name": "endereco",
+              "value": "={{ $json.body.dadosCliente.endereco }}",
+              "type": "string"
+            },
+            {
+              "id": "00ee773d-6532-4815-b383-479e814c4a97",
+              "name": "telefone",
+              "value": "={{ $json.body.dadosCliente.telefone }}",
+              "type": "string"
+            },
+            {
+              "id": "19db343b-af36-46e7-ac7c-c9e405d26e2a",
+              "name": "escopo",
+              "value": "={{ $('Webhook').item.json.body.dadosNegocio.escopoAtuacao }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b13bbcc8-b62a-4a17-ba5a-b84cb18e14c8",
+      "name": "Definir Variáveis",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2192,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.templateId }}/copy",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $json.nomeDocumento }}\",\n  \"parents\": [\"{{ $json.pastaDestino }}\"]\n}",
+        "options": {}
+      },
+      "id": "4569fd93-5eb1-4149-9fc8-87c3b7acfe6f",
+      "name": "1. Copiar Template (Drive API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1968,
+        64
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Copia o documento template para uma nova pasta"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "novo-doc-id",
+              "name": "novoDocumentoId",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "nome-cliente-2",
+              "name": "nomeCliente",
+              "value": "={{ $('Definir Variáveis').item.json.nomeCliente }}",
+              "type": "string"
+            },
+            {
+              "id": "cpf-2",
+              "name": "cpf",
+              "value": "={{ $('Definir Variáveis').item.json.cpf }}",
+              "type": "string"
+            },
+            {
+              "id": "email-2",
+              "name": "email",
+              "value": "={{ $('Definir Variáveis').item.json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "data-2",
+              "name": "dataContrato",
+              "value": "={{ $('Definir Variáveis').item.json.dataContrato }}",
+              "type": "string"
+            },
+            {
+              "id": "valor-2",
+              "name": "valor",
+              "value": "={{ $('Definir Variáveis').item.json.valor }}",
+              "type": "string"
+            },
+            {
+              "id": "69477464-8575-4fe3-a686-a95a0f53c941",
+              "name": "endereco",
+              "value": "={{ $('Definir Variáveis').item.json.endereco }}",
+              "type": "string"
+            },
+            {
+              "id": "becb3326-39bc-49f4-8a13-63a9b1648fab",
+              "name": "numeroProcesso",
+              "value": "={{ $('Definir Variáveis').item.json.numeroProcesso }}",
+              "type": "string"
+            },
+            {
+              "id": "87700e85-b208-4903-abd3-a713da1dc81c",
+              "name": "dataContrato",
+              "value": "={{ $('Definir Variáveis').item.json.dataContrato }}",
+              "type": "string"
+            },
+            {
+              "id": "358e025b-e325-49c2-839e-64467696c06a",
+              "name": "telefone",
+              "value": "={{ $('Definir Variáveis').item.json.telefone }}",
+              "type": "string"
+            },
+            {
+              "id": "a7831a97-f615-4e8e-a130-6f99a28a41ca",
+              "name": "escopo",
+              "value": "={{ $('Definir Variáveis').item.json.escopo }}",
+              "type": "string"
+            },
+            {
+              "id": "be525fff-e76a-445c-a4da-a014c70ba52c",
+              "name": "clausulaHonorario",
+              "value": "={{ $('Webhook').item.json.body.honorarios.clausulaHonorarios }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dbacd0d5-5688-41a2-aa75-713d0df56efc",
+      "name": "Preparar Dados p/ Substituição",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1744,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://docs.googleapis.com/v1/documents/{{ $json.novoDocumentoId }}:batchUpdate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"requests\": [\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{contratante}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.nomeCliente ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{cnpj_cpf}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.cpf ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{endereco_completo}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.endereco ?? '').replace(/\\n/g, '\\\\n') }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{numeroProcesso}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.numeroProcesso ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{valor_contrato}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.valor ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{data_atual}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.dataContrato ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{email}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.email ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{contato_telefone}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.telefone ?? '').toString() }}\"\n      }\n    },\n    {\n      \"replaceAllText\": {\n        \"containsText\": {\n          \"text\": \"{clausulaHonorario}\",\n          \"matchCase\": true\n        },\n        \"replaceText\": \"{{ ($json.clausulaHonorario ?? '').toString().replace(/\\\"/g, '\\\\\\\"').replace(/\\\\n/g, '\\\\\\\\n') }}\"\n      }\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "9f52c6ef-9599-4b11-aaa9-4863fcd44527",
+      "name": "2. Substituir Placeholders (Docs API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1296,
+        64
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Substitui todos os placeholders no documento copiado"
+    },
+    {
+      "parameters": {
+        "url": "=https://docs.google.com/document/d/{{ $('Preparar Dados p/ Substituição7').item.json.novoDocumentoId }}/edit",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "9fa3b27b-734d-4195-900c-2cbf91cc2bba",
+      "name": "3. Link Contrato - Editável",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2864,
+        2368
+      ],
+      "notes": "Baixa o documento como PDF binário"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo/edit?gid=85579251#gid=85579251",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 85579251,
+          "mode": "list",
+          "cachedResultName": "contratos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo/edit#gid=85579251"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $now.toMillis() }}",
+            "cliente_nome": "={{ $('Preparar Dados p/ Substituição7').item.json.nomeCliente }}",
+            "cliente_email": "={{ $('Preparar Dados p/ Substituição7').item.json.email }}",
+            "area": "={{ $('Webhook').item.json.body.dadosNegocio.areas[0] }}",
+            "tipo": "={{ $('Webhook').item.json.body.tipoFormulario }}",
+            "advogado_nome": "={{ $('Webhook').item.json.body.dadosNegociacao.responsavelInterno }}",
+            "link_drive": "=https://docs.google.com/document/d/{{ $('Preparar Dados p/ Substituição7').item.json.novoDocumentoId }}/edit",
+            "status": "aguardando_aprovacao",
+            "data_geracao": "={{ $now.toISO() }}",
+            "doc_id": "={{ $('Preparar Dados p/ Substituição7').item.json.novoDocumentoId }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "doc_id",
+              "displayName": "doc_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -848,
+        560
+      ],
+      "id": "fc6993b1-1c18-463d-83a5-4e1e9be38697",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo/edit?gid=85579251#gid=85579251",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 85579251,
+          "mode": "list",
+          "cachedResultName": "contratos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo/edit#gid=85579251"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $now.toMillis() }}",
+            "cliente_nome": "={{ $('Preparar Dados p/ Substituição').item.json.nomeCliente }}",
+            "cliente_email": "={{ $('Preparar Dados p/ Substituição').item.json.email }}",
+            "area": "={{ $('Webhook').item.json.body.dadosNegocio.areas[0] }}",
+            "tipo": "={{ $('Webhook').item.json.body.tipoFormulario }}",
+            "advogado_nome": "={{ $('Webhook').item.json.body.dadosNegociacao.responsavelInterno }}",
+            "link_drive": "=https://docs.google.com/document/d/{{ $('Preparar Dados p/ Substituição').item.json.novoDocumentoId }}/edit",
+            "status": "aguardando_aprovacao",
+            "data_geracao": "={{ $now.toISO() }}",
+            "doc_id": "={{ $('Preparar Dados p/ Substituição').item.json.novoDocumentoId }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "doc_id",
+              "displayName": "doc_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_assinatura",
+              "displayName": "data_assinatura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signed_file",
+              "displayName": "signed_file",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_nome",
+              "displayName": "signatario_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_email",
+              "displayName": "signatario_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -848,
+        368
+      ],
+      "id": "cedc576f-fc69-43cd-a8b5-33dee6806e6b",
+      "name": "Append row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Node chamado após Append row in sheet1 (branch Avulso PF/PJ)\n// Referencia os dados do Webhook original e do node de Preparar Dados\nconst wh = $('Webhook').item.json.body;\nconst prep = $('Preparar Dados p/ Substituição7').item.json;\nconst cliente = wh.dadosCliente.nome || '';\nconst area = (wh.dadosNegocio.areas || []).join(', ') || '';\nconst tipo = wh.tipoFormulario || '';\nconst advogado = wh.cadastradoPor.nome || '';\nconst docId = prep.novoDocumentoId || '';\nconst linkDoc = docId ? `https://docs.google.com/document/d/${docId}/edit` : '(link indisponível)';\n\nconst mensagem = [\n  '📄 *Novo Contrato para Aprovação!*',\n  '',\n  `👤 *Cliente:* ${cliente}`,\n  `⚖️ *Área:* ${area}`,\n  `📋 *Tipo:* ${tipo}`,\n  `🧑‍💼 *Gerado por:* ${advogado}`,\n  '',\n  `🔗 *Contrato:* ${linkDoc}`,\n  '',\n  'Acesse o sistema para conferir e aprovar o contrato.'\n].join('\\n');\n\nreturn [{ json: { mensagem } }];"
+      },
+      "id": "11dc3dd9-ede1-4b1e-8da9-25c4082b92f0",
+      "name": "Montar Mensagem Tadeu (branch PF/PJ)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2864,
+        1920
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "COLE_URL_DA_SUA_API_WHATSAPP_AQUI",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "apikey",
+              "value": "COLE_SUA_API_KEY_WHATSAPP_AQUI"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "9d755072-5065-4ef3-8e1c-2bfd105ab2db",
+      "name": "WhatsApp Tadeu (branch PF/PJ)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -2640,
+        1920
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Node chamado após Append row in sheet2 (branch Avulso PF PREV)\nconst wh = $('Webhook').item.json.body;\nconst prep = $('Preparar Dados p/ Substituição').item.json;\nconst cliente = wh.dadosCliente.nome || '';\nconst area = (wh.dadosNegocio.areas || []).join(', ') || '';\nconst tipo = wh.tipoFormulario || '';\nconst advogado = wh.cadastradoPor.nome || '';\nconst docId = prep.novoDocumentoId || '';\nconst linkDoc = docId ? `https://docs.google.com/document/d/${docId}/edit` : '(link indisponível)';\n\nconst mensagem = [\n  '📄 *Novo Contrato para Aprovação!*',\n  '',\n  `👤 *Cliente:* ${cliente}`,\n  `⚖️ *Área:* ${area}`,\n  `📋 *Tipo:* ${tipo}`,\n  `🧑‍💼 *Gerado por:* ${advogado}`,\n  '',\n  `🔗 *Contrato:* ${linkDoc}`,\n  '',\n  'Acesse o sistema para conferir e aprovar o contrato.'\n].join('\\n');\n\nreturn [{ json: { mensagem } }];"
+      },
+      "id": "3e9ba15b-42f3-4169-bccd-2935cab6acc7",
+      "name": "Montar Mensagem Tadeu (branch PREV)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2864,
+        2144
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "COLE_URL_DA_SUA_API_WHATSAPP_AQUI",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "apikey",
+              "value": "COLE_SUA_API_KEY_WHATSAPP_AQUI"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "0c837d6a-546e-4d3b-b9fe-ad99b20c0f8b",
+      "name": "WhatsApp Tadeu (branch PREV)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -2640,
+        2144
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Preparar Dados p/ Substituição').item.json.novoDocumentoId }}/permissions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"role\": \"writer\",\n  \"type\": \"anyone\",\n  \"allowFileDiscovery\": false\n}",
+        "options": {}
+      },
+      "id": "da27aca9-8715-4703-a2f9-13cd29ac6a24",
+      "name": "3. Tornar Editável (Drive API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1072,
+        64
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Define permissão pública de edição no documento"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Preparar Dados p/ Substituição7').item.json.novoDocumentoId }}/permissions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"role\": \"writer\",\n  \"type\": \"anyone\",\n  \"allowFileDiscovery\": false\n}",
+        "options": {}
+      },
+      "id": "31c7b480-b03d-4557-9a7f-d30f12519513",
+      "name": "3. Tornar Editável (Drive API)1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1072,
+        832
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Define permissão pública de edição no documento"
+    },
+    {
+      "parameters": {
+        "sendTo": "=ferdinando@sava.adv.br, daniel@sava.adv.br, cybelle@sava.adv.br, tadeu.vasconcelos@sava.adv.br",
+        "subject": "=Formulário {{ $('Webhook').item.json.body.tipoFormulario }} | {{ $('Webhook').item.json.body.dadosCliente.nome }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Nova Abertura de Pasta</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">📂 Nova Abertura de Pasta</h2>\n\n<p style=\"color:#555;\">\nUma nova solicitação de abertura de pasta foi cadastrada no sistema.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📌 Informações Gerais</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Título:</strong></td>\n<td>{{$('Webhook').item.json.body.tituloPasta}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Tipo de Formulário:</strong></td>\n<td>{{$('Webhook').item.json.body.tipoFormulario}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Data de Entrada:</strong></td>\n<td>{{$('Webhook').item.json.body.aberturaPasta.dataEntrada}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">👤 Cliente</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.nome}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>CPF/CNPJ:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.cpfCnpj}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Telefone:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.telefone}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.email}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Endereço:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.endereco || 'Não informado'}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">⚖️ Dados do Negócio</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Natureza:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.naturezaNegocio?.join(', ')}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Área:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.areas?.join(', ')}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Organização:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.organizacaoInterna}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Parte Adversa:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.parteAdversa}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Escopo:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.escopoAtuacao}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Resumo da Negociação:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.resumoNegociacao}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">💰 Honorários</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Tipo:</strong></td>\n<td>{{$('Webhook').item.json.body.honorarios.tipoHonorarios?.join(', ')}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nota Fiscal:</strong></td>\n<td>{{$('Webhook').item.json.body.honorarios.notaFiscal}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Caixa Escritório:</strong></td>\n<td>{{$('Webhook').item.json.body.honorarios.caixaEscritorio}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Robô Monitoramento:</strong></td>\n<td>{{$('Webhook').item.json.body.honorarios.roboMonitoramento}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Tipo Pessoa:</strong></td>\n<td>\n{{$('Webhook').item.json.body.honorarios.tipoPessoaFisicaJuridica === 'PF' ? 'Pessoa Física' : 'Pessoa Jurídica'}}\n</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">🧑‍💼 Cadastro</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome:</strong></td>\n<td>{{$('Webhook').item.json.body.cadastradoPor.nome}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{$('Webhook').item.json.body.cadastradoPor.email}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Cargo:</strong></td>\n<td>{{$('Webhook').item.json.body.cadastradoPor.cargo}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📄 Contrato</h3>\n\n<p style=\"color:#555;\">\nO contrato foi gerado automaticamente e pode ser acessado pelo link abaixo:\n</p>\n\n<p style=\"text-align:center;margin:25px 0;\">\n<a href=\"https://docs.google.com/document/d/{{ $('Preparar Dados p/ Substituição7').item.json.novoDocumentoId }}/edit\"\n   style=\"background:#2563eb;\n          color:#ffffff;\n          padding:12px 20px;\n          text-decoration:none;\n          border-radius:6px;\n          font-weight:bold;\n          display:inline-block;\">\nAbrir Contrato no Google Docs\n</a>\n</p>\n\n<p style=\"font-size:12px;color:#888;text-align:center;\">\nSe o botão não funcionar, copie e cole este link no navegador:<br>\nhttps://docs.google.com/document/d/{{ $('Preparar Dados p/ Substituição7').item.json.novoDocumentoId }}/edit\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -848,
+        752
+      ],
+      "id": "e958bd4a-4cd2-4f0b-b73f-a05b48ea01ce",
+      "name": "Send a message",
+      "webhookId": "5c598d7f-53b5-46ec-bcb5-8a7b8ef5dd90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NPrMEaaPahLccdK4",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=ferdinando@sava.adv.br, daniel@sava.adv.br, cybelle@sava.adv.br, tadeu.vasconcelos@sava.adv.br",
+        "subject": "=Formulário {{ $('Webhook').item.json.body.tipoFormulario }} | {{ $('Webhook').item.json.body.dadosCliente.nome }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Nova Abertura de Pasta</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">📂 Nova Abertura de Pasta</h2>\n\n<p style=\"color:#555;\">\nUma nova solicitação de abertura de pasta foi cadastrada no sistema.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📌 Informações Gerais</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Título:</strong></td>\n<td>{{$('Webhook').item.json.body.tituloPasta}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Tipo de Formulário:</strong></td>\n<td>{{$('Webhook').item.json.body.tipoFormulario}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Data de Entrada:</strong></td>\n<td>{{$('Webhook').item.json.body.aberturaPasta.dataEntrada}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">👤 Cliente</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.nome}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>CPF/CNPJ:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.cpfCnpj}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Telefone:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.telefone}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.email}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Endereço:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.endereco || 'Não informado'}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">⚖️ Dados do Negócio</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Natureza:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.naturezaNegocio?.join(', ')}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Área:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.areas?.join(', ')}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Organização:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.organizacaoInterna}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Parte Adversa:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.parteAdversa}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Escopo:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.escopoAtuacao}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Resumo da Negociação:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosNegocio.resumoNegociacao}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">💰 Honorários</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Tipo:</strong></td>\n<td>{{$('Webhook').item.json.body.honorarios.tipoHonorarios?.join(', ')}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nota Fiscal:</strong></td>\n<td>{{$('Webhook').item.json.body.honorarios.notaFiscal}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Caixa Escritório:</strong></td>\n<td>{{$('Webhook').item.json.body.honorarios.caixaEscritorio}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Robô Monitoramento:</strong></td>\n<td>{{$('Webhook').item.json.body.honorarios.roboMonitoramento}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Tipo Pessoa:</strong></td>\n<td>\n{{$('Webhook').item.json.body.honorarios.tipoPessoaFisicaJuridica === 'PF' ? 'Pessoa Física' : 'Pessoa Jurídica'}}\n</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">🧑‍💼 Cadastro</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome:</strong></td>\n<td>{{$('Webhook').item.json.body.cadastradoPor.nome}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{$('Webhook').item.json.body.cadastradoPor.email}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Cargo:</strong></td>\n<td>{{$('Webhook').item.json.body.cadastradoPor.cargo}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📄 Contrato</h3>\n\n<p style=\"color:#555;\">\nO contrato foi gerado automaticamente e pode ser acessado pelo link abaixo:\n</p>\n\n<p style=\"text-align:center;margin:25px 0;\">\n<a href=\"https://docs.google.com/document/d/{{ $('Preparar Dados p/ Substituição').item.json.novoDocumentoId }}/edit\"\n   style=\"background:#2563eb;\n          color:#ffffff;\n          padding:12px 20px;\n          text-decoration:none;\n          border-radius:6px;\n          font-weight:bold;\n          display:inline-block;\">\nAbrir Contrato no Google Docs\n</a>\n</p>\n\n<p style=\"font-size:12px;color:#888;text-align:center;\">\nSe o botão não funcionar, copie e cole este link no navegador:<br>\nhttps://docs.google.com/document/d/{{ $('Preparar Dados p/ Substituição').item.json.novoDocumentoId }}/edit\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -848,
+        -16
+      ],
+      "id": "70f7b7a4-8079-415b-9a53-7bdbc914b08b",
+      "name": "Send a message1",
+      "webhookId": "5c598d7f-53b5-46ec-bcb5-8a7b8ef5dd90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uWhyXLRG3r2ewzr6",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1520,
+        832
+      ],
+      "id": "f5459235-7c0a-4b14-99a5-f2a82cfddbc7",
+      "name": "Wait",
+      "webhookId": "d90bf579-f42e-4d97-a0db-0ba62aae31d3"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1520,
+        64
+      ],
+      "id": "363f78ed-ef14-4c76-a75e-0b6a60d1a1cc",
+      "name": "Wait1",
+      "webhookId": "fb720919-f90d-4cbe-b2dc-d440034cfcc3"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.dadosCliente.email }}, ferdinando@sava.adv.br, daniel@sava.adv.br, cybelle@sava.adv.br, tadeu.vasconcelos@sava.adv.br,{{ $('Webhook').item.json.body.cadastradoPor.email }}",
+        "subject": "=Solicitação de Documentos Pendentes",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Solicitação de Documentos Pendentes</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"\n        style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n        <tr>\n            <td>\n\n                <h2 style=\"margin-top:0;color:#333;\">📄 Solicitação de Documentos Pendentes</h2>\n\n                <p style=\"color:#555; line-height: 1.6;\">\n                    Olá! Notamos que ainda há documentos pendentes para darmos andamento à sua solicitação ou processo.\n                </p>\n\n                <hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n                <h3 style=\"color:#333;\">📌 Documentos Necessários</h3>\n\n                <p style=\"color:#555; margin-bottom: 20px;\">\n                    Abaixo está a lista dos documentos que precisamos que você nos envie:\n                </p>\n\n                <!-- Bloco com os documentos pendentes -->\n                <div style=\"background-color: #fff8e1; border-left: 4px solid #ffb300; padding: 15px; border-radius: 4px; margin-bottom: 20px;\">\n                    <p style=\"color:#333; margin:0; font-weight: bold; white-space: pre-line;\">\n                        {{ $('Webhook').item.json.body.aberturaPasta.quaisDocumentos }}\n                    </p>\n                </div>\n\n                <hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n                <p style=\"color:#555; font-size: 14px; text-align: center; line-height: 1.5;\">\n                    Por favor, providencie o envio o mais breve possível para não atrasar o seu atendimento.<br>\n                    Caso já tenha enviado, por favor, desconsidere este aviso.\n                </p>\n\n            </td>\n        </tr>\n    </table>\n\n</body>\n\n</html>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -624,
+        656
+      ],
+      "id": "de1c3547-455c-41d3-8221-3d31ae4045fd",
+      "name": "Solicita_documentos",
+      "webhookId": "5c598d7f-53b5-46ec-bcb5-8a7b8ef5dd90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NPrMEaaPahLccdK4",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cbdd7ae9-b35a-4d90-b05d-8a211c7e20df",
+              "leftValue": "={{ $('Webhook').item.json.body.aberturaPasta.documentosPendentes }}",
+              "rightValue": "Sim",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -848,
+        944
+      ],
+      "id": "59696f6e-d8af-41bb-a9a1-9177bac2e1ac",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        1040
+      ],
+      "id": "5b48fa3a-4961-4b6a-a1b7-07c43aab5a42",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').first().json.body.dadosCliente.email }}, ferdinando@sava.adv.br, daniel@sava.adv.br, cybelle@sava.adv.br, tadeu.vasconcelos@sava.adv.br",
+        "subject": "=Solicitação de Documentos Pendentes",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Solicitação de Documentos Pendentes</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"\n        style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n        <tr>\n            <td>\n\n                <h2 style=\"margin-top:0;color:#333;\">📄 Solicitação de Documentos Pendentes</h2>\n\n                <p style=\"color:#555; line-height: 1.6;\">\n                    Olá! Notamos que ainda há documentos pendentes para darmos andamento à sua solicitação ou processo.\n                </p>\n\n                <hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n                <h3 style=\"color:#333;\">📌 Documentos Necessários</h3>\n\n                <p style=\"color:#555; margin-bottom: 20px;\">\n                    Abaixo está a lista dos documentos que precisamos que você nos envie:\n                </p>\n\n                <!-- Bloco com os documentos pendentes -->\n                <div style=\"background-color: #fff8e1; border-left: 4px solid #ffb300; padding: 15px; border-radius: 4px; margin-bottom: 20px;\">\n                    <p style=\"color:#333; margin:0; font-weight: bold; white-space: pre-line;\">\n                        {{ $('Webhook').item.body.aberturaPasta.quaisDocumentos }}\n                    </p>\n                </div>\n\n                <hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n                <p style=\"color:#555; font-size: 14px; text-align: center; line-height: 1.5;\">\n                    Por favor, providencie o envio o mais breve possível para não atrasar o seu atendimento.<br>\n                    Caso já tenha enviado, por favor, desconsidere este aviso.\n                </p>\n\n            </td>\n        </tr>\n    </table>\n\n</body>\n\n</html>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -624,
+        80
+      ],
+      "id": "c5756532-3b99-4e27-8f74-73face9c652d",
+      "name": "Solicita_documentos1",
+      "webhookId": "5c598d7f-53b5-46ec-bcb5-8a7b8ef5dd90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NPrMEaaPahLccdK4",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cbdd7ae9-b35a-4d90-b05d-8a211c7e20df",
+              "leftValue": "={{ $('Webhook').item.body.aberturaPasta.documentosPendentes }}",
+              "rightValue": "Sim",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -848,
+        176
+      ],
+      "id": "b63b8409-44cb-4106-baa2-3716a6d0c983",
+      "name": "If1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        464
+      ],
+      "id": "b7fdc912-f1e1-45c6-ab12-c9de7f980cfe",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a35b8186-2fc9-4557-8f61-37dd9ce6ef81",
+              "leftValue": "={{ $json.body.honorarios.tipoHonorarios.join() }}",
+              "rightValue": "Labore",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        -2416,
+        992
+      ],
+      "id": "130b1b83-0863-4170-9eff-a6254257a5ec",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "sendTo": "=cybelle@sava.adv.br",
+        "subject": "=Solicitação de Geração de Cobrança",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Solicitação ao Financeiro</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">💰 Solicitação de Geração de Cobrança</h2>\n\n<p style=\"color:#555;\">\nSolicitamos ao financeiro a geração de cobrança referente a <strong>entrada e/ou prolabore</strong> do cliente abaixo.\n</p>\n\n<p style=\"color:#555;\">\nFavor emitir a forma de pagamento (boleto, Pix ou outro meio aplicável) e encaminhar para o cliente.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">👤 Dados do Cliente</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.nome}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>CPF/CNPJ:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.cpfCnpj}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.email}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Telefone:</strong></td>\n<td>{{$('Webhook').item.json.body.dadosCliente.telefone}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📂 Dados da Pasta</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Título da Pasta:</strong></td>\n<td>{{$('Webhook').item.json.body.tituloPasta}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Tipo de Formulário:</strong></td>\n<td>{{$('Webhook').item.json.body.tipoFormulario}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Data de Entrada:</strong></td>\n<td>{{$('Webhook').item.json.body.aberturaPasta.dataEntrada}}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">💵 Dados da Cobrança</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Tipo de Cobrança:</strong></td>\n<td>{{ $json.body.honorarios.tipoHonorarios }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Valor:</strong></td>\n<td>R$ {{ $json.body.honorarios.valorProLabore }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Forma de Pagamento:</strong></td>\n<td>{{ $json.body.honorarios.formaPagamentoProLabore }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Data de Vencimento:</strong></td>\n<td>A definir</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Observações:</strong></td>\n<td>Dia vencimento: {{ $json.body.honorarios.diaVencimentoProLabore }}, Percentual Ad Exitum: {{ $json.body.honorarios.percentualAdExitum }}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n\n<p style=\"color:#555;\">\nApós a emissão, favor realizar a cobrança diretamente ao cliente.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">🧑‍💼 Solicitação Realizada por</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome:</strong></td>\n<td>{{$('Webhook').item.json.body.cadastradoPor.nome}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{$('Webhook').item.json.body.cadastradoPor.email}}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Cargo:</strong></td>\n<td>{{$('Webhook').item.json.body.cadastradoPor.cargo}}</td>\n</tr>\n\n</table>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {
+          "ccList": "ferdinando@sava.adv.br, daniel@sava.adv.br, tadeu.vasconcelos@sava.adv.br"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -2192,
+        1072
+      ],
+      "id": "eb9bc74b-adea-4097-abe5-6843bbd53944",
+      "name": "email_financeiro",
+      "webhookId": "5c598d7f-53b5-46ec-bcb5-8a7b8ef5dd90",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NPrMEaaPahLccdK4",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('Webhook').item.json.body.dadosCliente.nome }} | Novo Negócio",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "10gGDxH_byq37gV5_rB29YG_p3QNN973q",
+          "mode": "list",
+          "cachedResultName": "Sava | Novos Negócios",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/10gGDxH_byq37gV5_rB29YG_p3QNN973q"
+        },
+        "options": {
+          "folderColorRgb": "#33D92D"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -848,
+        1232
+      ],
+      "id": "0a0fb23c-e073-44a7-8445-f18f718b170c",
+      "name": "Cria Pasta | Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "LKab87g7QhZVPbiy",
+          "name": "Sava | Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1tN3kXkDPEToNy63V4yD3CrpdJf7JU0vgEQz5Q88qLmE",
+          "mode": "list",
+          "cachedResultName": "Dados Sava | Novos Negócios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tN3kXkDPEToNy63V4yD3CrpdJf7JU0vgEQz5Q88qLmE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 708299615,
+          "mode": "list",
+          "cachedResultName": "Base",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tN3kXkDPEToNy63V4yD3CrpdJf7JU0vgEQz5Q88qLmE/edit#gid=708299615"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ $json.body.timestamp.toDateTime().toLocal('America/Sao_Paulo').format('dd/MM/yyyy HH:mm') }}",
+            "tipoFormulario": "={{ $json.body.tipoFormulario }}",
+            "naturezaNegocio": "={{ $json.body.dadosNegocio.naturezaNegocio }}",
+            "organizacaoInterna": "={{ $json.body.dadosNegocio.organizacaoInterna }}",
+            "areas": "={{ $json.body.dadosNegocio.areas.join() }}",
+            "areaOutrosEspecificar": "={{ $json.body.dadosNegocio.areaOutrosEspecificar }}",
+            "numeroProcesso": "={{ $json.body.dadosNegocio.numeroProcesso }}",
+            "parteAdversa": "={{ $json.body.dadosNegocio.parteAdversa }}",
+            "escopoAtuacao": "={{ $json.body.dadosNegocio.escopoAtuacao }}",
+            "resumoNegociacao": "={{ $json.body.dadosNegocio.resumoNegociacao }}",
+            "tipoHonorarios": "={{ $json.body.honorarios.tipoHonorarios.join() }}",
+            "valoresPercentuais": "={{ $json.body.honorarios.valoresPercentuais }}",
+            "expectativaRecebimento": "={{ $json.body.honorarios.expectativaRecebimento }}",
+            "notaFiscal": "={{ $json.body.honorarios.notaFiscal }}",
+            "caixaEscritorio": "={{ $json.body.honorarios.caixaEscritorio }}",
+            "roboMonitoramento": "={{ $json.body.honorarios.roboMonitoramento }}",
+            "criterioReajuste": "={{ $json.body.honorarios.criterioReajuste }}",
+            "periodoVigencia": "={{ $json.body.honorarios.periodoVigencia }}",
+            "tipoIndicacao": "={{ $json.body.dadosNegociacao.tipoIndicacao }}",
+            "qualMidiaSocial": "={{ $json.body.dadosNegociacao.qualMidiaSocial }}",
+            "responsavelIndicacao": "={{ $json.body.dadosNegociacao.responsavelIndicacao }}",
+            "indicacaoTemParticipacao": "={{ $json.body.dadosNegociacao.indicacaoTemParticipacao }}",
+            "indicacaoValor": "={{ $json.body.dadosNegociacao.indicacaoValor }}",
+            "responsavelInterno": "={{ $json.body.dadosNegociacao.responsavelInterno }}",
+            "parceiroExterno": "={{ $json.body.dadosNegociacao.parceiroExterno }}",
+            "parceiroTemParticipacao": "={{ $json.body.dadosNegociacao.parceiroTemParticipacao }}",
+            "parceiroValor": "={{ $json.body.dadosNegociacao.parceiroValor }}",
+            "nomeCliente": "={{ $json.body.dadosCliente.nome }}",
+            "cpfCnpj": "={{ $json.body.dadosCliente.cpfCnpj }}",
+            "telefone": "={{ $json.body.dadosCliente.telefone }}",
+            "email": "={{ $json.body.dadosCliente.email }}",
+            "endereco": "={{ $json.body.dadosCliente.endereco }}",
+            "responsaveisSetores": "={{ $json.body.dadosCliente.responsaveisSetores }}",
+            "advogadoResponsavel": "={{ $json.body.aberturaPasta.advogadoResponsavel }}",
+            "coordenador": "={{ $json.body.aberturaPasta.coordenador }}",
+            "advogadoSocio": "={{ $json.body.aberturaPasta.advogadoSocio }}",
+            "documentosPendentes": "={{ $json.body.aberturaPasta.documentosPendentes }}",
+            "quaisDocumentos": "={{ $json.body.aberturaPasta.quaisDocumentos }}",
+            "processoEstrategico": "={{ $json.body.aberturaPasta.processoEstrategico }}",
+            "dataEntrada": "={{ $json.body.aberturaPasta.dataEntrada }}",
+            "objetoAcao": "={{ $json.body.aberturaPasta.objetoAcao }}",
+            "prazoInicial": "={{ $json.body.aberturaPasta.prazoInicial }}",
+            "outrosPrazos_tipo": "={{ $json.body.aberturaPasta.outrosPrazos.tipo }}",
+            "outrosPrazos_data": "={{ $json.body.aberturaPasta.outrosPrazos.data }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipoFormulario",
+              "displayName": "tipoFormulario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "naturezaNegocio",
+              "displayName": "naturezaNegocio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "organizacaoInterna",
+              "displayName": "organizacaoInterna",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "areas",
+              "displayName": "areas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "areaOutrosEspecificar",
+              "displayName": "areaOutrosEspecificar",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "numeroProcesso",
+              "displayName": "numeroProcesso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "parteAdversa",
+              "displayName": "parteAdversa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "escopoAtuacao",
+              "displayName": "escopoAtuacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "resumoNegociacao",
+              "displayName": "resumoNegociacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipoHonorarios",
+              "displayName": "tipoHonorarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "valoresPercentuais",
+              "displayName": "valoresPercentuais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "expectativaRecebimento",
+              "displayName": "expectativaRecebimento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notaFiscal",
+              "displayName": "notaFiscal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "caixaEscritorio",
+              "displayName": "caixaEscritorio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "roboMonitoramento",
+              "displayName": "roboMonitoramento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "criterioReajuste",
+              "displayName": "criterioReajuste",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "periodoVigencia",
+              "displayName": "periodoVigencia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipoIndicacao",
+              "displayName": "tipoIndicacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "qualMidiaSocial",
+              "displayName": "qualMidiaSocial",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "responsavelIndicacao",
+              "displayName": "responsavelIndicacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "indicacaoTemParticipacao",
+              "displayName": "indicacaoTemParticipacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "indicacaoValor",
+              "displayName": "indicacaoValor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "responsavelInterno",
+              "displayName": "responsavelInterno",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "parceiroExterno",
+              "displayName": "parceiroExterno",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "parceiroTemParticipacao",
+              "displayName": "parceiroTemParticipacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "parceiroValor",
+              "displayName": "parceiroValor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nomeCliente",
+              "displayName": "nomeCliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cpfCnpj",
+              "displayName": "cpfCnpj",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telefone",
+              "displayName": "telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "endereco",
+              "displayName": "endereco",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "responsaveisSetores",
+              "displayName": "responsaveisSetores",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogadoResponsavel",
+              "displayName": "advogadoResponsavel",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "coordenador",
+              "displayName": "coordenador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogadoSocio",
+              "displayName": "advogadoSocio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "documentosPendentes",
+              "displayName": "documentosPendentes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "quaisDocumentos",
+              "displayName": "quaisDocumentos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "processoEstrategico",
+              "displayName": "processoEstrategico",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "dataEntrada",
+              "displayName": "dataEntrada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "objetoAcao",
+              "displayName": "objetoAcao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "prazoInicial",
+              "displayName": "prazoInicial",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "outrosPrazos_tipo",
+              "displayName": "outrosPrazos_tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "outrosPrazos_data",
+              "displayName": "outrosPrazos_data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2416,
+        800
+      ],
+      "id": "b94ca338-e49a-4e8a-9abb-a9bd562820c3",
+      "name": "banco de dados",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/11s_kwnicjG-2C7hH4yj81sipnF-4U9fXQiMqBeWJiBI/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2011736295,
+          "mode": "list",
+          "cachedResultName": "CONTRATOS PARTIDO",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11s_kwnicjG-2C7hH4yj81sipnF-4U9fXQiMqBeWJiBI/edit#gid=2011736295"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Data do Contrato": "={{ $now.format('dd/MM/yyyy') }}",
+            "Responsavel pela Negociação": "={{ $('Webhook').item.json.body.cadastradoPor.nome }}",
+            "Nome do Cliente": "={{ $('Webhook').item.json.body.dadosCliente.nome }}",
+            "Nome do Parceiro                     (se houver)": "={{ $('Webhook').item.json.body.dadosNegociacao.responsavelIndicacao }}",
+            "Área": "={{ $('Webhook').item.json.body.dadosNegocio.areas.join() }}",
+            "Escopo de Atuação": "={{ $('Webhook').item.json.body.dadosNegocio.escopoAtuacao }}",
+            "Resumo da Negociação": "={{ $('Webhook').item.json.body.dadosNegocio.resumoNegociacao }}",
+            "Acertos e Percentuais de Honorários com Terceiros": "={{ $json.body.honorarios.valoresPercentuais }}",
+            "Tipo de Honorários": "={{ $json.body.honorarios.tipoHonorarios.join() }}",
+            "Nota Fiscal": "={{ $json.body.honorarios.notaFiscal }}",
+            "Caixa Escritório": "={{ $json.body.honorarios.caixaEscritorio }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Data do Contrato",
+              "displayName": "Data do Contrato",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Responsavel pela Negociação",
+              "displayName": "Responsavel pela Negociação",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nome do Cliente",
+              "displayName": "Nome do Cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nome do Parceiro                     (se houver)",
+              "displayName": "Nome do Parceiro                     (se houver)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Área",
+              "displayName": "Área",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Escopo de Atuação",
+              "displayName": "Escopo de Atuação",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Resumo da Negociação",
+              "displayName": "Resumo da Negociação",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Acertos e Percentuais de Honorários com Terceiros",
+              "displayName": "Acertos e Percentuais de Honorários com Terceiros",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tipo de Honorários",
+              "displayName": "Tipo de Honorários",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Honorários Pro Labore (Mensal)",
+              "displayName": "Honorários Pro Labore (Mensal)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Honorários Ad Exitum",
+              "displayName": "Honorários Ad Exitum",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nota Fiscal",
+              "displayName": "Nota Fiscal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Caixa Escritório",
+              "displayName": "Caixa Escritório",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status Cliente",
+              "displayName": "Status Cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2192,
+        1600
+      ],
+      "id": "e6262753-1738-4f59-9dc1-61d63f6b1912",
+      "name": "contrato_partido",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/11s_kwnicjG-2C7hH4yj81sipnF-4U9fXQiMqBeWJiBI/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "AVULSOS ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11s_kwnicjG-2C7hH4yj81sipnF-4U9fXQiMqBeWJiBI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "DATA": "={{$now.format('dd/MM/yyyy')}}",
+            "INDICAÇÃO": "={{ $json.body.dadosNegociacao.responsavelIndicacao }}",
+            "PARTICIPAÇÃ FINANCEIRA": "={{ $json.body.dadosNegociacao.indicacaoTemParticipacao }}",
+            "NEGOCIAÇÃO": "={{ $json.body.cadastradoPor.nome }}",
+            "NOME DO CLIENTE": "={{ $json.body.dadosCliente.nome }}",
+            "PARTE ADVERSA": "={{ $json.body.dadosNegocio.parteAdversa }}",
+            "NÚMERO DO PROCESSO (SE HOUVER)": "={{ $json.body.dadosNegocio.numeroProcesso }}",
+            "ÁREA DE NEGOCIAÇÃO": "={{ $json.body.dadosNegocio.areas.join() }}",
+            "ESCOPO DA ATUAÇÃO": "={{ $json.body.dadosNegocio.escopoAtuacao }}",
+            "ÁREA DE ATUAÇÃO": "={{ $json.body.dadosNegocio.naturezaNegocio.join() }}",
+            "RESUMO DA NEGOCIAÇÃO": "={{ $json.body.dadosNegocio.resumoNegociacao }}",
+            "ACERTOS E PERCENTUAIS ": "={{ $json.body.dadosNegocio.resumoNegociacao }}",
+            "TIPO DE HONORÁRIOS": "={{ $json.body.honorarios.tipoHonorarios.join() }}",
+            "NOTA FISCAL": "={{ $json.body.honorarios.notaFiscal }}",
+            "CAIXA ESCRITÓRIO": "={{ $json.body.honorarios.caixaEscritorio }}",
+            "OBSERVAÇÕES": "={{ $json.body.honorarios.clausulaHonorarios }}",
+            "HONORÁRIOS PRO LABORE": "={{ $json.body.honorarios.valorProLabore }}",
+            "HONORÁRIOS HAD EXITUM": "={{ $json.body.honorarios.percentualAdExitum }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "DATA",
+              "displayName": "DATA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "INDICAÇÃO",
+              "displayName": "INDICAÇÃO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PARTICIPAÇÃ FINANCEIRA",
+              "displayName": "PARTICIPAÇÃ FINANCEIRA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NEGOCIAÇÃO",
+              "displayName": "NEGOCIAÇÃO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PARCEIRO EXTERNO",
+              "displayName": "PARCEIRO EXTERNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOME DO CLIENTE",
+              "displayName": "NOME DO CLIENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PARTE ADVERSA",
+              "displayName": "PARTE ADVERSA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NÚMERO DO PROCESSO (SE HOUVER)",
+              "displayName": "NÚMERO DO PROCESSO (SE HOUVER)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ÁREA DE NEGOCIAÇÃO",
+              "displayName": "ÁREA DE NEGOCIAÇÃO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ORGANIZAÇÃO INTERNA",
+              "displayName": "ORGANIZAÇÃO INTERNA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ÁREA DE ATUAÇÃO",
+              "displayName": "ÁREA DE ATUAÇÃO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ESCOPO DA ATUAÇÃO",
+              "displayName": "ESCOPO DA ATUAÇÃO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "RESUMO DA NEGOCIAÇÃO",
+              "displayName": "RESUMO DA NEGOCIAÇÃO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ACERTOS E PERCENTUAIS ",
+              "displayName": "ACERTOS E PERCENTUAIS ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TIPO DE HONORÁRIOS",
+              "displayName": "TIPO DE HONORÁRIOS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "HONORÁRIOS PRO LABORE",
+              "displayName": "HONORÁRIOS PRO LABORE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status Honorários Pro Labore",
+              "displayName": "Status Honorários Pro Labore",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "HONORÁRIOS HAD EXITUM",
+              "displayName": "HONORÁRIOS HAD EXITUM",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status Honorários Ad Exitum",
+              "displayName": "Status Honorários Ad Exitum",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EXPECTATIVA RECEBIMENTO HONORÁRIOS AD EXITUM (MÊS + ANO)",
+              "displayName": "EXPECTATIVA RECEBIMENTO HONORÁRIOS AD EXITUM (MÊS + ANO)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOTA FISCAL",
+              "displayName": "NOTA FISCAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CAIXA ESCRITÓRIO",
+              "displayName": "CAIXA ESCRITÓRIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status Final do Negócio",
+              "displayName": "Status Final do Negócio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "OBSERVAÇÕES",
+              "displayName": "OBSERVAÇÕES",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2192,
+        1408
+      ],
+      "id": "f9334ab8-ac8e-4ebe-9fc1-7c93bd205e5b",
+      "name": "contrato_avulsos",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.tipoFormulario }}",
+                    "rightValue": "Avulso",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d73dd7a1-c2c4-4c74-86b2-495621f1cb51"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Avulso"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "05aaff78-6322-4d24-be83-9e441e0a35e1",
+                    "leftValue": "={{ $json.body.tipoFormulario }}",
+                    "rightValue": "Partido",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Partido"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2416,
+        1504
+      ],
+      "id": "520615dc-317e-4732-ac55-da2d249e64e3",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Preparar Dados p/ Substituição7').item.json.novoDocumentoId }}/export?mimeType=application/pdf",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "9ce25fb7-acca-45e9-92d0-d2e74aaac7e5",
+      "name": "3. Exportar como PDF7",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -624,
+        1232
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Baixa o documento como PDF binário"
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Webhook').item.json.body.dadosCliente.nome }} | Contrato",
+        "driveId": {
+          "__rl": true,
+          "value": "={{ $('Cria Pasta | Drive').item.json.id }}",
+          "mode": "id"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -400,
+        1232
+      ],
+      "id": "9c6cb95a-e4c9-4039-8bad-298a94fbee20",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "LKab87g7QhZVPbiy",
+          "name": "Sava | Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('Webhook').item.json.body.dadosCliente.nome }} | Novo Negócio",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "10gGDxH_byq37gV5_rB29YG_p3QNN973q",
+          "mode": "list",
+          "cachedResultName": "Sava | Novos Negócios",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/10gGDxH_byq37gV5_rB29YG_p3QNN973q"
+        },
+        "options": {
+          "folderColorRgb": "#33D92D"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -848,
+        -208
+      ],
+      "id": "f219c1c3-56f3-4e54-9a73-c65306396f13",
+      "name": "Cria Pasta | Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "LKab87g7QhZVPbiy",
+          "name": "Sava | Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $('Preparar Dados p/ Substituição7').item.json.novoDocumentoId }}/export?mimeType=application/pdf",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "03defc67-67e7-4bbc-a69d-78682e5e0461",
+      "name": "3. Exportar como PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -624,
+        -208
+      ],
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "UpP5qRgv9pMabERq",
+          "name": "Google Docs account"
+        }
+      },
+      "notes": "Baixa o documento como PDF binário"
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Webhook').item.json.body.dadosCliente.nome }} | Contrato",
+        "driveId": {
+          "__rl": true,
+          "value": "={{ $('Cria Pasta | Drive1').item.json.id }}",
+          "mode": "id"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -400,
+        -208
+      ],
+      "id": "422dce6f-e44b-47a7-8c46-7734095f7475",
+      "name": "Upload file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "LKab87g7QhZVPbiy",
+          "name": "Sava | Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.contratoJaAssinado }}",
+                    "rightValue": false,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "false",
+                      "singleValue": true
+                    },
+                    "id": "e31eeb03-4024-4edc-aa85-c7a35ece1940"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Não assinado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "92a1da22-972e-4cd9-ae62-1148e42ab16e",
+                    "leftValue": "={{ $json.body.contratoJaAssinado }}",
+                    "rightValue": false,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Assinado"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2640,
+        1136
+      ],
+      "id": "f25dfc6f-d1c2-4edb-a845-1dac8c6a4214",
+      "name": "Switch2"
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('Webhook').item.json.body.dadosCliente.nome }} | Novo Negócio",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "10gGDxH_byq37gV5_rB29YG_p3QNN973q",
+          "mode": "list",
+          "cachedResultName": "Sava | Novos Negócios",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/10gGDxH_byq37gV5_rB29YG_p3QNN973q"
+        },
+        "options": {
+          "folderColorRgb": "#33D92D"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2416,
+        1280
+      ],
+      "id": "e4907ee0-5eb2-4c17-8bc0-1230555b1df2",
+      "name": "Cria Pasta | Drive2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "LKab87g7QhZVPbiy",
+          "name": "Sava | Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo/edit?gid=85579251#gid=85579251",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 85579251,
+          "mode": "list",
+          "cachedResultName": "contratos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo/edit#gid=85579251"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $now.toMillis() }}",
+            "cliente_nome": "={{ $('Webhook').item.json.body.dadosCliente.nome }}",
+            "cliente_email": "={{ $('Webhook').item.json.body.dadosCliente.email }}",
+            "area": "={{ $('Webhook').item.json.body.dadosNegocio.areas[0] }}",
+            "tipo": "={{ $('Webhook').item.json.body.tipoFormulario }}",
+            "advogado_nome": "={{ $('Webhook').item.json.body.dadosNegociacao.responsavelInterno }}",
+            "status": "assinado",
+            "data_geracao": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "doc_id",
+              "displayName": "doc_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "data_assinatura",
+              "displayName": "data_assinatura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signed_file",
+              "displayName": "signed_file",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_nome",
+              "displayName": "signatario_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_email",
+              "displayName": "signatario_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2416,
+        1696
+      ],
+      "id": "6abb11c2-e852-4798-a2da-ab1de4fa2c7a",
+      "name": "Append row in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-n8n.zfp6fw.easypanel.host",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+            "content-length": "4389",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+            "content-type": "application/json",
+            "origin": "null",
+            "priority": "u=1, i",
+            "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "200.187.172.198",
+            "x-forwarded-host": "n8n-n8n.zfp6fw.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "ca446ee844b0",
+            "x-real-ip": "200.187.172.198"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "timestamp": "2026-05-05T17:15:34.960Z",
+            "tipoFormulario": "Avulso",
+            "cadastradoPor": {
+              "nome": "Mateus",
+              "email": "mateus@sava.adv.br",
+              "cargo": ""
+            },
+            "dadosNegocio": {
+              "naturezaNegocio": [
+                "Judicial"
+              ],
+              "organizacaoInterna": "PME",
+              "tipoPessoa": "PF",
+              "areas": [
+                "Cível"
+              ],
+              "areaOutrosEspecificar": "",
+              "previdenciarioSubTipo": "INSS",
+              "numeroProcesso": "0878861-13.2025.8.15.20",
+              "parteAdversa": "EXPEDITA DUARTE FERREIRA",
+              "escopoAtuacao": "Patrocínio e defesa do Condomínio no Processo n. 0878861-13.2025.8.15.2001",
+              "resumoNegociacao": "Pelo patrícinio e acompanhamento do processo judicial.\n\nI. Honorários Pro Labore\nPelos serviços prestados, o valor total dos honorários fixos corresponderá a 04 (quatro) salários-mínimos vigentes, distribuídos da seguinte forma:\n\nI.a) Entrada: 02 (dois) salários-mínimos, a serem pagos no ato da contratação/assinatura do contrato.\nI.b)Parcelas Semestrais: 02 (dois) salários-mínimos, a serem quitados no intervalo de 12 meses, sendo:\n01 (um) salário-mínimo ao final do 1º semestre;\n01 (um) salário-mínimo ao final do 2º semestre.\n\nII. Honorários de Êxito\nComplementarmente aos honorários pro labore, serão devidos honorários de êxito nas seguintes hipóteses:\n\nPelo Encerramento do Processo: Em caso de decisão favorável (improcedência total do processo) ou celebração de acordo que resulte em benefício direto ao condomínio, será devido o valor equivalente a 01 (um) salário-mínimo vigente à época do encerramento da demanda ."
+            },
+            "honorarios": {
+              "tipoHonorarios": [
+                "Pro Labore + Ad Exitum"
+              ],
+              "adExitumSubTipo": "Padrão",
+              "proLaboreAdExitumSubTipo": "Valor Fixo de Êxito",
+              "valorProLabore": "4 salários mínimos",
+              "formaPagamentoProLabore": "I.a) Entrada: 02 (dois) salários-mínimos, a serem pagos no ato da contratação/assinatura do contrato. I.b)Parcelas Semestrais: 02 (dois) salários-mínimos, a serem quitados no intervalo de 12 meses, sendo: 01 (um) salário-mínimo ao final do 1º semestre; 01 (um) salário-mínimo ao final do 2º semestre.",
+              "diaVencimentoProLabore": "A definir",
+              "percentualAdExitum": "",
+              "valorFixoAdExitum": "01 (um) salário-mínimo vigente à época do encerramento da demanda ",
+              "valorAdiantamentoAdExitum": "",
+              "valorManutencaoAnual": "",
+              "expectativaRecebimento": "Dezembro/2027",
+              "notaFiscal": "Sim",
+              "caixaEscritorio": "Sim",
+              "roboMonitoramento": "Não",
+              "criterioReajuste": "",
+              "periodoVigencia": "",
+              "clausulaHonorarios": "O(a) CONTRATANTE pagará ao CONTRATADO, a título de honorários advocatícios, o valor de 4 salários mínimos, da seguinte forma: I.a) Entrada: 02 (dois) salários-mínimos, a serem pagos no ato da contratação/assinatura do contrato. I.b)Parcelas Semestrais: 02 (dois) salários-mínimos, a serem quitados no intervalo de 12 meses, sendo: 01 (um) salário-mínimo ao final do 1º semestre; 01 (um) salário-mínimo ao final do 2º semestre., Além disso, o(a) CONTRATANTE pagará, ao final da ação, a título de êxito, a quantia de 01 (um) salário-mínimo vigente à época do encerramento da demanda, corrigidos da data de assinatura deste contrato até o efetivo pagamento, isso pelo IPCA-E. Considera-se êxito o julgamento improcedente da ação ou a extinção desta sem resolução de mérito."
+            },
+            "dadosNegociacao": {
+              "tipoIndicacao": "Sócio",
+              "qualMidiaSocial": "",
+              "responsavelIndicacao": "Mateus Souto Maior",
+              "responsavelIndicacaoOutros": "",
+              "indicacaoTemParticipacao": "Sim",
+              "indicacaoValor": "20%",
+              "responsavelInterno": "Mateus Souto Maior",
+              "parceiroExterno": "",
+              "parceiroTemParticipacao": "Não",
+              "parceiroValor": ""
+            },
+            "dadosCliente": {
+              "nome": "TADEU VASCONCELOS",
+              "cpfCnpj": "603.161.601-72",
+              "telefone": "(61) 9860-1716",
+              "email": "tadeuvasconcelos@gmail.com",
+              "endereco": "Av. Julia Freire, 1440, Expedicionários",
+              "responsaveisSetores": ""
+            },
+            "aberturaPasta": {
+              "advogadoResponsavel": "Gustavo Sales",
+              "advogadoResponsavelOutros": "",
+              "coordenador": "Gustavo Sales",
+              "coordenadorOutros": "",
+              "advogadoSocio": "Ferdinando Vasconcelos",
+              "documentosPendentes": "Sim",
+              "quaisDocumentos": "Atas de Assembleia do Condomínio sobre vagas, Procuração e regularidade de representação.",
+              "processoEstrategico": "Não",
+              "dataEntrada": "2026-05-05",
+              "objetoAcao": "Disputa de vaga garagem em condominímo residencial",
+              "tipoPrazoSelecao": "outros_prazos",
+              "prazoInicial": "",
+              "outrosPrazos": {
+                "tipo": "Contestação",
+                "data": "2026-05-18"
+              }
+            },
+            "tituloPasta": "Abertura de Pasta - PME - Cível - TADEU VASCONCELOS",
+            "contratoJaAssinado": false
+          },
+          "webhookUrl": "https://n8n-n8n.zfp6fw.easypanel.host/webhook/novos-negocios",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Definir Variáveis",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Definir Variáveis7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Definir Variáveis7": {
+      "main": [
+        [
+          {
+            "node": "1. Copiar Template (Drive API)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1. Copiar Template (Drive API)1": {
+      "main": [
+        [
+          {
+            "node": "Preparar Dados p/ Substituição7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Dados p/ Substituição7": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Definir Variáveis": {
+      "main": [
+        [
+          {
+            "node": "1. Copiar Template (Drive API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1. Copiar Template (Drive API)": {
+      "main": [
+        [
+          {
+            "node": "Preparar Dados p/ Substituição",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Dados p/ Substituição": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Substituir Placeholders (Docs API)": {
+      "main": [
+        [
+          {
+            "node": "3. Tornar Editável (Drive API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Substituir Placeholders (Docs API)1": {
+      "main": [
+        [
+          {
+            "node": "3. Tornar Editável (Drive API)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar Mensagem Tadeu (branch PF/PJ)": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Tadeu (branch PF/PJ)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar Mensagem Tadeu (branch PREV)": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Tadeu (branch PREV)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Tornar Editável (Drive API)": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Cria Pasta | Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Tornar Editável (Drive API)1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Cria Pasta | Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "2. Substituir Placeholders (Docs API)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "2. Substituir Placeholders (Docs API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Solicita_documentos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Solicita_documentos1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "email_financeiro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "contrato_avulsos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "contrato_partido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Exportar como PDF7": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cria Pasta | Drive": {
+      "main": [
+        [
+          {
+            "node": "3. Exportar como PDF7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cria Pasta | Drive1": {
+      "main": [
+        [
+          {
+            "node": "3. Exportar como PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Exportar como PDF": {
+      "main": [
+        [
+          {
+            "node": "Upload file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch2": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "banco de dados",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "banco de dados",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "email_financeiro",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Cria Pasta | Drive2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "01b157ef-6a6b-47ef-850c-ee2f45c46c9a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a614b5eafeb499abe48a1ab5cea0292f09be70a2f6390f3f19fe25e3cc43001f"
+  },
+  "id": "8Sa2OlKhYbClEd2p",
+  "tags": [
+    {
+      "updatedAt": "2026-02-17T17:58:33.621Z",
+      "createdAt": "2026-02-17T17:58:33.621Z",
+      "id": "a5nYzZXvfRYvjnMw",
+      "name": "Sava"
+    }
+  ]
+}

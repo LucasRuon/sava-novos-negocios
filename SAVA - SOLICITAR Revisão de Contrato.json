@@ -1,0 +1,673 @@
+{
+  "name": "SAVA - SOLICITAR Revisão de Contrato",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "solicitar-revisao",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "617540ef-aa88-45d7-9590-4317a7a9645b",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        16
+      ],
+      "webhookId": "sava-solicitar-revisao"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\nreturn [{\n  json: {\n    contrato_id: body.contrato_id || '',\n    cliente_nome: body.cliente_nome || '',\n    advogado_nome: body.advogado_nome || '',\n    observacao: body.observacao || '',\n    solicitado_por: body.solicitado_por || '',\n    solicitado_por_email: body.solicitado_por_email || '',\n    data_solicitacao: body.data_solicitacao || new Date().toISOString()\n  }\n}];"
+      },
+      "id": "782b337d-ed93-4b12-bfac-d14805c487ed",
+      "name": "Extrair Dados do Body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "contratos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Extrair Dados do Body').item.json.contrato_id }}",
+            "status": "revisao_solicitada",
+            "observacao_revisao": "={{ $('Extrair Dados do Body').item.json.observacao }}",
+            "row_number": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cliente_nome",
+              "displayName": "cliente_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente_email",
+              "displayName": "cliente_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link_drive",
+              "displayName": "link_drive",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_geracao",
+              "displayName": "data_geracao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por",
+              "displayName": "aprovado_por",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "aprovado_por_email",
+              "displayName": "aprovado_por_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_aprovacao",
+              "displayName": "data_aprovacao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "observacao_revisao",
+              "displayName": "observacao_revisao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "zapsign_token",
+              "displayName": "zapsign_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "zapsign_link",
+              "displayName": "zapsign_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "doc_id",
+              "displayName": "doc_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_assinatura",
+              "displayName": "data_assinatura",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signed_file",
+              "displayName": "signed_file",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_nome",
+              "displayName": "signatario_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "signatario_email",
+              "displayName": "signatario_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "5ba75dc2-3df2-43c4-bc4c-c7ae0b28f1ef",
+      "name": "Atualizar Status → revisao_solicitada",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        672,
+        -176
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const dados = $('Extrair Dados do Body').item.json;\nconst mensagem = `⚠️ *Revisão Solicitada – Contrato*\\n\\n👤 *Cliente:* ${dados.cliente_nome}\\n📋 *Solicitado por:* ${dados.solicitado_por}\\n\\n📝 *Observação:*\\n${dados.observacao}\\n\\nAcesse o sistema para corrigir e gerar um novo contrato.`;\nreturn [{ json: { mensagem, advogado_nome: dados.advogado_nome } }];"
+      },
+      "id": "dc7992b8-985e-4a9e-a5c1-4851fab1bbeb",
+      "name": "Montar Mensagem WhatsApp",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        -528
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "COLE_URL_DA_SUA_API_WHATSAPP_AQUI",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "apikey",
+              "value": "COLE_SUA_API_KEY_WHATSAPP_AQUI"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "4dd706e6-5ca4-4404-8d01-c6dc96769f1e",
+      "name": "Notificar Advogado via WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        864,
+        -528
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Revisão solicitada. Advogado notificado via WhatsApp.' }) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "e7f6bf80-b438-46c9-b202-8f8d068fc3bb",
+      "name": "Responder ao Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        896,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "contratos",
+          "mode": "name"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "id",
+              "lookupValue": "={{ $json.contrato_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4325ccb0-d4c4-41cc-b658-01c2ded558c9",
+      "name": "Atualizar Status → revisao_solicitada1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        448,
+        16
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=ferdinando@sava.adv.br",
+        "subject": "=Solicitação de Revisão de Contrato | {{ $('Webhook').item.json.body.cliente_nome }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Solicitação de Revisão de Contrato</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">📝 Solicitação de Revisão de Contrato</h2>\n\n<p style=\"color:#555;\">\nUma nova solicitação de revisão de contrato foi enviada.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📌 Informações da Solicitação</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome do Cliente:</strong></td>\n<td>{{ $('Webhook').item.json.body.cliente_nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Solicitado por:</strong></td>\n<td>{{ $('Webhook').item.json.body.solicitado_por }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Observações para Alteração:</strong></td>\n<td>{{ $('Webhook').item.json.body.observacao }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Link do Contrato:</strong></td>\n<td>\n<a href=\"{{ $('Atualizar Status → revisao_solicitada1').item.json.link_drive }}\" target=\"_blank\">\nAcessar contrato para revisão\n</a>\n</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<p style=\"font-size:12px;color:#888;text-align:center;\">\nEste e-mail foi gerado automaticamente pelo sistema de gestão de contratos.\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        16
+      ],
+      "id": "2f71d018-4bbc-4207-a5e4-cda7582f8b1c",
+      "name": "Send a message",
+      "webhookId": "f4a8205a-db5a-4d40-8a60-f60edfd20f5c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uWhyXLRG3r2ewzr6",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.body.responsavel_assinatura_sava }}",
+                    "rightValue": "Ferdinando",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cc9967c5-c19e-4faf-9734-88ad4564c358"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Ferdinando"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "050c72dd-133a-473b-98ae-2d7c86c2246d",
+                    "leftValue": "={{ $('Webhook').item.json.body.responsavel_assinatura_sava }}",
+                    "rightValue": "a",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Daniel"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        112
+      ],
+      "id": "36726ad9-1063-477b-a696-b204e5ce5545",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "sendTo": "=daniel@sava.adv.br",
+        "subject": "=Solicitação de Revisão de Contrato | {{ $('Webhook').item.json.body.cliente_nome }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Solicitação de Revisão de Contrato</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">📝 Solicitação de Revisão de Contrato</h2>\n\n<p style=\"color:#555;\">\nUma nova solicitação de revisão de contrato foi enviada.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📌 Informações da Solicitação</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome do Cliente:</strong></td>\n<td>{{ $('Webhook').item.json.body.cliente_nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Solicitado por:</strong></td>\n<td>{{ $('Webhook').item.json.body.solicitado_por }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Observações para Alteração:</strong></td>\n<td>{{ $('Webhook').item.json.body.observacao }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Link do Contrato:</strong></td>\n<td>\n<a href=\"{{ $('Atualizar Status → revisao_solicitada1').item.json.link_drive }}\" target=\"_blank\">\nAcessar contrato para revisão\n</a>\n</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<p style=\"font-size:12px;color:#888;text-align:center;\">\nEste e-mail foi gerado automaticamente pelo sistema de gestão de contratos.\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        208
+      ],
+      "id": "1d664db4-2fb2-4255-932d-e422ffc46e64",
+      "name": "Send a message2",
+      "webhookId": "f4a8205a-db5a-4d40-8a60-f60edfd20f5c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uWhyXLRG3r2ewzr6",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-n8n.zfp6fw.easypanel.host",
+            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+            "content-length": "286",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+            "content-type": "application/json",
+            "origin": "null",
+            "priority": "u=1, i",
+            "sec-ch-ua": "\"Chromium\";v=\"147\", \"Not.A/Brand\";v=\"8\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"macOS\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "45.166.251.160",
+            "x-forwarded-host": "n8n-n8n.zfp6fw.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "ca446ee844b0",
+            "x-real-ip": "45.166.251.160"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "contrato_id": 1773945201432,
+            "cliente_nome": "savanegocios",
+            "advogado_nome": "",
+            "responsavel_assinatura_sava": "Ferdinando",
+            "observacao": "observações de revisão",
+            "solicitado_por": "Ferdinando",
+            "solicitado_por_email": "ferdinando@sava.adv.br",
+            "data_solicitacao": "2026-04-17T03:20:15.146Z"
+          },
+          "webhookUrl": "https://n8n-n8n.zfp6fw.easypanel.host/webhook/solicitar-revisao",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extrair Dados do Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair Dados do Body": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Status → revisao_solicitada1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Atualizar Status → revisao_solicitada": {
+      "main": [
+        [
+          {
+            "node": "Responder ao Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar Mensagem WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Notificar Advogado via WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificar Advogado via WhatsApp": {
+      "main": [
+        []
+      ]
+    },
+    "Atualizar Status → revisao_solicitada1": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Status → revisao_solicitada",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "fe205705-47d8-4698-ab2d-12689869dbb2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a614b5eafeb499abe48a1ab5cea0292f09be70a2f6390f3f19fe25e3cc43001f"
+  },
+  "id": "lRaDh0ZpeDe02OUC",
+  "tags": [
+    {
+      "updatedAt": "2026-02-17T17:58:33.621Z",
+      "createdAt": "2026-02-17T17:58:33.621Z",
+      "id": "a5nYzZXvfRYvjnMw",
+      "name": "Sava"
+    }
+  ]
+}

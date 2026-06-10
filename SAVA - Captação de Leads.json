@@ -1,0 +1,411 @@
+{
+  "name": "SAVA - Captação de Leads",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "leads",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "31e01325-5126-4eb0-a679-49538220381a",
+      "name": "Webhook Leads",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        16
+      ],
+      "webhookId": "7e81a1d0-ca57-4498-bc09-50567f86223d"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo",
+          "mode": "list",
+          "cachedResultName": "Sava | Backend | Usuários",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1083090000,
+          "mode": "list",
+          "cachedResultName": "leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Nd-hQTINwripUiM6zKLB9xgZ24Pu21PIX5LKb-z9SSo/edit#gid=1083090000"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ $json.body.timestamp }}",
+            "advogado_nome": "={{ $json.body.cadastradoPor.nome }}",
+            "advogado_email": "={{ $json.body.cadastradoPor.email }}",
+            "advogado_cargo": "={{ $json.body.cadastradoPor.cargo }}",
+            "lead_nome": "={{ $json.body.lead.nome }}",
+            "lead_telefone": "={{ $json.body.lead.telefone }}",
+            "lead_email": "={{ $json.body.lead.email }}",
+            "area_interesse": "={{ $json.body.lead.areaInteresse }}",
+            "data_agendamento": "={{ $json.body.lead.dataAgendamento }}",
+            "hora_agendamento": "={{ $json.body.lead.horaAgendamento }}",
+            "observacoes": "={{ $json.body.lead.observacoes }}",
+            "origem": "={{ $json.body.lead.origem }}",
+            "pendencia_financeira": "=Não",
+            "status": "=Novo Lead"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogado_nome",
+              "displayName": "advogado_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogado_email",
+              "displayName": "advogado_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "advogado_cargo",
+              "displayName": "advogado_cargo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "lead_nome",
+              "displayName": "lead_nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "lead_telefone",
+              "displayName": "lead_telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "lead_email",
+              "displayName": "lead_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "area_interesse",
+              "displayName": "area_interesse",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data_agendamento",
+              "displayName": "data_agendamento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "hora_agendamento",
+              "displayName": "hora_agendamento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observacoes",
+              "displayName": "observacoes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "providências",
+              "displayName": "providências",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "origem",
+              "displayName": "origem",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pendencia_financeira",
+              "displayName": "pendencia_financeira",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "valor_proposta",
+              "displayName": "valor_proposta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "data_status_update",
+              "displayName": "data_status_update",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "providencias",
+              "displayName": "providencias",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "notas_crm",
+              "displayName": "notas_crm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f72b11dc-008e-440b-b609-b4a08061f962",
+      "name": "Salvar Lead",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        16
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q9VIXixHGoJzyddS",
+          "name": "Sava Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"message\": \"Lead cadastrado com sucesso!\"\n}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "b0403515-eada-470e-aedf-ada0bd7f1cfd",
+      "name": "Resposta Sucesso",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        448,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "=secretaria@sava.adv.br, {{ $('Webhook Leads').item.json.body.cadastradoPor.email }}",
+        "subject": "=Novo Lead | {{ $('Webhook Leads').item.json.body.lead.nome }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Novo Lead Recebido</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">📥 Novo Lead Recebido</h2>\n\n<p style=\"color:#555;\">\nUm novo lead foi cadastrado no sistema.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📌 Informações do Lead</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Cadastrador por:</strong></td>\n<td>{{ $('Webhook Leads').item.json.body.cadastradoPor.nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome:</strong></td>\n<td>{{ $('Webhook Leads').item.json.body.lead.nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Telefone:</strong></td>\n<td>{{ $('Webhook Leads').item.json.body.lead.telefone }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{ $('Webhook Leads').item.json.body.lead.email }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Área de Interesse:</strong></td>\n<td>{{ $('Webhook Leads').item.json.body.lead.areaInteresse }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Agendamento:</strong></td>\n<td>\n{{ $('Webhook Leads').item.json.body.lead.dataAgendamento }}  \nàs {{ $('Webhook Leads').item.json.body.lead.horaAgendamento }}\n</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Observações:</strong></td>\n<td>{{ $('Webhook Leads').item.json.body.lead.observacoes || 'Nenhuma observação informada' }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Providências:</strong></td>\n<td>{{ $('Webhook Leads').item.json.body.lead.providencias || 'Nenhuma providência informada' }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Origem:</strong></td>\n<td>{{ $('Webhook Leads').item.json.body.lead.origem }}</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<p style=\"font-size:12px;color:#888;text-align:center;\">\nEste e-mail foi gerado automaticamente pelo sistema de captação de leads.\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        112
+      ],
+      "id": "0c4bdbd4-239e-417d-b876-80518e620ce2",
+      "name": "Send a message",
+      "webhookId": "85ecdf51-c230-474d-866f-18e901777631",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uWhyXLRG3r2ewzr6",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook Leads": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-n8n.zfp6fw.easypanel.host",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0",
+            "content-length": "542",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+            "content-type": "application/json",
+            "origin": "null",
+            "priority": "u=0",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "te": "trailers",
+            "x-forwarded-for": "177.191.129.199",
+            "x-forwarded-host": "n8n-n8n.zfp6fw.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "ca446ee844b0",
+            "x-real-ip": "177.191.129.199"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "timestamp": "2026-03-27T14:03:59.446Z",
+            "tipoFormulario": "Lead",
+            "cadastradoPor": {
+              "nome": "Tadeu",
+              "email": "tadeu.vasconcelos@sava.adv.br",
+              "cargo": ""
+            },
+            "lead": {
+              "nome": "João das Coves",
+              "telefone": "(61) 98260-1716",
+              "email": "tadeuvasconcelos@gmail.com",
+              "areaInteresse": "Trabalhista",
+              "dataAgendamento": "2026-03-30",
+              "horaAgendamento": "14:00",
+              "observacoes": "Revisão de valores de rescisão",
+              "providencias": "Cliente quer discutir o processo de valores da rescisão ",
+              "origem": "Instagram"
+            },
+            "status": "Novo Lead",
+            "dataCriacao": "2026-03-27T14:03:59.446Z"
+          },
+          "webhookUrl": "https://n8n-n8n.zfp6fw.easypanel.host/webhook/leads",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook Leads": {
+      "main": [
+        [
+          {
+            "node": "Salvar Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salvar Lead": {
+      "main": [
+        [
+          {
+            "node": "Resposta Sucesso",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "89beaeab-d04a-4e78-97c5-968e265c682c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a614b5eafeb499abe48a1ab5cea0292f09be70a2f6390f3f19fe25e3cc43001f"
+  },
+  "id": "2ikCu0bwx8ntWxul",
+  "tags": [
+    {
+      "updatedAt": "2026-02-17T17:58:33.621Z",
+      "createdAt": "2026-02-17T17:58:33.621Z",
+      "id": "a5nYzZXvfRYvjnMw",
+      "name": "Sava"
+    }
+  ]
+}
