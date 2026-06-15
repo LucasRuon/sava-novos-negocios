@@ -3426,6 +3426,20 @@
                                                         name="processoEstrategico" value="Não" checked required><label
                                                         for="estrategicoNao">Não</label></div>
                                             </div>
+                                            <div class="conditional-field" id="tipoProcessoField">
+                                                <label class="required">PROCESSO:</label>
+                                                <div class="radio-group">
+                                                    <div class="radio-item"><input type="radio" id="tipoProcessoEstrategico"
+                                                            name="tipoProcesso" value="Estratégico" required><label
+                                                            for="tipoProcessoEstrategico">Estratégico</label></div>
+                                                    <div class="radio-item"><input type="radio" id="tipoProcessoEspecial"
+                                                            name="tipoProcesso" value="Especial" required><label
+                                                            for="tipoProcessoEspecial">Especial</label></div>
+                                                    <div class="radio-item"><input type="radio" id="tipoProcessoComum"
+                                                            name="tipoProcesso" value="Comum" required><label
+                                                            for="tipoProcessoComum">Comum</label></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -4244,6 +4258,7 @@
         document.getElementById('advogadoResponsavel').addEventListener('change', function () { document.getElementById('advogadoResponsavelOutrosField').classList.toggle('active', this.value === 'Outros'); });
         document.getElementById('coordenador').addEventListener('change', function () { document.getElementById('coordenadorOutrosField').classList.toggle('active', this.value === 'Outros'); });
         document.querySelectorAll('input[name="documentosPendentes"]').forEach(function (r) { r.addEventListener('change', function () { document.getElementById('docPendentesField').classList.toggle('active', this.value === 'Sim'); }); });
+        document.querySelectorAll('input[name="processoEstrategico"]').forEach(function (r) { r.addEventListener('change', function () { document.getElementById('tipoProcessoField').classList.toggle('active', this.value === 'Sim'); }); });
 
         function isFormularioAvulso() {
             return document.body.classList.contains('tipo-avulso') || document.body.classList.contains('tipo-avulso-sem-contrato');
@@ -4680,6 +4695,7 @@
                 documentosPendentes: deveAbrirPasta ? (fd.get('documentosPendentes') || '') : '',
                 quaisDocumentos: deveAbrirPasta ? (fd.get('quaisDocumentos') || '') : '',
                 processoEstrategico: deveAbrirPasta ? (fd.get('processoEstrategico') || '') : '',
+                tipoProcesso: (deveAbrirPasta && fd.get('processoEstrategico') === 'Sim') ? (fd.get('tipoProcesso') || '') : '',
                 dataEntrada: deveAbrirPasta ? (fd.get('dataEntrada') || '') : '',
                 tipoPrazoSelecao: deveAbrirPasta ? (fd.get('tipoPrazoSelecao') || '') : '',
                 prazoInicial: deveAbrirPasta && fd.get('tipoPrazoSelecao') === 'peticao_inicial' ? (fd.get('prazoInicial') || '') : '',
