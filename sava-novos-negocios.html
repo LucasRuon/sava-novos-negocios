@@ -2656,9 +2656,7 @@
                 <div class="divider"></div>
                 <div
                     style="background:var(--warning-bg);border-left:4px solid var(--warning);padding:12px 16px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:0.88rem;color:#744210;">
-                    <strong>Atenção:</strong> Confira o contrato no Drive antes de aprovar. Ao clicar em
-                    <strong>"Aprovar e Enviar"</strong>, o contrato será enviado automaticamente para o cliente assinar
-                    via ZapSign.
+                    <strong>Atenção:</strong> Confira o contrato no Drive antes de aprovar. Escolha o tipo de aprovação. A "Assinatura Eletrônica" enviará automaticamente via ZapSign.
                 </div>
                 <div style="margin-top:16px;">
                     <label
@@ -2696,14 +2694,17 @@
                         interação registrada.</div>
                 </div>
             </div>
-            <div class="modal-actions">
-                <button class="modal-btn modal-btn-secondary" onclick="closeContratoModal()">Cancelar</button>
-                <button class="modal-btn modal-btn-revisao-modal" id="btnSolicitarRevisao"
-                    onclick="ativarRevisao()">Solicitar Revisão</button>
-                <button class="modal-btn modal-btn-aprovar" id="btnAprovarContrato"
-                    onclick="confirmarAprovacao()">Aprovar e Enviar</button>
-                <button class="modal-btn modal-btn-confirmar-revisao" id="btnConfirmarRevisao"
-                    onclick="confirmarRevisao()" style="display:none;">Confirmar Revisão</button>
+            <div class="modal-actions" style="flex-wrap: wrap; gap: 8px;">
+                <button class="modal-btn modal-btn-secondary" onclick="closeContratoModal()" style="flex: 1 1 100%;">Cancelar</button>
+                <button class="modal-btn modal-btn-revisao-modal" id="btnEditarContrato" onclick="editarContratoCRM()" style="background:#4a5568; color:white;">Editar Contrato</button>
+                <button class="modal-btn modal-btn-revisao-modal" id="btnSolicitarRevisao" onclick="ativarRevisao()">Solicitar Revisão</button>
+                
+                <div style="flex: 1 1 100%; height: 1px; background: var(--border); margin: 8px 0;" id="divisoriaAprovacao"></div>
+                
+                <button class="modal-btn modal-btn-aprovar" id="btnContratoJaAssinado" onclick="confirmarAprovacao('ja_assinado')" style="background:#38a169; flex: 1 1 100%;">Contrato Já Assinado</button>
+                <button class="modal-btn modal-btn-aprovar" id="btnContratoFisico" onclick="confirmarAprovacao('fisico')" style="background:#3182ce; flex: 1 1 100%;">Contrato Físico</button>
+                <button class="modal-btn modal-btn-aprovar" id="btnAprovarContrato" onclick="confirmarAprovacao('eletronica')" style="flex: 1 1 100%;">Assinatura Eletrônica</button>
+                <button class="modal-btn modal-btn-confirmar-revisao" id="btnConfirmarRevisao" onclick="confirmarRevisao()" style="display:none; flex: 1 1 100%;">Confirmar Revisão</button>
             </div>
         </div>
     </div>
@@ -2982,20 +2983,30 @@
                                     <h2 class="section-title">Honorários e Valores</h2>
                                 </div>
                                 <div class="form-group"><label class="required">Tipo de Honorários</label>
-                                    <div class="checkbox-group">
-                                        <div class="checkbox-item"><input type="checkbox" id="tipoProLabore"
-                                                name="tipoHonorarios" value="Pro Labore"><label for="tipoProLabore">Pro
+                                    <div class="radio-group">
+                                        <div class="radio-item"><input type="radio" id="tipoProLabore"
+                                                name="tipoHonorarios" value="Pro Labore" required><label for="tipoProLabore">Pro
                                                 Labore</label></div>
-                                        <div class="checkbox-item avulso-only"><input type="checkbox" id="tipoAdExitum"
-                                                name="tipoHonorarios" value="Ad Exitum"><label for="tipoAdExitum">Ad
+                                        <div class="radio-item avulso-only"><input type="radio" id="tipoAdExitum"
+                                                name="tipoHonorarios" value="Ad Exitum" required><label for="tipoAdExitum">Ad
                                                 Exitum</label></div>
-                                        <div class="checkbox-item"><input type="checkbox" id="tipoProLaboreAdExitum"
-                                                name="tipoHonorarios" value="Pro Labore + Ad Exitum"><label
+                                        <div class="radio-item"><input type="radio" id="tipoProLaboreAdExitum"
+                                                name="tipoHonorarios" value="Pro Labore + Ad Exitum" required><label
                                                 for="tipoProLaboreAdExitum">Pro Labore + Ad Exitum</label></div>
                                     </div>
-                                    <div class="conditional-field-inline" id="adExitumSubField"><label
-                                            class="required">Subtipo Ad
-                                            Exitum</label>
+                                    <div class="conditional-field-inline" id="proLaboreSubField" style="display:none;"><label
+                                            class="required">Subtipo Pro Labore</label>
+                                        <div class="radio-group">
+                                            <div class="radio-item"><input type="radio" id="proLaborePadrao"
+                                                    name="proLaboreSub" value="Padrão" checked required><label
+                                                    for="proLaborePadrao">Padrão</label></div>
+                                            <div class="radio-item"><input type="radio" id="proLaboreOutros"
+                                                    name="proLaboreSub" value="Outros" required><label
+                                                    for="proLaboreOutros">Outros</label></div>
+                                        </div>
+                                    </div>
+                                    <div class="conditional-field-inline" id="adExitumSubField" style="display:none;"><label
+                                            class="required">Subtipo Ad Exitum</label>
                                         <div class="radio-group">
                                             <div class="radio-item"><input type="radio" id="adExitumPadrao"
                                                     name="adExitumSub" value="Padrão" checked required><label
@@ -3003,11 +3014,13 @@
                                             <div class="radio-item"><input type="radio" id="adExitumAdiantamento"
                                                     name="adExitumSub" value="Com Adiantamento" required><label
                                                     for="adExitumAdiantamento">Com Adiantamento</label></div>
+                                            <div class="radio-item"><input type="radio" id="adExitumOutros"
+                                                    name="adExitumSub" value="Outros" required><label
+                                                    for="adExitumOutros">Outros</label></div>
                                         </div>
                                     </div>
-                                    <div class="conditional-field-inline" id="proLaboreAdExitumSubField"><label
-                                            class="required">Subtipo
-                                            Pro Labore + Ad Exitum</label>
+                                    <div class="conditional-field-inline" id="proLaboreAdExitumSubField" style="display:none;"><label
+                                            class="required">Subtipo Pro Labore + Ad Exitum</label>
                                         <div class="radio-group">
                                             <div class="radio-item"><input type="radio" id="plaesPadrao"
                                                     name="proLaboreAdExitumSub" value="Padrão" checked required><label
@@ -3023,7 +3036,15 @@
                                                     name="proLaboreAdExitumSub" value="Valor Fixo de Êxito"
                                                     required><label for="plaesValorFixo">Valor Fixo de Êxito</label>
                                             </div>
+                                            <div class="radio-item"><input type="radio" id="plaesOutros"
+                                                    name="proLaboreAdExitumSub" value="Outros" required><label
+                                                    for="plaesOutros">Outros</label>
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group" id="honorariosOutrosTextoContainer" style="display:none; margin-top:16px;">
+                                        <label class="required">Descreva os Honorários (Outros)</label>
+                                        <textarea id="honorariosOutrosTexto" placeholder="Descreva a regra de honorários..."></textarea>
                                     </div>
                                 </div>
                                 <div id="fieldsProLabore" class="conditional-field" style="margin-top:20px;">
@@ -3523,33 +3544,7 @@
                                         placeholder="Registre as orientações específicas do caso para a Controladoria."></textarea>
                                 </div>
                             </div>
-                            <div class="info-box"
-                                style="margin-top: 32px; background: #fffaf0; border-left-color: #ed8936;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="#ed8936" stroke-width="2">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                    <polyline points="14 2 14 8 20 8"></polyline>
-                                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                                </svg>
-                                <div style="flex: 1;">
-                                    <p style="color: #c05621; font-weight: 600; margin-bottom: 12px;">O contrato já foi
-                                        assinado fisicamente? <span style="color: #e53e3e;">*</span></p>
-                                    <div class="radio-group" style="margin-top: 0; gap: 24px;">
-                                        <div class="radio-item">
-                                            <input type="radio" id="contratoJaAssinadoNao" name="contratoJaAssinado"
-                                                value="nao" style="accent-color: #ed8936;" required>
-                                            <label for="contratoJaAssinadoNao">Não, seguir com assinatura
-                                                digital</label>
-                                        </div>
-                                        <div class="radio-item">
-                                            <input type="radio" id="contratoJaAssinadoSim" name="contratoJaAssinado"
-                                                value="sim" style="accent-color: #ed8936;" required>
-                                            <label for="contratoJaAssinadoSim">Sim, já assinou (pula o fluxo
-                                                digital)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="submit-section"><button type="submit" class="submit-btn">Enviar
                                     Cadastro</button>
                                 <div class="loading" id="loading">
@@ -4359,7 +4354,13 @@
         });
 
         // Honorários
-        document.querySelectorAll('input[name="tipoHonorarios"]').forEach(function (cb) { cb.addEventListener('change', function () { if (this.checked && this.value === 'Pro Labore + Ad Exitum') { document.getElementById('tipoProLabore').checked = false; var ae = document.getElementById('tipoAdExitum'); if (ae) ae.checked = false; } else if (this.checked) { document.getElementById('tipoProLaboreAdExitum').checked = false; } toggleHonorariosSub(); atualizarTextoContrato(); }); });
+        // Honorários
+        document.querySelectorAll('input[name="tipoHonorarios"]').forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                toggleHonorariosSub();
+                atualizarTextoContrato();
+            });
+        });
 
         // Previdenciário sub-tipo toggle
         document.getElementById('areaPrevidenciario').addEventListener('change', function () {
@@ -4369,11 +4370,13 @@
 
         // Honorários sub-options toggle
         function toggleHonorariosSub() {
-            var pl = document.getElementById('tipoProLabore').checked;
-            var ad = document.getElementById('tipoAdExitum').checked;
-            var plae = document.getElementById('tipoProLaboreAdExitum').checked;
+            var pl = document.getElementById('tipoProLabore') && document.getElementById('tipoProLabore').checked;
+            var ad = document.getElementById('tipoAdExitum') && document.getElementById('tipoAdExitum').checked;
+            var plae = document.getElementById('tipoProLaboreAdExitum') && document.getElementById('tipoProLaboreAdExitum').checked;
 
             // Subcampos de seleção
+            var plSubField = document.getElementById('proLaboreSubField');
+            if(plSubField) plSubField.style.display = pl ? 'block' : 'none';
             document.getElementById('adExitumSubField').classList.toggle('active', ad);
             document.getElementById('proLaboreAdExitumSubField').classList.toggle('active', plae);
 
@@ -4391,18 +4394,48 @@
             var fixoContainer = document.getElementById('fieldValorFixoAdExitumContainer');
             var manutencaoContainer = document.getElementById('fieldsManutencao');
 
-            if (fixoContainer) fixoContainer.style.display = (plae && plaeSub && plaeSub.value === 'Valor Fixo de Êxito') ? 'block' : 'none';
+            var isFixo = plae && plaeSub && plaeSub.value === 'Valor Fixo de Êxito';
+            if (fixoContainer) fixoContainer.style.display = isFixo ? 'block' : 'none';
             if (manutencaoContainer) manutencaoContainer.classList.toggle('active', plae && plaeSub && plaeSub.value === 'Com Manutenção Anual');
+
+            var percAdExitum = document.getElementById('percentualAdExitum');
+            var percLabel = document.querySelector('label[for="percentualAdExitum"]');
+            if (percAdExitum) {
+                if (isFixo) {
+                    percAdExitum.removeAttribute('required');
+                    if (percLabel) percLabel.classList.remove('required');
+                } else {
+                    percAdExitum.setAttribute('required', 'required');
+                    if (percLabel) percLabel.classList.add('required');
+                }
+            }
+
+            // Campo Outros Texto
+            var plSub = document.querySelector('input[name="proLaboreSub"]:checked');
+            var hasOutros = (pl && plSub && plSub.value === 'Outros') || 
+                            (ad && adSub && adSub.value === 'Outros') || 
+                            (plae && plaeSub && plaeSub.value === 'Outros');
+            
+            var outrosTextContainer = document.getElementById('honorariosOutrosTextoContainer');
+            if(outrosTextContainer) outrosTextContainer.style.display = hasOutros ? 'block' : 'none';
+            var txtOutros = document.getElementById('honorariosOutrosTexto');
+            if(txtOutros) {
+                if (hasOutros) {
+                    txtOutros.setAttribute('required', 'required');
+                } else {
+                    txtOutros.removeAttribute('required');
+                }
+            }
         }
 
         // Adicionar listeners para os novos campos
-        document.querySelectorAll('input[name="adExitumSub"], input[name="proLaboreAdExitumSub"]').forEach(function (r) {
+        document.querySelectorAll('input[name="proLaboreSub"], input[name="adExitumSub"], input[name="proLaboreAdExitumSub"]').forEach(function (r) {
             r.addEventListener('change', toggleHonorariosSub);
             r.addEventListener('change', atualizarTextoContrato);
         });
 
         // Listeners para os inputs de valores para atualizar o contrato em tempo real
-        ['valorProLabore', 'formaPagamentoProLabore', 'quantidadeParcelasProLabore', 'percentualAdExitum', 'valorFixoAdExitum', 'valorAdiantamentoAdExitum', 'valorManutencaoAnual'].forEach(function (id) {
+        ['valorProLabore', 'formaPagamentoProLabore', 'quantidadeParcelasProLabore', 'percentualAdExitum', 'valorFixoAdExitum', 'valorAdiantamentoAdExitum', 'valorManutencaoAnual', 'honorariosOutrosTexto'].forEach(function (id) {
             var el = document.getElementById(id);
             if (el) el.addEventListener('input', atualizarTextoContrato);
         });
@@ -4698,7 +4731,8 @@
             
             var loading = document.getElementById('loading'), btn = document.querySelector('#novosNegociosForm .submit-btn');
             loading.classList.add('active'); btn.disabled = true;
-            var tipo = document.body.classList.contains('tipo-partido') ? 'Partido' : (document.body.classList.contains('tipo-avulso-sem-contrato') ? 'Avulso (sem contratos)' : 'Avulso');
+            var isSemContrato = document.body.classList.contains('tipo-avulso-sem-contrato');
+            var tipo = document.body.classList.contains('tipo-partido') ? 'Partido' : 'Avulso';
             var areas = [], naturezas = [], tiposH = [];
             document.querySelectorAll('input[name="area"]:checked').forEach(function (c) { areas.push(c.value); });
             document.querySelectorAll('input[name="naturezaNegocio"]:checked').forEach(function (c) { naturezas.push(c.value); });
@@ -4726,7 +4760,7 @@
                 outrosPrazos: deveAbrirPasta && fd.get('tipoPrazoSelecao') === 'outros_prazos' ? { tipo: fd.get('tipoPrazo') || '', data: fd.get('dataPrazo') || '' } : { tipo: '', data: '' }
             };
             var data = {
-                timestamp: new Date().toISOString(), tipoFormulario: tipo,
+                timestamp: new Date().toISOString(), tipoFormulario: tipo, isSemContrato: isSemContrato,
                 cadastradoPor: { nome: currentUser ? currentUser.nome : 'Anonimo', email: currentUser ? currentUser.email : '', cargo: currentUser ? currentUser.cargo : '' },
                 dadosNegocio: {
                     naturezaNegocio: naturezas,
@@ -4787,7 +4821,7 @@
                 }),
                 aberturaPasta: aberturaPastaDados,
                 tituloPasta: tituloSolicitacao,
-                contratoJaAssinado: fd.get('contratoJaAssinado') === 'sim'
+                contratoJaAssinado: false
             };
             fetch(API_URLS.novosNegocios, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
                 .then(function (r) {
@@ -5486,10 +5520,25 @@
 
             document.getElementById('btnAprovarContrato').style.display = '';
             document.getElementById('btnAprovarContrato').disabled = false;
-            document.getElementById('btnAprovarContrato').textContent = c.status === 'revisao_solicitada' ? 'Aprovar Revisão e Enviar' : 'Aprovar e Enviar';
+            document.getElementById('btnAprovarContrato').textContent = 'Assinatura Eletrônica';
+            
+            document.getElementById('btnContratoJaAssinado').style.display = '';
+            document.getElementById('btnContratoJaAssinado').disabled = false;
+            document.getElementById('btnContratoJaAssinado').textContent = 'Contrato Já Assinado';
+
+            document.getElementById('btnContratoFisico').style.display = '';
+            document.getElementById('btnContratoFisico').disabled = false;
+            document.getElementById('btnContratoFisico').textContent = 'Contrato Físico';
+
+            document.getElementById('btnEditarContrato').style.display = '';
+            
+            var divAprov = document.getElementById('divisoriaAprovacao');
+            if(divAprov) divAprov.style.display = '';
+
             document.getElementById('btnConfirmarRevisao').style.display = 'none';
             document.getElementById('btnConfirmarRevisao').disabled = false;
             document.getElementById('btnConfirmarRevisao').textContent = 'Confirmar Revisão';
+            
             var btnRev = document.getElementById('btnSolicitarRevisao');
             if (btnRev) {
                 btnRev.textContent = 'Solicitar Revisão';
@@ -5513,6 +5562,13 @@
             revisaoAtiva = true;
             document.getElementById('revisaoField').classList.add('active');
             document.getElementById('btnAprovarContrato').style.display = 'none';
+            document.getElementById('btnContratoJaAssinado').style.display = 'none';
+            document.getElementById('btnContratoFisico').style.display = 'none';
+            document.getElementById('btnEditarContrato').style.display = 'none';
+            
+            var divAprov = document.getElementById('divisoriaAprovacao');
+            if(divAprov) divAprov.style.display = 'none';
+
             document.getElementById('btnConfirmarRevisao').style.display = '';
             var btnRev = document.getElementById('btnSolicitarRevisao');
             if (btnRev) { btnRev.textContent = 'Cancelar'; btnRev.onclick = cancelarRevisao; }
@@ -5527,20 +5583,42 @@
             if (btnRev) { btnRev.textContent = 'Solicitar Revisão'; btnRev.onclick = ativarRevisao; }
         }
 
-        function confirmarAprovacao() {
+        function editarContratoCRM() {
+            if (currentContratoIndex === null) return;
+            var c = allContratos[currentContratoIndex];
+            if (!c || !c.link_drive) {
+                showToast('error', 'Sem Link', 'O contrato não possui um link do Google Docs.');
+                return;
+            }
+            window.open(c.link_drive, '_blank');
+        }
+
+        function confirmarAprovacao(tipoAssinatura) {
+            if (!tipoAssinatura) tipoAssinatura = 'eletronica';
+            
             if (currentContratoIndex === null) return;
             var c = allContratos[currentContratoIndex];
             if (!c) return;
             var responsavelSava = document.getElementById('responsavelAssinaturaSava').value;
             var erroEl = document.getElementById('responsavelAssinaturaError');
-            if (!responsavelSava) {
+            if (!responsavelSava && tipoAssinatura === 'eletronica') {
                 erroEl.style.display = 'block';
                 document.getElementById('responsavelAssinaturaSava').style.borderColor = 'var(--error)';
                 return;
             }
             erroEl.style.display = 'none';
             document.getElementById('responsavelAssinaturaSava').style.borderColor = 'var(--border)';
-            var btn = document.getElementById('btnAprovarContrato');
+            
+            var btn;
+            if (tipoAssinatura === 'ja_assinado') {
+                btn = document.getElementById('btnContratoJaAssinado');
+            } else if (tipoAssinatura === 'fisico') {
+                btn = document.getElementById('btnContratoFisico');
+            } else {
+                btn = document.getElementById('btnAprovarContrato');
+            }
+            
+            var oldText = btn.textContent;
             btn.disabled = true;
             btn.textContent = 'Aprovando...';
             fetch(API_URLS.aprovarContrato, {
@@ -5555,26 +5633,35 @@
                     aprovado_por: currentUser ? currentUser.nome : 'Sistema',
                     aprovado_por_email: currentUser ? currentUser.email : '',
                     responsavel_assinatura_sava: responsavelSava,
+                    tipo_assinatura: tipoAssinatura,
                     data_aprovacao: new Date().toISOString()
                 })
             })
                 .then(function (r) { return r.json(); })
                 .then(function (data) {
                     if (data.success) {
-                        showToast('success', 'Contrato aprovado!', 'Enviado para assinatura via ZapSign. O cliente receberá o link em breve.');
-                        allContratos[currentContratoIndex].status = 'em_assinatura';
+                        if (tipoAssinatura === 'eletronica') {
+                            showToast('success', 'Contrato aprovado!', 'Enviado para assinatura via ZapSign. O cliente receberá o link em breve.');
+                            allContratos[currentContratoIndex].status = 'em_assinatura';
+                        } else if (tipoAssinatura === 'ja_assinado') {
+                            showToast('success', 'Contrato aprovado!', 'Contrato marcado como Já Assinado. O upload será realizado na próxima etapa.');
+                            allContratos[currentContratoIndex].status = 'assinado';
+                        } else {
+                            showToast('success', 'Contrato aprovado!', 'Contrato marcado como Físico. O upload será realizado na próxima etapa.');
+                            allContratos[currentContratoIndex].status = 'em_assinatura';
+                        }
                         filtrarContratosPorMes();
                         closeContratoModal();
                     } else {
                         showToast('error', 'Erro ao aprovar', data.message || 'Tente novamente.');
                         btn.disabled = false;
-                        btn.textContent = 'Aprovar e Enviar';
+                        btn.textContent = oldText;
                     }
                 })
                 .catch(function () {
                     showToast('error', 'Erro de conexão', 'Não foi possível aprovar. Tente novamente.');
                     btn.disabled = false;
-                    btn.textContent = 'Aprovar e Enviar';
+                    btn.textContent = oldText;
                 });
         }
 
