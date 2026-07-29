@@ -2672,6 +2672,13 @@
                         style="display:none;color:var(--error);font-size:0.8rem;margin-top:4px;">Selecione o responsável
                         pela assinatura</span>
                 </div>
+                <div style="margin-top:16px;" id="containerContratoAssinadoInput">
+                    <label
+                        style="display:block;margin-bottom:8px;font-weight:600;font-size:0.9rem;color:var(--text-secondary);">Anexo / Link do Contrato Assinado (PDF ou Drive)</label>
+                    <input type="url" id="linkContratoAssinadoInput"
+                        placeholder="Cole aqui o link do arquivo assinado (Google Drive / PDF)..."
+                        style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:white;color:var(--text-primary);">
+                </div>
                 <div class="revisao-field" id="revisaoField">
                     <label
                         style="display:block;margin-bottom:8px;font-weight:600;font-size:0.9rem;color:var(--text-secondary);">Observação
@@ -2968,10 +2975,6 @@
                                         placeholder="Descreva detalhadamente o escopo de atuação no caso..."
                                         required></textarea>
                                 </div>
-                                <div class="form-group"><label class="required" for="resumoNegociacao">Resumo da
-                                        Negociação</label><textarea id="resumoNegociacao" name="resumoNegociacao"
-                                        rows="4" placeholder="Descreva os principais pontos da negociação..."
-                                        required></textarea></div>
                             </div>
                             <div class="section">
                                 <div class="section-header">
@@ -3008,12 +3011,12 @@
                                     <div class="conditional-field-inline" id="adExitumSubField" style="display:none;"><label
                                             class="required">Subtipo Ad Exitum</label>
                                         <div class="radio-group">
-                                            <div class="radio-item"><input type="radio" id="adExitumPadrao"
-                                                    name="adExitumSub" value="Padrão" checked required><label
-                                                    for="adExitumPadrao">Padrão</label></div>
-                                            <div class="radio-item"><input type="radio" id="adExitumAdiantamento"
-                                                    name="adExitumSub" value="Com Adiantamento" required><label
-                                                    for="adExitumAdiantamento">Com Adiantamento</label></div>
+                                            <div class="radio-item"><input type="radio" id="adExitumValor"
+                                                    name="adExitumSub" value="Valor" required><label
+                                                    for="adExitumValor">Valor</label></div>
+                                            <div class="radio-item"><input type="radio" id="adExitumPercentual"
+                                                    name="adExitumSub" value="Percentual" checked required><label
+                                                    for="adExitumPercentual">Percentual</label></div>
                                             <div class="radio-item"><input type="radio" id="adExitumOutros"
                                                     name="adExitumSub" value="Outros" required><label
                                                     for="adExitumOutros">Outros</label></div>
@@ -3022,19 +3025,15 @@
                                     <div class="conditional-field-inline" id="proLaboreAdExitumSubField" style="display:none;"><label
                                             class="required">Subtipo Pro Labore + Ad Exitum</label>
                                         <div class="radio-group">
-                                            <div class="radio-item"><input type="radio" id="plaesPadrao"
-                                                    name="proLaboreAdExitumSub" value="Padrão" checked required><label
-                                                    for="plaesPadrao">Padrão</label></div>
-                                            <div class="radio-item"><input type="radio" id="plaesEconomia"
-                                                    name="proLaboreAdExitumSub" value="Sobre Economia" required><label
-                                                    for="plaesEconomia">Sobre Economia</label></div>
-                                            <div class="radio-item"><input type="radio" id="plaesManutencao"
-                                                    name="proLaboreAdExitumSub" value="Com Manutenção Anual"
-                                                    required><label for="plaesManutencao">Com Manutenção Anual</label>
-                                            </div>
-                                            <div class="radio-item"><input type="radio" id="plaesValorFixo"
-                                                    name="proLaboreAdExitumSub" value="Valor Fixo de Êxito"
-                                                    required><label for="plaesValorFixo">Valor Fixo de Êxito</label>
+                                            <div class="radio-item"><input type="radio" id="plaesValor"
+                                                    name="proLaboreAdExitumSub" value="Valor" required><label
+                                                    for="plaesValor">Valor</label></div>
+                                            <div class="radio-item"><input type="radio" id="plaesPercentual"
+                                                    name="proLaboreAdExitumSub" value="Percentual" checked required><label
+                                                    for="plaesPercentual">Percentual</label></div>
+                                            <div class="radio-item"><input type="radio" id="plaesOutros"
+                                                    name="proLaboreAdExitumSub" value="Outros" required><label
+                                                    for="plaesOutros">Outros</label>
                                             </div>
                                             <div class="radio-item"><input type="radio" id="plaesOutros"
                                                     name="proLaboreAdExitumSub" value="Outros" required><label
@@ -3096,6 +3095,11 @@
                                         <input type="text" id="valorAdiantamentoAdExitum"
                                             name="valorAdiantamentoAdExitum" placeholder="Ex: R$ 2.000,00" required>
                                     </div>
+                                </div>
+
+                                <div class="form-group" id="descreverExitumContainer" style="display:none; margin-top:16px;">
+                                    <label class="required" for="descreverExitum">Descrever o Êxito</label>
+                                    <textarea id="descreverExitum" name="descreverExitum" rows="3" placeholder="Descreva detalhadamente a regra ou condição de êxito..."></textarea>
                                 </div>
 
                                 <div id="fieldsManutencao" class="conditional-field" style="margin-top:20px;">
@@ -3271,6 +3275,9 @@
                                         <option value="Google">Google</option>
                                         <option value="Outros">Outros</option>
                                     </select></div>
+                                <div class="conditional-field" id="qualMidiaSocialOutrosField"><label class="required"
+                                        for="qualMidiaSocialOutros">Especifique a mídia social</label><input type="text"
+                                        id="qualMidiaSocialOutros" name="qualMidiaSocialOutros" placeholder="Nome da mídia social"></div>
                                 <div class="form-group"><label class="required">Quem indicou terá participação
                                         financeira?</label>
                                     <div class="radio-group">
@@ -3292,10 +3299,26 @@
                                         required>
                                         <option value="">Selecione...</option>
                                     </select></div>
-                                <div class="form-group"><label for="parceiroExterno">Parceiro Externo que atuará na
+                                <div class="conditional-field" id="responsavelInternoOutrosField"><label
+                                        class="required" for="responsavelInternoOutros">Especifique o
+                                        responsável</label>
+                                    <div class="input-with-btn"><input type="text" id="responsavelInternoOutros"
+                                            name="responsavelInternoOutros" placeholder="Nome do responsável"><button type="button" class="btn-add-nome"
+                                            onclick="adicionarNomeComFeedback('responsaveisNegociacao', 'responsavelInternoOutros', 'responsavelInterno', this)">Adicionar</button>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="parceiroExterno">Parceiro Interno ou Externo que atuará na
                                         Operação (Se Houver)</label><select id="parceiroExterno" name="parceiroExterno">
                                         <option value="">Selecione...</option>
                                     </select></div>
+                                <div class="conditional-field" id="parceiroExternoOutrosField"><label
+                                        class="required" for="parceiroExternoOutros">Especifique o
+                                        parceiro</label>
+                                    <div class="input-with-btn"><input type="text" id="parceiroExternoOutros"
+                                            name="parceiroExternoOutros" placeholder="Nome do parceiro"><button type="button" class="btn-add-nome"
+                                            onclick="adicionarNomeComFeedback('parceiros', 'parceiroExternoOutros', 'parceiroExterno', this)">Adicionar</button>
+                                    </div>
+                                </div>
                                 <div class="form-group"><label class="required">Parceiro tem participação
                                         financeira?</label>
                                     <div class="radio-group">
@@ -3527,7 +3550,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="section partido-only">
+                            <div class="section">
                                 <div class="section-header">
                                     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="2">
@@ -3865,14 +3888,14 @@
                         <div class="stat-card-sub">aguardando cliente</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-card-label">Assinados</div>
-                        <div class="stat-card-value" id="statContratosAssinados">0</div>
-                        <div class="stat-card-sub">concluídos</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-label">Revisão Solicitada</div>
+                        <div class="stat-card-label">Aguardando Upload do Contrato</div>
                         <div class="stat-card-value" id="statContratosRevisao">0</div>
                         <div class="stat-card-sub">em ajuste</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-label">Concluídos</div>
+                        <div class="stat-card-value" id="statContratosAssinados">0</div>
+                        <div class="stat-card-sub">concluídos</div>
                     </div>
                 </div>
                 <div>
@@ -3962,6 +3985,7 @@
             popularSelect('responsavelIndicacao', listasConfig.responsaveisIndicacao, true);
             popularSelect('responsavelInterno', listasConfig.responsaveisNegociacao, true);
             popularSelect('parceiroExterno', listasConfig.parceiros, true);
+            if (typeof atualizarOutrosCampos === 'function') atualizarOutrosCampos();
         }
 
         function popularSelect(selectId, lista, incluirOutros) {
@@ -4269,13 +4293,28 @@
         // ==========================================
         // CAMPOS CONDICIONAIS
         // ==========================================
+        function atualizarOutrosCampos() {
+            ['parceiroExterno', 'responsavelInterno', 'responsavelIndicacao', 'qualMidiaSocial', 'advogadoResponsavel', 'coordenador'].forEach(function (id) {
+                var el = document.getElementById(id);
+                var field = document.getElementById(id + 'OutrosField');
+                if (el && field) {
+                    field.classList.toggle('active', el.value === 'Outros');
+                }
+            });
+        }
+
+        ['parceiroExterno', 'responsavelInterno', 'responsavelIndicacao', 'qualMidiaSocial', 'advogadoResponsavel', 'coordenador'].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('change', atualizarOutrosCampos);
+                el.addEventListener('input', atualizarOutrosCampos);
+            }
+        });
+
         document.querySelectorAll('input[name="indicacaoParticipacao"]').forEach(function (r) { r.addEventListener('change', function () { document.getElementById('indicacaoValorField').classList.toggle('active', this.value === 'Sim'); }); });
         document.querySelectorAll('input[name="parceiroParticipacao"]').forEach(function (r) { r.addEventListener('change', function () { document.getElementById('parceiroValorField').classList.toggle('active', this.value === 'Sim'); }); });
         document.getElementById('areaOutros').addEventListener('change', function () { document.getElementById('areaOutrosField').classList.toggle('active', this.checked); });
         document.getElementById('tipoIndicacao').addEventListener('change', function () { document.getElementById('midiasSociaisField').classList.toggle('active', this.value === 'Mídias Sociais'); });
-        document.getElementById('responsavelIndicacao').addEventListener('change', function () { document.getElementById('responsavelIndicacaoOutrosField').classList.toggle('active', this.value === 'Outros'); });
-        document.getElementById('advogadoResponsavel').addEventListener('change', function () { document.getElementById('advogadoResponsavelOutrosField').classList.toggle('active', this.value === 'Outros'); });
-        document.getElementById('coordenador').addEventListener('change', function () { document.getElementById('coordenadorOutrosField').classList.toggle('active', this.value === 'Outros'); });
         document.querySelectorAll('input[name="documentosPendentes"]').forEach(function (r) { r.addEventListener('change', function () { document.getElementById('docPendentesField').classList.toggle('active', this.value === 'Sim'); }); });
         document.querySelectorAll('input[name="processoEstrategico"]').forEach(function (r) { r.addEventListener('change', function () { document.getElementById('tipoProcessoField').classList.toggle('active', this.value === 'Sim'); }); });
 
@@ -4380,41 +4419,36 @@
             document.getElementById('adExitumSubField').classList.toggle('active', ad);
             document.getElementById('proLaboreAdExitumSubField').classList.toggle('active', plae);
 
-            // Campos de valores específicos
-            document.getElementById('fieldsProLabore').classList.toggle('active', pl || plae);
-            document.getElementById('fieldsAdExitum').classList.toggle('active', ad || plae);
-
-            // Subcampos Ad Exitum (Adiantamento)
             var adSub = document.querySelector('input[name="adExitumSub"]:checked');
-            var adiantamentoContainer = document.getElementById('fieldAdiantamentoAdExitumContainer');
-            if (adiantamentoContainer) adiantamentoContainer.style.display = (ad && adSub && adSub.value === 'Com Adiantamento') ? 'block' : 'none';
-
-            // Subcampos PL + AE (Valor Fixo ou Manutenção)
+            var adSubVal = (ad && adSub) ? adSub.value : '';
             var plaeSub = document.querySelector('input[name="proLaboreAdExitumSub"]:checked');
-            var fixoContainer = document.getElementById('fieldValorFixoAdExitumContainer');
-            var manutencaoContainer = document.getElementById('fieldsManutencao');
+            var plaeSubVal = (plae && plaeSub) ? plaeSub.value : '';
 
-            var isFixo = plae && plaeSub && plaeSub.value === 'Valor Fixo de Êxito';
-            if (fixoContainer) fixoContainer.style.display = isFixo ? 'block' : 'none';
-            if (manutencaoContainer) manutencaoContainer.classList.toggle('active', plae && plaeSub && plaeSub.value === 'Com Manutenção Anual');
+            // Campos de valores Pro Labore / Valor
+            var showProLaboreFields = pl || plae || (ad && adSubVal === 'Valor');
+            document.getElementById('fieldsProLabore').classList.toggle('active', showProLaboreFields);
 
-            var percAdExitum = document.getElementById('percentualAdExitum');
-            var percLabel = document.querySelector('label[for="percentualAdExitum"]');
-            if (percAdExitum) {
-                if (isFixo) {
-                    percAdExitum.removeAttribute('required');
-                    if (percLabel) percLabel.classList.remove('required');
+            // Campos Ad Exitum (Percentual)
+            var showAdExitumFields = (ad && adSubVal === 'Percentual') || (plae && plaeSubVal === 'Percentual');
+            document.getElementById('fieldsAdExitum').classList.toggle('active', showAdExitumFields);
+
+            // Campo Descrever o Êxito
+            var descExitumContainer = document.getElementById('descreverExitumContainer');
+            if (descExitumContainer) descExitumContainer.style.display = (ad || plae) ? 'block' : 'none';
+            var txtExitum = document.getElementById('descreverExitum');
+            if (txtExitum) {
+                if (ad || plae) {
+                    txtExitum.setAttribute('required', 'required');
                 } else {
-                    percAdExitum.setAttribute('required', 'required');
-                    if (percLabel) percLabel.classList.add('required');
+                    txtExitum.removeAttribute('required');
                 }
             }
 
             // Campo Outros Texto
             var plSub = document.querySelector('input[name="proLaboreSub"]:checked');
             var hasOutros = (pl && plSub && plSub.value === 'Outros') || 
-                            (ad && adSub && adSub.value === 'Outros') || 
-                            (plae && plaeSub && plaeSub.value === 'Outros');
+                            (ad && adSubVal === 'Outros') || 
+                            (plae && plaeSubVal === 'Outros');
             
             var outrosTextContainer = document.getElementById('honorariosOutrosTextoContainer');
             if(outrosTextContainer) outrosTextContainer.style.display = hasOutros ? 'block' : 'none';
@@ -4435,7 +4469,7 @@
         });
 
         // Listeners para os inputs de valores para atualizar o contrato em tempo real
-        ['valorProLabore', 'formaPagamentoProLabore', 'quantidadeParcelasProLabore', 'percentualAdExitum', 'valorFixoAdExitum', 'valorAdiantamentoAdExitum', 'valorManutencaoAnual', 'honorariosOutrosTexto'].forEach(function (id) {
+        ['valorProLabore', 'formaPagamentoProLabore', 'quantidadeParcelasProLabore', 'percentualAdExitum', 'valorFixoAdExitum', 'valorAdiantamentoAdExitum', 'valorManutencaoAnual', 'honorariosOutrosTexto', 'descreverExitum'].forEach(function (id) {
             var el = document.getElementById(id);
             if (el) el.addEventListener('input', atualizarTextoContrato);
         });
@@ -4578,7 +4612,7 @@
             var areas = [];
             document.querySelectorAll('input[name="area"]:checked').forEach(function (c) { areas.push(c.value); });
             var areaKey = 'Regra geral';
-            if (areas.indexOf('Cível') !== -1 || areas.indexOf('Trabalhista') !== -1) {
+            if (areas.indexOf('Cível') !== -1 || areas.indexOf('Trabalhista') !== -1 || areas.indexOf('Família') !== -1 || areas.indexOf('Criminal') !== -1) {
                 areaKey = 'Cível/Trabalhista';
             } else if (areas.indexOf('Previdenciário') !== -1) {
                 var previdSub = document.querySelector('input[name="previdenciarioSubTipo"]:checked');
@@ -4660,6 +4694,11 @@
 
             if (vMA) {
                 novoTexto = novoTexto.replace(/valor anual de R\$ ______________ \(_________________ reais\)/g, 'valor anual de ' + vMA);
+            }
+
+            var dE = document.getElementById('descreverExitum') ? document.getElementById('descreverExitum').value.trim() : '';
+            if (dE && (document.getElementById('tipoAdExitum').checked || document.getElementById('tipoProLaboreAdExitum').checked)) {
+                novoTexto += '\n\nDescrição do Êxito: ' + dE;
             }
 
             var socBoleto = document.getElementById('sociedadeBoleto') ? document.getElementById('sociedadeBoleto').value : '';
@@ -4749,7 +4788,7 @@
                 coordenadorOutros: deveAbrirPasta ? (fd.get('coordenadorOutros') || '') : '',
                 advogadoSocio: deveAbrirPasta ? (fd.get('advogadoSocio') || '') : '',
                 abrirPastaAdvwin: abrirPastaAdvwinSelecao,
-                orientacaoControladoria: tipo === 'Partido' ? (fd.get('orientacaoControladoria') || '') : '',
+                orientacaoControladoria: fd.get('orientacaoControladoria') || '',
                 documentosPendentes: deveAbrirPasta ? (fd.get('documentosPendentes') || '') : '',
                 quaisDocumentos: deveAbrirPasta ? (fd.get('quaisDocumentos') || '') : '',
                 processoEstrategico: deveAbrirPasta ? (fd.get('processoEstrategico') || '') : '',
@@ -4772,13 +4811,14 @@
                     numeroProcesso: fd.getAll('numeroProcesso').filter(function(v) { return v.trim() !== ''; }),
                     parteAdversa: fd.getAll('parteAdversa').filter(function(v) { return v.trim() !== ''; }),
                     escopoAtuacao: fd.get('escopoAtuacao'),
-                    resumoNegociacao: fd.get('resumoNegociacao'),
+                    descreverExitum: fd.get('descreverExitum') || '',
                     observacoesFinanceiro: fd.get('observacoesFinanceiro') || ''
                 },
                 honorarios: {
                     tipoHonorarios: tiposH,
                     adExitumSubTipo: fd.get('adExitumSub') || '',
                     proLaboreAdExitumSubTipo: fd.get('proLaboreAdExitumSub') || '',
+                    descreverExitum: fd.get('descreverExitum') || '',
                     valorProLabore: fd.get('valorProLabore') || '',
                     formaPagamentoProLabore: fd.get('formaPagamentoProLabore') || '',
                     diaVencimentoProLabore: fd.getAll('dataParcelaProLabore').join(', ') || '',
@@ -4800,12 +4840,15 @@
                 dadosNegociacao: {
                     tipoIndicacao: fd.get('tipoIndicacao'),
                     qualMidiaSocial: fd.get('qualMidiaSocial') || '',
+                    qualMidiaSocialOutros: fd.get('qualMidiaSocialOutros') || '',
                     responsavelIndicacao: fd.get('responsavelIndicacao'),
                     responsavelIndicacaoOutros: fd.get('responsavelIndicacaoOutros') || '',
                     indicacaoTemParticipacao: fd.get('indicacaoParticipacao'),
                     indicacaoValor: fd.get('indicacaoValor') || '',
                     responsavelInterno: fd.get('responsavelInterno'),
+                    responsavelInternoOutros: fd.get('responsavelInternoOutros') || '',
                     parceiroExterno: fd.get('parceiroExterno') || '',
+                    parceiroExternoOutros: fd.get('parceiroExternoOutros') || '',
                     parceiroTemParticipacao: fd.get('parceiroParticipacao'),
                     parceiroValor: fd.get('parceiroValor') || ''
                 },
@@ -5263,24 +5306,24 @@
             'assinado': 'Assinado',
             'revisao_solicitada': 'Revisão Solicitada'
         };
-        var statusOrder = ['aguardando_aprovacao', 'revisao_solicitada', 'em_assinatura', 'assinado'];
+        var statusOrder = ['aguardando_aprovacao', 'em_assinatura', 'revisao_solicitada', 'assinado'];
         var statusDotColors = {
             'aguardando_aprovacao': 'var(--warning)',
             'em_assinatura': '#3182ce',
-            'assinado': 'var(--success)',
-            'revisao_solicitada': 'var(--error)'
+            'revisao_solicitada': 'var(--error)',
+            'assinado': 'var(--success)'
         };
         var statusCardClass = {
             'aguardando_aprovacao': 'status-aguardando',
             'em_assinatura': 'status-em_assinatura',
-            'assinado': 'status-assinado',
-            'revisao_solicitada': 'status-revisao'
+            'revisao_solicitada': 'status-revisao',
+            'assinado': 'status-assinado'
         };
         var statusBadgeClass = {
             'aguardando_aprovacao': 'aguardando',
             'em_assinatura': 'em_assinatura',
-            'assinado': 'assinado',
-            'revisao_solicitada': 'revisao'
+            'revisao_solicitada': 'revisao',
+            'assinado': 'assinado'
         };
 
         function abrirLinkDrive(url) {
@@ -5380,10 +5423,10 @@
             }
 
             var colMapping = {
-                'aguardando_aprovacao': { title: 'Aguardando Aprovação', class: 'col-aguardando' },
-                'revisao_solicitada': { title: 'Revisão Solicitada', class: 'col-revisao' },
-                'em_assinatura': { title: 'Em Assinatura', class: 'col-assinatura' },
-                'assinado': { title: 'Assinados', class: 'col-assinado' }
+                'aguardando_aprovacao': { title: 'AGUARDANDO APROVAÇÃO', class: 'col-aguardando' },
+                'em_assinatura': { title: 'EM ASSINATURA', class: 'col-assinatura' },
+                'revisao_solicitada': { title: 'AGUARDANDO UPLOAD DO CONTRATO', class: 'col-revisao' },
+                'assinado': { title: 'CONCLUÍDOS', class: 'col-assinado' }
             };
 
             var grouped = {};
@@ -5487,6 +5530,11 @@
             }
             document.getElementById('revisaoField').classList.remove('active');
             document.getElementById('revisaoObservacao').value = '';
+            
+            var inputAssinado = document.getElementById('linkContratoAssinadoInput');
+            if (inputAssinado) {
+                inputAssinado.value = c.link_contrato_assinado || c.link_drive || '';
+            }
 
             // Renderizar Histórico
             var histContainer = document.getElementById('modalContratoHistorico');
@@ -5609,6 +5657,9 @@
             erroEl.style.display = 'none';
             document.getElementById('responsavelAssinaturaSava').style.borderColor = 'var(--border)';
             
+            var inputAssinado = document.getElementById('linkContratoAssinadoInput');
+            var linkAssinadoVal = inputAssinado ? inputAssinado.value.trim() : '';
+
             var btn;
             if (tipoAssinatura === 'ja_assinado') {
                 btn = document.getElementById('btnContratoJaAssinado');
@@ -5629,6 +5680,7 @@
                     cliente_nome: c.cliente_nome || '',
                     cliente_email: c.cliente_email || '',
                     link_drive: c.link_drive || '',
+                    link_contrato_assinado: linkAssinadoVal || c.link_drive || '',
                     status_atual: c.status || 'aguardando_aprovacao',
                     aprovado_por: currentUser ? currentUser.nome : 'Sistema',
                     aprovado_por_email: currentUser ? currentUser.email : '',
@@ -5640,14 +5692,17 @@
                 .then(function (r) { return r.json(); })
                 .then(function (data) {
                     if (data.success) {
+                        if (linkAssinadoVal) {
+                            allContratos[currentContratoIndex].link_contrato_assinado = linkAssinadoVal;
+                        }
                         if (tipoAssinatura === 'eletronica') {
                             showToast('success', 'Contrato aprovado!', 'Enviado para assinatura via ZapSign. O cliente receberá o link em breve.');
                             allContratos[currentContratoIndex].status = 'em_assinatura';
                         } else if (tipoAssinatura === 'ja_assinado') {
-                            showToast('success', 'Contrato aprovado!', 'Contrato marcado como Já Assinado. O upload será realizado na próxima etapa.');
+                            showToast('success', 'Contrato Registrado!', 'Contrato marcado como Já Assinado e movido para Assinados.');
                             allContratos[currentContratoIndex].status = 'assinado';
                         } else {
-                            showToast('success', 'Contrato aprovado!', 'Contrato marcado como Físico. O upload será realizado na próxima etapa.');
+                            showToast('success', 'Contrato Registrado!', 'Contrato marcado como Físico com sucesso.');
                             allContratos[currentContratoIndex].status = 'em_assinatura';
                         }
                         filtrarContratosPorMes();
