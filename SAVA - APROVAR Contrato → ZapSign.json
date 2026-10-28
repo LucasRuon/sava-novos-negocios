@@ -744,7 +744,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"name\": \"Contrato | {{ $('Extrair Dados do Body').item.json.cliente_nome }}\",\n  \"base64_pdf\": \"{{ $json.data }}\",\n  \"lang\": \"pt-br\",\n  \"sandbox\": false,\n  \"signers\": [\n    {\n      \"name\": \"{{ $('Webhook').item.json.body.cliente_nome }}\",\n      \"email\": \"{{ $('Webhook').item.json.body.cliente_email }}\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    },\n    {\n      \"name\": \"Ferdinando Vasconcelos\",\n      \"email\": \"ferdinando@sava.adv.br\",\n      \"phone_country\": \"55\",\n      \"phone_number\": \"8393024442\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    }\n  ]\n}",
+        "jsonBody": "={\n  \"name\": \"Contrato | {{ $('Extrair Dados do Body').item.json.cliente_nome }}\",\n  \"base64_pdf\": \"{{ $json.data }}\",\n  \"lang\": \"pt-br\",\n  \"sandbox\": false,\n  \"signers\": [\n    {\n      \"name\": \"{{ $('Webhook').item.json.body.cliente_nome }}\",\n      \"email\": \"{{ $('Webhook').item.json.body.cliente_email }}\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    },\n    {\n      \"name\": \"Ferdinando Vasconcelos\",\n      \"email\": \"***@sava.adv.br\",\n      \"phone_country\": \"55\",\n      \"phone_number\": \"8393024442\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    }\n  ]\n}",
         "options": {}
       },
       "id": "dcd36e56-b582-4c61-848b-57eea5646aa5",
@@ -1676,7 +1676,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"name\": \"Contrato | {{ $('Extrair Dados do Body1').item.json.cliente_nome }}\",\n  \"base64_pdf\": \"{{ $json.data }}\",\n  \"lang\": \"pt-br\",\n  \"sandbox\": false,\n  \"signers\": [\n    {\n      \"name\": \"{{ $('Webhook').item.json.body.cliente_nome }}\",\n      \"email\": \"{{ $('Webhook').item.json.body.cliente_email }}\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    },\n    {\n      \"name\": \"Daniel Sebadelhe Aranha\",\n      \"email\": \"daniel@sava.adv.br\",\n      \"phone_country\": \"55\",\n      \"phone_number\": \"8393823367\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    }\n  ]\n}",
+        "jsonBody": "={\n  \"name\": \"Contrato | {{ $('Extrair Dados do Body1').item.json.cliente_nome }}\",\n  \"base64_pdf\": \"{{ $json.data }}\",\n  \"lang\": \"pt-br\",\n  \"sandbox\": false,\n  \"signers\": [\n    {\n      \"name\": \"{{ $('Webhook').item.json.body.cliente_nome }}\",\n      \"email\": \"{{ $('Webhook').item.json.body.cliente_email }}\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    },\n    {\n      \"name\": \"Daniel Sebadelhe Aranha\",\n      \"email\": \"***@sava.adv.br\",\n      \"phone_country\": \"55\",\n      \"phone_number\": \"8393823367\",\n      \"auth_mode\": \"assinaturaTela\",\n      \"send_automatic_email\": true,\n      \"send_automatic_whatsapp\": false\n    }\n  ]\n}",
         "options": {}
       },
       "id": "6fc2a6ea-a8d0-4c77-9974-6b1030f300f2",
@@ -1747,7 +1747,7 @@
     },
     {
       "parameters": {
-        "sendTo": "=daniel@sava.adv.br",
+        "sendTo": "=***@sava.adv.br",
         "subject": "=Contrato Aguardando Assinatura | {{ $json.body.cliente_nome }}",
         "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Contrato Aguardando Assinatura</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:700px;margin:auto;background:#ffffff;border-radius:8px;padding:24px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">✍️ Contrato Aguardando Assinatura</h2>\n\n<p style=\"color:#555;font-size:15px;\">\nOlá <strong>{{ $json.body.cliente_nome }}</strong>,\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nSeu contrato já foi preparado e está disponível para assinatura.\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nPara dar continuidade ao processo, pedimos que acesse o documento através do botão abaixo e realize a assinatura.\n</p>\n\n<p style=\"text-align:center;margin:30px 0;\">\n\n<a href=\"{{ $json.body.link_drive }}\"\n   style=\"background:#2563eb;\n          color:#ffffff;\n          padding:14px 24px;\n          text-decoration:none;\n          border-radius:6px;\n          font-weight:bold;\n          display:inline-block;\n          font-size:15px;\">\nAbrir Contrato para Assinatura\n</a>\n\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:25px 0;\">\n\n<table width=\"100%\" style=\"border-collapse:collapse;font-size:14px;color:#444;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Cliente:</strong></td>\n<td>{{ $json.body.cliente_nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{ $json.body.cliente_email }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Responsável pela assinatura:</strong></td>\n<td>{{ $json.body.responsavel_assinatura_sava }}</td>\n</tr>\n\n</table>\n\n<p style=\"font-size:12px;color:#888;margin-top:25px;text-align:center;\">\nCaso o botão não funcione, copie e cole o link abaixo no navegador:<br>\n{{ $json.body.link_drive }}\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
         "options": {}
@@ -1770,7 +1770,7 @@
     },
     {
       "parameters": {
-        "sendTo": "=ferdinando@sava.adv.br",
+        "sendTo": "=***@sava.adv.br",
         "subject": "=Contrato Aguardando Assinatura | {{ $json.body.cliente_nome }}",
         "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Contrato Aguardando Assinatura</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:700px;margin:auto;background:#ffffff;border-radius:8px;padding:24px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">✍️ Contrato Aguardando Assinatura</h2>\n\n<p style=\"color:#555;font-size:15px;\">\nOlá <strong>{{ $json.body.cliente_nome }}</strong>,\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nSeu contrato já foi preparado e está disponível para assinatura.\n</p>\n\n<p style=\"color:#555;font-size:15px;\">\nPara dar continuidade ao processo, pedimos que acesse o documento através do botão abaixo e realize a assinatura.\n</p>\n\n<p style=\"text-align:center;margin:30px 0;\">\n\n<a href=\"{{ $json.body.link_drive }}\"\n   style=\"background:#2563eb;\n          color:#ffffff;\n          padding:14px 24px;\n          text-decoration:none;\n          border-radius:6px;\n          font-weight:bold;\n          display:inline-block;\n          font-size:15px;\">\nAbrir Contrato para Assinatura\n</a>\n\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:25px 0;\">\n\n<table width=\"100%\" style=\"border-collapse:collapse;font-size:14px;color:#444;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Cliente:</strong></td>\n<td>{{ $json.body.cliente_nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Email:</strong></td>\n<td>{{ $json.body.cliente_email }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Responsável pela assinatura:</strong></td>\n<td>{{ $json.body.responsavel_assinatura_sava }}</td>\n</tr>\n\n</table>\n\n<p style=\"font-size:12px;color:#888;margin-top:25px;text-align:center;\">\nCaso o botão não funcione, copie e cole o link abaixo no navegador:<br>\n{{ $json.body.link_drive }}\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
         "options": {}
@@ -1878,11 +1878,11 @@
           "body": {
             "contrato_id": 1776865077568,
             "cliente_nome": "Tadeu da Costa Vasconcelos",
-            "cliente_email": "tadeuvasconcelos@gmail.com",
+            "cliente_email": "***@gmail.com",
             "link_drive": "https://docs.google.com/document/d/1UOhnBxfBwZ7oLTatIEeZ-lHqki38lBJ6JX2-RaBK0Pg/edit",
             "status_atual": "aguardando_aprovacao",
             "aprovado_por": "Tadeu",
-            "aprovado_por_email": "tadeu.vasconcelos@sava.adv.br",
+            "aprovado_por_email": "***@sava.adv.br",
             "responsavel_assinatura_sava": "Ferdinando",
             "data_aprovacao": "2026-04-22T14:19:40.637Z"
           },

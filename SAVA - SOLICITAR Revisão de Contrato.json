@@ -409,7 +409,7 @@
     },
     {
       "parameters": {
-        "sendTo": "=ferdinando@sava.adv.br",
+        "sendTo": "=***@sava.adv.br",
         "subject": "=Solicitação de Revisão de Contrato | {{ $('Webhook').item.json.body.cliente_nome }}",
         "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Solicitação de Revisão de Contrato</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">📝 Solicitação de Revisão de Contrato</h2>\n\n<p style=\"color:#555;\">\nUma nova solicitação de revisão de contrato foi enviada.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📌 Informações da Solicitação</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome do Cliente:</strong></td>\n<td>{{ $('Webhook').item.json.body.cliente_nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Solicitado por:</strong></td>\n<td>{{ $('Webhook').item.json.body.solicitado_por }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Observações para Alteração:</strong></td>\n<td>{{ $('Webhook').item.json.body.observacao }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Link do Contrato:</strong></td>\n<td>\n<a href=\"{{ $('Atualizar Status → revisao_solicitada1').item.json.link_drive }}\" target=\"_blank\">\nAcessar contrato para revisão\n</a>\n</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<p style=\"font-size:12px;color:#888;text-align:center;\">\nEste e-mail foi gerado automaticamente pelo sistema de gestão de contratos.\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
         "options": {}
@@ -498,7 +498,7 @@
     },
     {
       "parameters": {
-        "sendTo": "=daniel@sava.adv.br",
+        "sendTo": "=***@sava.adv.br",
         "subject": "=Solicitação de Revisão de Contrato | {{ $('Webhook').item.json.body.cliente_nome }}",
         "message": "=<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Solicitação de Revisão de Contrato</title>\n</head>\n\n<body style=\"font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:800px;margin:auto;background:#ffffff;border-radius:8px;padding:20px;border:1px solid #e5e5e5;\">\n\n<tr>\n<td>\n\n<h2 style=\"margin-top:0;color:#333;\">📝 Solicitação de Revisão de Contrato</h2>\n\n<p style=\"color:#555;\">\nUma nova solicitação de revisão de contrato foi enviada.\n</p>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<h3 style=\"color:#333;\">📌 Informações da Solicitação</h3>\n\n<table width=\"100%\" style=\"border-collapse:collapse;\">\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Nome do Cliente:</strong></td>\n<td>{{ $('Webhook').item.json.body.cliente_nome }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Solicitado por:</strong></td>\n<td>{{ $('Webhook').item.json.body.solicitado_por }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Observações para Alteração:</strong></td>\n<td>{{ $('Webhook').item.json.body.observacao }}</td>\n</tr>\n\n<tr>\n<td style=\"padding:6px 0;\"><strong>Link do Contrato:</strong></td>\n<td>\n<a href=\"{{ $('Atualizar Status → revisao_solicitada1').item.json.link_drive }}\" target=\"_blank\">\nAcessar contrato para revisão\n</a>\n</td>\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #eee;margin:20px 0;\">\n\n<p style=\"font-size:12px;color:#888;text-align:center;\">\nEste e-mail foi gerado automaticamente pelo sistema de gestão de contratos.\n</p>\n\n</td>\n</tr>\n</table>\n\n</body>\n</html>",
         "options": {}
@@ -556,7 +556,7 @@
             "responsavel_assinatura_sava": "Ferdinando",
             "observacao": "observações de revisão",
             "solicitado_por": "Ferdinando",
-            "solicitado_por_email": "ferdinando@sava.adv.br",
+            "solicitado_por_email": "***@sava.adv.br",
             "data_solicitacao": "2026-04-17T03:20:15.146Z"
           },
           "webhookUrl": "https://n8n-n8n.zfp6fw.easypanel.host/webhook/solicitar-revisao",
